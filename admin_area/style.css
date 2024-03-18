@@ -1,0 +1,10 @@
+.insert_product .form-group{
+    padding-bottom: 15px;
+}
+.section-gaps{
+    padding: 50px 0;
+}
+.product-image{
+    height: 100px;
+    width: 100px;
+}

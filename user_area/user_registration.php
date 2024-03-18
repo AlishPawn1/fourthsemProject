@@ -1,0 +1,181 @@
+<?php
+session_start();
+include('user_header.php');  
+include("../include/connect_database.php");
+include('../function/commonfunction.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Include PHPMailer Autoload file
+require 'C:/xampp/htdocs/shop/PHPMailer-master/src/PHPMailer.php';
+require 'C:/xampp/htdocs/shop/PHPMailer-master/src/SMTP.php'; // Include the SMTP class
+require 'C:/xampp/htdocs/shop/PHPMailer-master/src/Exception.php'; // Include the Exception class
+
+// Function to generate a random verification code
+function generateVerificationCode() {
+    return rand(100000, 999999); // Generates a 6-digit code
+}
+
+// Create a new instance of the PHPMailer class
+$mail = new PHPMailer();
+
+// Set up SMTP configuration
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail->SMTPAuth = true;
+$mail->Username = 'alishpawn00@gmail.com';
+$mail->Password = 'lupfmoliqmhqwumu';
+$mail->SMTPSecure = 'tls';
+$mail->Port = 587;
+
+$errors = []; // Define an empty array to store errors
+
+if(isset($_POST['user_register'])){
+    $user_name = $_POST['user_name'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    $conform_user_password = isset($_POST['conform_user_password']) ? $_POST['conform_user_password'] : '';
+    $user_address = $_POST['user_address'];
+    $user_phone = $_POST['user_contact'];
+    $user_ip = getIPAddress();
+
+    // Generate verification code
+    $verification_code = generateVerificationCode();
+
+    // Perform server-side validation
+
+    if (empty($user_name) || strlen($user_name) < 3) {
+        $errors['user_name'] = "Username must be at least 3 characters long.";
+    }
+
+    if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+        $errors['user_email'] = "Enter a valid email address.";
+    }
+
+    if (strlen($user_password) < 8 || !preg_match('/[A-Z]/', $user_password) || !preg_match('/[a-z]/', $user_password) || !preg_match('/\d/', $user_password) || !preg_match('/[@$!%*?&]/', $user_password)) {
+        $errors['user_password'] = "Password must contain at least 1 lowercase, 1 uppercase, 1 number, 1 special character, and be 8 characters long.";
+    }
+
+    if ($user_password !== $conform_user_password) {
+        $errors['conform_user_password'] = "Passwords do not match.";
+    }
+
+    if (strlen($user_phone) !== 10 || !ctype_digit($user_phone)) {
+        $errors['user_contact'] = "Contact must be a 10-digit number.";
+    }
+
+    if (empty($user_address) || strlen($user_address) < 5) {
+        $errors['user_address'] = "Address must be at least 5 characters long.";
+    }
+
+    // Check if there are any errors
+    if (!empty($errors)) {
+        // Display errors inline with the respective form fields
+    } else {
+        // Handle file upload
+        if (!empty($_FILES['user_image']['name'])) {
+            $user_image = $_FILES['user_image']['name'];
+            $user_image_temp = $_FILES['user_image']['tmp_name'];
+            
+            // Move uploaded file to the appropriate directory
+            $target_path = "./user_image/$user_image";
+            move_uploaded_file($user_image_temp, $target_path);
+        } else {
+            $user_image = ""; // Set default value or handle case accordingly
+        }
+
+        // Construct and execute the SQL query
+        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_phone', '$verification_code')";
+        $result = mysqli_query($conn, $insert_query);
+
+        if ($result) {
+            // Send verification email
+            $mail->setFrom('alishpawn00@gmail.com', 'Your Name');
+            $mail->addAddress($user_email, $user_name);
+            $mail->Subject = 'Verify your email address for registration';
+            $mail->isHTML(true);
+            $mail->Body = "Please click the following link to verify your email address: <a href='http://localhost/shop/user_area/verify_email.php?code=$verification_code'>Verify Email</a>";
+    
+            if (!$mail->send()) {
+                // Display error message if email sending fails
+                echo "<script>alert('Failed to send verification email.')</script>";
+            } else {
+                // Display success message if email sending succeeds
+                echo "<script>alert('Registration successful. Please check your email to verify your account.')</script>";
+            }
+        } else {
+            echo "<script>alert('Failed to insert user.')</script>";
+        }
+    }
+}
+
+?>
+
+
+
+<section class="single-banner bg-light-white margin-top-header">
+    <div class="container">
+        <div class="content">
+            <h1 class="heading">My Account</h1>
+            <div class="breadcrumb m-0">
+                <a href="index.php">Home</a>
+                <span>/</span>
+                <span>My Account</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="login-user padding-top-section">
+    <div class="container">
+        <h4 class="heading">New Registration Form</h4>
+        <form id="registrationForm" action="" method="post" enctype="multipart/form-data">
+            <div class="row pb-5">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" id="user_name" name="user_name" class="form-input">
+                        <span id="usernameError" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_email">Email <span class="required">*</span></label>
+                        <input type="text" id="user_email" name="user_email" class="form-input">
+                        <span id="emailError" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="User_image">Image <span class="optional">(optional)</span></label>
+                        <input type="file" id="user_image" name="user_image" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_password">Password <span class="required">*</span></label>
+                        <input type="password" id="user_password" name="user_password" class="form-input password">
+                        <input type="checkbox" class="showPassword">
+                        <span id="passwordError" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="conform_user_password">Confirm Password <span class="required">*</span></label>
+                        <input type="password" id="conform_user_password" name="conform_user_password" class="form-input password">
+                        <input type="checkbox" class="showPassword">
+                        <span id="confirmPasswordError" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_address">Address <span class="required">*</span></label>
+                        <input type="text" id="user_address" name="user_address" class="form-input">
+                        <span id="addressError" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_contact">Contact <span class="required">*</span></label>
+                        <input type="tel" id="user_contact" name="user_contact" class="form-input">
+                        <span id="contactError" class="error"></span>
+                    </div>
+                    <div>
+                        <input type="submit" value="Register" class="read-more btn" name="user_register">
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="login-user.php" class="text-danger">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<?php include('user_footer.php'); ?>
