@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2024 at 01:07 PM
+-- Generation Time: Mar 19, 2024 at 06:58 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_table`
+--
+
+CREATE TABLE `admin_table` (
+  `admin_id` int(11) NOT NULL,
+  `admin_name` varchar(100) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `admin_password` varchar(255) NOT NULL,
+  `verification_code` int(11) NOT NULL,
+  `email_verified` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_table`
+--
+
+INSERT INTO `admin_table` (`admin_id`, `admin_name`, `admin_email`, `admin_password`, `verification_code`, `email_verified`) VALUES
+(1, 'alish', 'alishpau@gmail.com', '123', 981532, 1);
 
 -- --------------------------------------------------------
 
@@ -50,7 +72,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`) VALUES
-(1, 'clock'),
+(1, 'clock '),
 (2, 'vast');
 
 -- --------------------------------------------------------
@@ -89,6 +111,13 @@ CREATE TABLE `order_pending` (
   `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_pending`
+--
+
+INSERT INTO `order_pending` (`order_id`, `user_id`, `invoice_number`, `product_id`, `quantity`, `order_status`) VALUES
+(1, 1, 1958115011, 3, 4, 'pending');
+
 -- --------------------------------------------------------
 
 --
@@ -116,7 +145,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_name`, `product_description`, `tag_id`, `category_id`, `product_image_1`, `product_image_2`, `product_price`, `product_in_store`, `date`, `status`, `stock_update_date`, `quantity_added`) VALUES
-(3, 'demo', 'demo', 1, 1, 'Screenshot 2024-01-27 232408.png', 'Screenshot 2024-01-31 165809.png', 15.00, 100, '2024-03-16 05:55:19', 'true', '2024-03-16 11:40:19', 0);
+(3, 'demo', 'demo', 1, 1, 'Screenshot 2024-01-27 232408.png', 'Screenshot 2024-01-31 165809.png', 15.00, 96, '2024-03-19 15:31:02', 'true', '2024-03-16 11:40:19', 0);
 
 -- --------------------------------------------------------
 
@@ -162,7 +191,7 @@ CREATE TABLE `tags` (
 
 INSERT INTO `tags` (`id`, `tag_name`) VALUES
 (1, 'clock'),
-(2, 'wooden'),
+(2, 'wooden update'),
 (3, 'vast'),
 (4, 'log');
 
@@ -183,6 +212,13 @@ CREATE TABLE `user_order` (
   `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user_order`
+--
+
+INSERT INTO `user_order` (`order_id`, `user_id`, `product_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES
+(1, 1, 3, 15, 1958115011, 4, '2024-03-19 15:54:24', 'complete');
+
 -- --------------------------------------------------------
 
 --
@@ -197,6 +233,13 @@ CREATE TABLE `user_payments` (
   `payment_mode` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_payments`
+--
+
+INSERT INTO `user_payments` (`payment_id`, `order_id`, `invoice_number`, `amount`, `payment_mode`, `date`) VALUES
+(1, 1, 1958115011, 15, 'Cash on delivery', '2024-03-19 15:54:24');
 
 -- --------------------------------------------------------
 
@@ -222,12 +265,17 @@ CREATE TABLE `user_table` (
 --
 
 INSERT INTO `user_table` (`user_id`, `user_name`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`, `email_verified`) VALUES
-(1, 'alish', 'alishpau@gmail.com', '@Lish03#', '', '::1', 'bhaktapur', '9768711111', 127988, 1),
-(2, 'ronit', 'anjelinapawn@gmail.com', '@Lish03#', '', '::1', 'bhaktapur', '9768711111', 438651, 0);
+(1, 'alish', 'alishpau@gmail.com', '123', 'bg.jpg', '::1', 'bhaktapur', '9768711111', 281934, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_table`
+--
+ALTER TABLE `admin_table`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `cart_details`
@@ -305,10 +353,16 @@ ALTER TABLE `user_table`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_table`
+--
+ALTER TABLE `admin_table`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -326,7 +380,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `order_pending`
 --
 ALTER TABLE `order_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -356,19 +410,19 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `user_order`
 --
 ALTER TABLE `user_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_payments`
 --
 ALTER TABLE `user_payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
