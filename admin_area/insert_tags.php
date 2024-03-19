@@ -65,7 +65,7 @@ if(isset($_POST['insert_tag'])){
                                 <form action="" method="post">
                                     <input type="hidden" name="tag_id" value="<?php echo $data['id']; ?>">
                                     <button type="submit" name="delete_tag" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this tag?')">Delete</button>
-                                    <button type="submit" name="edit_tag" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to edit this tag?')">Edit</button>
+                                    <a href="index.php?edit_tags=<?php echo $data["id"] ?>" class="btn btn-success btn-sm">Edit</a>
                                 </form>
                             </td>
                         </tr>

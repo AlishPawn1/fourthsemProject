@@ -44,34 +44,34 @@ if(isset($_POST['user_register'])){
 
     // Perform server-side validation
 
-    if (empty($user_name) || strlen($user_name) < 3) {
-        $errors['user_name'] = "Username must be at least 3 characters long.";
-    }
+    // if (empty($user_name) || strlen($user_name) < 3) {
+    //     $errors['user_name'] = "Username must be at least 3 characters long.";
+    // }
 
-    if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
-        $errors['user_email'] = "Enter a valid email address.";
-    }
+    // if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+    //     $errors['user_email'] = "Enter a valid email address.";
+    // }
 
-    if (strlen($user_password) < 8 || !preg_match('/[A-Z]/', $user_password) || !preg_match('/[a-z]/', $user_password) || !preg_match('/\d/', $user_password) || !preg_match('/[@$!%*?&]/', $user_password)) {
-        $errors['user_password'] = "Password must contain at least 1 lowercase, 1 uppercase, 1 number, 1 special character, and be 8 characters long.";
-    }
+    // if (strlen($user_password) < 6 || !preg_match('/[A-Z]/', $user_password) || !preg_match('/[a-z]/', $user_password) || !preg_match('/\d/', $user_password)) {
+    //     $errors['user_password'] = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
+    // }       
 
-    if ($user_password !== $conform_user_password) {
-        $errors['conform_user_password'] = "Passwords do not match.";
-    }
+    // if ($user_password !== $conform_user_password) {
+    //     $errors['conform_user_password'] = "Passwords do not match.";
+    // }
 
-    if (strlen($user_phone) !== 10 || !ctype_digit($user_phone)) {
-        $errors['user_contact'] = "Contact must be a 10-digit number.";
-    }
+    // if (strlen($user_phone) !== 10 || !ctype_digit($user_phone)) {
+    //     $errors['user_contact'] = "Contact must be a 10-digit number.";
+    // }
 
-    if (empty($user_address) || strlen($user_address) < 5) {
-        $errors['user_address'] = "Address must be at least 5 characters long.";
-    }
+    // if (empty($user_address) || strlen($user_address) < 5) {
+    //     $errors['user_address'] = "Address must be at least 5 characters long.";
+    // }
 
     // Check if there are any errors
-    if (!empty($errors)) {
-        // Display errors inline with the respective form fields
-    } else {
+    // if (!empty($errors)) {
+    //     // Display errors inline with the respective form fields
+    // } else {
         // Handle file upload
         if (!empty($_FILES['user_image']['name'])) {
             $user_image = $_FILES['user_image']['name'];
@@ -102,16 +102,15 @@ if(isset($_POST['user_register'])){
             } else {
                 // Display success message if email sending succeeds
                 echo "<script>alert('Registration successful. Please check your email to verify your account.')</script>";
+                echo "<script>window.open('login-user.php', '_self')</script>";
             }
         } else {
             echo "<script>alert('Failed to insert user.')</script>";
         }
     }
-}
+// }
 
 ?>
-
-
 
 <section class="single-banner bg-light-white margin-top-header">
     <div class="container">

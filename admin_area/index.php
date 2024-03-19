@@ -40,6 +40,15 @@ include("../function/commonfunction.php");
                     <a class="nav-link" href="index.php?insert_tags">insert tags</a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link" href="index.php?list_order">All order</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php?list_payment">All payment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php?list_user">List user</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" href="index.php?add_stock">add stock</a>
                   </li>
                   <li class="nav-item dropdown">
@@ -96,6 +105,21 @@ include("../function/commonfunction.php");
                 }
                 elseif (isset($_GET['delete_product'])) {
                     include('delete_product.php');
+                }
+                elseif (isset($_GET['edit_categories'])) {
+                    include('edit_categories.php');
+                }
+                elseif (isset($_GET['edit_tags'])) {
+                    include('edit_tags.php');
+                }
+                elseif (isset($_GET['list_order'])) {
+                    include('list_order.php');
+                }
+                elseif (isset($_GET['list_payment'])) {
+                    include('list_payment.php');
+                }
+                elseif (isset($_GET['list_user'])) {
+                    include('list_user.php');
                 }
                 else {
                     // Your default index.php content here

@@ -19,7 +19,7 @@ if(isset($_POST['user_login'])){
     $row_cart = mysqli_num_rows($select_result);
 
     if($row > 0){
-        $_SESSION["username"] = $user_name;
+        // $_SESSION["username"] = $user_name;
         if($user_password === $row_data['user_password']){ // Compare plain text passwords
             if($row_data['email_verified']){ // Check if email is verified
                 if($row_cart > 0){

@@ -63,7 +63,7 @@ if(isset($_POST['insert_category'])){
                                 <form action="" method="post">
                                     <input type="hidden" name="category_id" value="<?php echo $data['id']; ?>">
                                     <button type="submit" name="delete_category" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
-                                    <a class="text-white text-decoration-none btn btn-success btn-sm" href="index.php?edit_category=<?php echo $data["id"]?>">Edit</a>
+                                    <a class="text-white text-decoration-none btn btn-success btn-sm" href="index.php?edit_categories=<?php echo $data["id"]?>">Edit</a>
                                 </form>
                             </td>
                         </tr>
@@ -82,14 +82,6 @@ if(isset($_POST['insert_category'])){
                 <input type="submit" value="Insert Value" class="btn btn-primary" name="insert_category">
             </form>
         </div>
-        <div class="mt-5 d-non">
-            <form action="" method="post">
-                <div class="form-group">
-                    <label for="edit_category">Edit category</label>
-                    <input type="text" name="edit_category" class="form-control" id="edit_category">
-                </div>
-                <input type="submit" name="update_categorty" value="Update Category" class="btn btn-success">
-            </form>
-        </div>
+        
     </div>
 </div>

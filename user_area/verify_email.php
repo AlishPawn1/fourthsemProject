@@ -17,17 +17,3 @@ if (mysqli_num_rows($result) == 1) {
     echo "Invalid verification code.";
 }
 ?>
-
-
-
-<section class="formjkl">
-    <div class="container"></div>
-</section>
-
-<style> 
-
-.formjkl .container{
-    width: ; // change gar
-}
-
-</style>

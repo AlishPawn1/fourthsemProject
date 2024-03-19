@@ -93,8 +93,8 @@ if(isset($_GET['search_keyword'])){
                         <li class="right">
                             <a href="#">Login</a>
                             <ul class="sub-menu">
-                                <li><a href="./user_area/login-user.php"><span>Login</span></a></li>
-                                <li><a href="user_area/user_registration.php"><span>Register</span></a></li>
+                                <li><a href="login-user.php"><span>Login</span></a></li>
+                                <li><a href="user_registration.php"><span>Register</span></a></li>
                             </ul>
                         </li>
                     <?php else: ?>

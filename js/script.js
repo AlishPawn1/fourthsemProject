@@ -421,14 +421,15 @@ function validateEmail() {
 function validatePassword() {
   const passwordInput = document.getElementById("user_password");
   const passwordError = document.getElementById("passwordError");
-  if (passwordInput.value.trim().length < 8 || !/[A-Z]/.test(passwordInput.value) || !/[a-z]/.test(passwordInput.value) || !/\d/.test(passwordInput.value) || !/[@$!%*?&]/.test(passwordInput.value)) {
-      passwordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, 1 number, 1 special character, and be 8 characters long.";
+  if (passwordInput.value.trim().length < 6 || !/[A-Z]/.test(passwordInput.value) || !/[a-z]/.test(passwordInput.value) || !/\d/.test(passwordInput.value)) {
+      passwordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
       return false;
   } else {
       passwordError.textContent = "";
       return true;
   }
 }
+
 
 // Function to validate confirm password
 function validateConfirmPassword() {
