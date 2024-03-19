@@ -9,7 +9,6 @@
         if($row == 0){
             echo "<h1 class='heading text-center'>No Order Found!</h1>";
         } else {
-            // Display the table only if there are rows in the result
             echo "
         <h3 class='text-center heading'>All order</h3>
             
@@ -46,11 +45,8 @@
                     <td data-label='Total Amount'>$total_products</td>
                     <td data-label='Order due'>$order_date</td>
                     <td data-label='Status'>$order_status</td>
-                    <td data-label='Delete'> <!-- Corrected data-label attributes -->
-                        <form action='' method='post'>
-                            <input type='hidden' name='order_id' value='$order_id'>
-                            <button type='submit' name='delete_order' class='btn btn-danger btn-sm' onclick='return confirm('Are you sure you want to delete this order?')'>Delete</button>
-                        </form>
+                    <td data-label='Delete'>
+                        <a href='' class='btn btn-danger' onclick='return confirm('Are you sure you want to delete this order?')'>Delete</a>
                     </td>
                 </tr>
                 ";

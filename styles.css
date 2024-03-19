@@ -1051,7 +1051,11 @@ footer a:hover {
 .contact-banner .heading {
     font-size: 54px;
 }
-
+.form-input:focus{
+    outline: none !important;
+    border-color: #eaeaea;
+    box-shadow: none;
+}
 .form-input,
 .form-textarea {
     width: 100%;

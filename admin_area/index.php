@@ -3,7 +3,14 @@
 
 include("../include/connect_database.php");
 include("../function/commonfunction.php");
+session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION['admin_logged_in'])) {
+    // Redirect to the login page
+    header("Location: admin_login.php");
+    exit(); // Stop further execution
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +23,19 @@ include("../function/commonfunction.php");
     <link rel="stylesheet" href="/ecommerce/css/all.css">
     <link rel="stylesheet" href="style.css">
     <!-- Add your custom CSS file if needed -->
+    <style>
+      .title{
+        height: 100vh;
+        display: grid;
+        place-content: center;
+      }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
-              <a class="navbar-brand" href="#">Admin Dashboard</a>
+              <a class="navbar-brand" href="index.php">Admin Dashboard</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -63,8 +77,15 @@ include("../function/commonfunction.php");
                   </li>
                 </ul>
                 <div class="logout-btn">
-                  <a href="">Logout</a>
+                  <a href="logout.php">Logout</a>
                 </div>
+                <?php 
+                
+                if(isset($_SESSION['admin_name'])){
+                  echo "<h5 style='float: right; margin:0 0 0 5px;'>Welcome " . $_SESSION['admin_name'] . "</h5>";
+                }
+
+                ?>
               </div>
             </div>
           </nav>
@@ -122,8 +143,11 @@ include("../function/commonfunction.php");
                     include('list_user.php');
                 }
                 else {
-                    // Your default index.php content here
-                    // This part will be executed when no specific parameter is set in the URL
+                  echo "
+                  <div class='title'>
+                    <h1 class='heading'>Welcome to dashboard</h1>
+                  </div>                        
+                  ";
                 }
             ?>
         </div>

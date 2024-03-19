@@ -1,3 +1,10 @@
+:root{
+    --primary-color: #303233;
+    --secondary-color: #F8F8F8;
+    --third-color: #fcca03;
+    --default-transition: all 0.3s linear;
+
+}
 .insert_product .form-group{
     padding-bottom: 15px;
 }
@@ -9,5 +16,67 @@
     width: 100px;
 }
 .form-group{
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    position: relative;
+}
+.section-gaps{
+    padding: 50px 0;
+}
+.read-more, .white-btn {
+    background-color: var(--third-color);
+    color: #000;
+    padding: 14px 50px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
+    border: none;
+    transition: var(--default-transition);
+}
+.form-input:focus{
+    outline: none !important;
+    border-color: #eaeaea;
+    box-shadow: none;
+}
+.search-product input[type="email"]:focus, .contact-input:focus, .form-input:focus {
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
+    outline: 0;
+    padding-left: 5px;
+    border-left-color: transparent;
+    outline: none;
+    border: none;
+}
+.form-input, .form-textarea {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    padding: 4px 13px;
+    margin-bottom: 10px;
+    font-family: var(--third-fonts);
+}
+.required {
+    color: red;
+}
+.login-user .error {
+    color: red;
+    font-size: 10px;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    z-index: -1;
+}
+.form-group .showPassword {
+    position: absolute;
+    top: 62%;
+    transform: translateY(-50%);
+    right: 15px;
+}
+.admin_login .container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin_login .content{
+    width: 50%;
 }

@@ -390,7 +390,7 @@ showPasswordCheckboxes.forEach(function(checkbox) {
     });
 });
 
-
+// user validation
 // Function to validate username
 function validateUsername() {
   const usernameInput = document.getElementById("user_name");
@@ -488,3 +488,5 @@ document.getElementById("registrationForm").addEventListener("submit", function(
       event.preventDefault();
   }
 });
+
+

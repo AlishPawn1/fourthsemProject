@@ -39,76 +39,52 @@ if(isset($_POST['user_register'])){
     $user_phone = $_POST['user_contact'];
     $user_ip = getIPAddress();
 
+    $existing_email_query = "SELECT * FROM admin_table WHERE admin_email = '$admin_email'";
+    $existing_email_result = mysqli_query($conn, $existing_email_query);
+    if (mysqli_num_rows($existing_email_result) > 0) {
+        // Email already exists, display error message
+        echo "<script>alert('Email is already registered. Please use a different email address.')</script>";
+    } else {
     // Generate verification code
-    $verification_code = generateVerificationCode();
+        $verification_code = generateVerificationCode();
 
-    // Perform server-side validation
-
-    // if (empty($user_name) || strlen($user_name) < 3) {
-    //     $errors['user_name'] = "Username must be at least 3 characters long.";
-    // }
-
-    // if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
-    //     $errors['user_email'] = "Enter a valid email address.";
-    // }
-
-    // if (strlen($user_password) < 6 || !preg_match('/[A-Z]/', $user_password) || !preg_match('/[a-z]/', $user_password) || !preg_match('/\d/', $user_password)) {
-    //     $errors['user_password'] = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
-    // }       
-
-    // if ($user_password !== $conform_user_password) {
-    //     $errors['conform_user_password'] = "Passwords do not match.";
-    // }
-
-    // if (strlen($user_phone) !== 10 || !ctype_digit($user_phone)) {
-    //     $errors['user_contact'] = "Contact must be a 10-digit number.";
-    // }
-
-    // if (empty($user_address) || strlen($user_address) < 5) {
-    //     $errors['user_address'] = "Address must be at least 5 characters long.";
-    // }
-
-    // Check if there are any errors
-    // if (!empty($errors)) {
-    //     // Display errors inline with the respective form fields
-    // } else {
-        // Handle file upload
-        if (!empty($_FILES['user_image']['name'])) {
-            $user_image = $_FILES['user_image']['name'];
-            $user_image_temp = $_FILES['user_image']['tmp_name'];
-            
-            // Move uploaded file to the appropriate directory
-            $target_path = "./user_image/$user_image";
-            move_uploaded_file($user_image_temp, $target_path);
-        } else {
-            $user_image = ""; // Set default value or handle case accordingly
-        }
-
-        // Construct and execute the SQL query
-        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_phone', '$verification_code')";
-        $result = mysqli_query($conn, $insert_query);
-
-        if ($result) {
-            // Send verification email
-            $mail->setFrom('alishpawn00@gmail.com', 'Your Name');
-            $mail->addAddress($user_email, $user_name);
-            $mail->Subject = 'Verify your email address for registration';
-            $mail->isHTML(true);
-            $mail->Body = "Please click the following link to verify your email address: <a href='http://localhost/shop/user_area/verify_email.php?code=$verification_code'>Verify Email</a>";
-    
-            if (!$mail->send()) {
-                // Display error message if email sending fails
-                echo "<script>alert('Failed to send verification email.')</script>";
+            // Handle file upload
+            if (!empty($_FILES['user_image']['name'])) {
+                $user_image = $_FILES['user_image']['name'];
+                $user_image_temp = $_FILES['user_image']['tmp_name'];
+                
+                // Move uploaded file to the appropriate directory
+                $target_path = "./user_image/$user_image";
+                move_uploaded_file($user_image_temp, $target_path);
             } else {
-                // Display success message if email sending succeeds
-                echo "<script>alert('Registration successful. Please check your email to verify your account.')</script>";
-                echo "<script>window.open('login-user.php', '_self')</script>";
+                $user_image = ""; // Set default value or handle case accordingly
             }
-        } else {
-            echo "<script>alert('Failed to insert user.')</script>";
+
+            // Construct and execute the SQL query
+            $insert_query = "INSERT INTO `user_table`(`user_name`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_phone', '$verification_code')";
+            $result = mysqli_query($conn, $insert_query);
+
+            if ($result) {
+                // Send verification email
+                $mail->setFrom('alishpawn00@gmail.com', 'Your Name');
+                $mail->addAddress($user_email, $user_name);
+                $mail->Subject = 'Verify your email address for registration';
+                $mail->isHTML(true);
+                $mail->Body = "Please click the following link to verify your email address: <a href='http://localhost/shop/user_area/verify_email.php?code=$verification_code'>Verify Email</a>";
+        
+                if (!$mail->send()) {
+                    // Display error message if email sending fails
+                    echo "<script>alert('Failed to send verification email.')</script>";
+                } else {
+                    // Display success message if email sending succeeds
+                    echo "<script>alert('Registration successful. Please check your email to verify your account.')</script>";
+                    echo "<script>window.open('login-user.php', '_self')</script>";
+                }
+            } else {
+                echo "<script>alert('Failed to insert user.')</script>";
+            }
         }
     }
-// }
 
 ?>
 
@@ -143,7 +119,7 @@ if(isset($_POST['user_register'])){
                     </div>
                     <div class="form-group">
                         <label for="User_image">Image <span class="optional">(optional)</span></label>
-                        <input type="file" id="user_image" name="user_image" class="form-input">
+                        <input type="file" id="user_image" name="user_image" class="form-input form-control">
                     </div>
                     <div class="form-group">
                         <label for="user_password">Password <span class="required">*</span></label>
