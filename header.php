@@ -21,15 +21,14 @@ if(isset($_SESSION["username"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>new-website</title>
+    <title>Newari Shop</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
     <link rel="stylesheet" type="text/css" href="css/all.css">
-    <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
     <link rel="stylesheet" href="css/splide.min.css">
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" href="image/newari_favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">  
 </head>
 <body>
@@ -37,7 +36,7 @@ if(isset($_SESSION["username"])) {
     <div class="container">
         <div class="d-flex justify-content-between align-items-center nav-bar position-relative">
             <div class="main-logo">
-                <a href="index.php"><img src="image/logo.png" alt=""></a>
+                <a href="index.php"><img src="image/newari_favicon.jpg" alt=""></a>
             </div>
             <nav>
                 <ul class="primary-menu">

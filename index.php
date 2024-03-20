@@ -10,7 +10,7 @@ cart();
         <div class="splide__track">
             <ul class="splide__list">
                 <li class="splide__slide">
-                    <div class="banner" style="background-image: url(image/section-bg-29-1.jpg);">
+                    <div class="banner" style="background-image: url('image/newari-dress-girl.png'); background-position: right bottom; background-size: contain;">
                         <div class="container">
                             <div class="content d-flex align-items-center justify-content-start h-100 wow animate__delay-slow" >
                                 <div class="col-xl-6">
