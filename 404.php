@@ -13,13 +13,6 @@
         </div>
     </div>
 </section>
-<!-- <section class="error-content">
-    <div class="container">
-        <div class="content">
-            <h4 class="heading">The page you are looking for does not exist. It may have been moved, or removed altogether. Perhaps you can return back to the site's homepage and see if you can find what you are looking for.</h4>
-        </div>
-    </div>
-</section> -->
 
 
 
