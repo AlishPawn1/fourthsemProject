@@ -33,7 +33,7 @@ if(isset($_GET['search_keyword'])){
         <div class="container">
             <div class="d-flex justify-content-between align-items-center nav-bar position-relative">
                 <div class="main-logo">
-                    <a href="../index.php"><img src="../image/newari_favicon.jpg" alt=""></a>
+                    <a href="../index.php"><img src="../image/logo.png" alt=""></a>
                 </div>
                 <nav>
                     <ul class="primary-menu">

@@ -140,99 +140,30 @@
                 <div class="col-lg-4">
                     <div class="footer-about footer-box">
                         <h4 class="heading underline">About Us</h4>
-                        <p>Morbi eu purus eget tellus fringilla malesuada eget nec nisi. Etiam nec dolor porttitor, cursus elit quis, tristique erat. Integer euismod, nunc sit amet posuere gravida, dolor ipsum lobortis tortor, sed viverra purus dolor at massa nulla.</p>
+                        <p>Experience the fascinating world of Newari culture with Newari shop, where traditions and style combine. Enjoy exquisite collection of Newari clothing, jewellery and cultural artifacts that represents the ageless beauty and artistry of Nepal's Kathmandu Valley. </p>
                         <div class="social-icon pt-lg-2">
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="icon">
                                     <i class="fa-solid fa-location-dot"></i>
                                 </div>
-                                <p><span>90-120 Swanston St,Melbourne VIC 3000, Australia</span></p>
+                                <p><span>Bhaktapur, Nepal</span></p>
                             </div>
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="icon">
                                     <i class="fa-solid fa-phone"></i>
                                 </div>
-                                <p><a href="tel:+61 3 9559 9559">+61 3 9559 9559</a> or <a href="tel:+61 3 9669 9669">+61 3 9669 9669</a></p>
+                                <p><a href="tel:+977 9880945250">+977 9880945250</a> or <a href="tel:+977 9876543210">+977 9876543210</a></p>
                             </div>
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="icon">
                                     <i class="fa-solid fa-envelope"></i>
                                 </div>
-                                <p><a href="mailto:support@gtcreators.com">support@gtcreators.com</a></p>
+                                <p><a href="mailto:ronitchauguthi321@gmail.com">ronitchauguthi321@gmail.com</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="footer-box footer-recent">
-                        <h4 class="heading underline">Recent Posts</h4>
-                        <div>
-                            <a href="#">
-                                <div class="d-flex gap-3 pb-3 align-items-center">
-                                    <div class="image">
-                                        <img src="image/footer-r-1.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3 class="heading">Vestibulum rutrum pretium</h3>
-                                        <div class="date">
-                                            <span>August 14, 2016</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="">
-                            <a href="#">
-                                <div class="d-flex gap-3 pb-3 align-items-center">
-                                    <div class="image">
-                                        <img src="image/footer-r-2.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3 class="heading">Pellentesque non magna</h3>
-                                        <div class="date">
-                                            <span>August 14, 2016</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="d-flex gap-3 pb-3 align-items-center">
-                            <div class="image d-none">
-                                <img src="image/footer-r-3.jpg" alt="">
-                            </div>
-                            <div class="splide footer-slide">
-                                <div class="splide__track">
-                                    <ul class="splide__list">
-                                        <li class="splide__slide">
-                                            <div class="image">
-                                                <a href="#"><img src="image/footer-r-3.jpg" alt=""></a>
-                                            </div>
-                                        </li>
-                                        <li class="splide__slide">
-                                            <div class="image">
-                                                <a href="#"><img src="image/footer-r-4.jpg" alt=""></a>
-                                            </div>
-                                        </li>
-                                        <li class="splide__slide">
-                                            <div class="image">
-                                                <a href="#"><img src="image/footer-r-5.jpg" alt=""></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="content">
-                                    <h3 class="heading">Slider post format</h3>
-                                    <div class="date">
-                                        <span>July 30, 2016</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-4 col-sm-6 offset-3">
                     <div class="footer-box footer-gallery">
                         <h4 class="heading underline">Our Gallery</h4>
                         <?php
@@ -274,7 +205,7 @@
     <section class="footer-bottom">
         <div class="container">
             <div class="text-center">
-                <span>©2016 GTC. All rights reserved.</span>
+                <span>©2024. All rights reserved.</span>
             </div>
         </div>
         <!-- <button id="to_top_button"><i class="fa-solid fa-chevron-up"></i></button> -->

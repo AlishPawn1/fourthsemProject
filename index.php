@@ -15,21 +15,21 @@ cart();
                             <div class="content d-flex align-items-center justify-content-start h-100 wow animate__delay-slow" >
                                 <div class="col-xl-6">
                                     <h1 class="heading underline"><span>the best</span> products</h1>
-                                    <p>FREE SHIPPING ON ORDERS OF $75 OR MORE</p>
-                                    <a href="#" class="btn read-more mt-1">read more</a>
+                                    <p>Create a diverse and authentic collection of Newari clothes.</p>
+                                    <a href="#other_section" class="btn read-more mt-1">read more</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
                 <li class="splide__slide">
-                    <div class="banner" style="background-image: url(image/section-bg-30-1.jpg);">
+                    <div class="banner" style="background-image: url('image/Vector.png'); background-position: left bottom; background-size: contain;">
                         <div class="container">
                             <div class="content d-flex align-items-center justify-content-end h-100 wow animate__delay-slow" >
                                 <div class="col-xl-6">
-                                    <h1 class="heading underline"><span>sale off</span> save 50%</h1>
-                                    <p>FREE SHIPPING ON ORDERS OF $75 OR MORE</p>
-                                    <a href="#" class="btn read-more mt-1">read more</a>
+                                    <h1 class="heading underline"><span>Follow</span>Us</h1>
+                                    <p>Follow us for new product in local.</p>
+                                    <a href="#other_section" class="btn read-more mt-1">read more</a>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ cart();
         </div>
     </div>
 </section>
-<section class="shop-categorie section-gap">
+<section id="other_section" class="shop-categorie section-gap">
     <div class="container">
         <div class="row g-sm-4 g-2">
             <div class="col-sm-4 d-flex">
@@ -47,21 +47,21 @@ cart();
                     <div class="row gy-sm-4 gy-2">
                         <div class="col-12">
                             <div class="image overflow-hidden wow animate__animated animate__fadeInLeft">
-                                <a href="#"><img src="image/shop-categories-2.jpg" alt=""></a>
+                                <a href="#"><img src="image/image_1.jpg" alt=""></a>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="image overflow-hidden wow animate__animated animate__fadeInLeft">
-                                <a href="#"><img src="image/shop-categories-3.jpg" alt=""></a>
+                                <a href="#"><img src="image/image_2.jpg" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8 d-flex">
-                <div class="shop-big d-flex wow animate__animated animate__fadeInRight">
+                <div class="shop-big w-100 wow animate__animated animate__fadeInRight">
                     <div class="image overflow-hidden">
-                        <a href="#"><img src="image/shop-categories-1.jpg" alt=""></a>
+                        <a href="#"><img src="image/image_3.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -75,10 +75,9 @@ cart();
                 <div class="d-flex justify-content-center wow animate__animated animate__zoomIn">
                     <div class="text-center">
                         <div class="title">
-                            <h3 class="heading">DEALS THIS WEEK</h3>
+                            <h3 class="heading">Visit our all product</h3>
                         </div>
-                        <p>SED TEMPUS EGET ANTE SIT AMET VULPUTATE. MORBI DIGNISSIM.</p>
-                        <h2 class="heading">SAVE 50%</h2>
+                        <p>Promote cultural exchange by making Newari products </p>
                         <a href="display_all.php" class="white-btn btn">shop now</a>
                     </div>
                 </div>
@@ -107,10 +106,9 @@ cart();
             <div class="col-lg-6 col-sm-8">
                 <div class="content text-center wow animate__animated animate__zoomIn">
                     <div class="title">
-                        <h4 class="heading">SNUG. VASE LOW / COPPER</h4>
+                        <h4 class="heading">Visit our all product</h4>
                     </div>
-                    <p>VIVAMUS ELEMENTUM SEMPER AUCTOR VIVAMUS ALIQUM NISI SIT</p>
-                    <h3 class="heading">ON SALE!</h3>
+                    <p>Promote cultural exchange by making Newari products</p>
                     <a href="display_all.php" class="white-btn btn">shop now</a>
                 </div>
             </div>
