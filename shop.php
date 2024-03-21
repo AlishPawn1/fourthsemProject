@@ -1,4 +1,5 @@
 <?php 
+$dynamicTitle = "Shop";
 include("header.php"); 
 include("function/commonfunction.php");
 cart();

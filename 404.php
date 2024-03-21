@@ -1,4 +1,6 @@
-<?php include("header.php"); ?>
+<?php 
+$dynamicTitle = "Page Not Found";
+include("header.php"); ?>
 
 
 <section class="error-banner bg-light-white">

@@ -1,4 +1,5 @@
 <?php 
+$dynamicTitle = "Search";
 include("header.php"); 
 include('function/commonfunction.php');
 

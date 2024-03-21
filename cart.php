@@ -1,5 +1,5 @@
 <?php 
-
+$dynamicTitle = "Cart";
 include("header.php"); 
 include("function/commonfunction.php");
 

@@ -205,7 +205,7 @@
     <section class="footer-bottom">
         <div class="container">
             <div class="text-center">
-                <span>©2024. All rights reserved.</span>
+                <span>©2024. All rights reserved. <a href="policy.php">Policy and term</a></span>
             </div>
         </div>
         <!-- <button id="to_top_button"><i class="fa-solid fa-chevron-up"></i></button> -->

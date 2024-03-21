@@ -1,4 +1,6 @@
-<?php include("header.php"); ?>
+<?php
+$dynamicTitle = "Contact";
+include("header.php"); ?>
 
 <?php
 

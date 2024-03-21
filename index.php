@@ -1,5 +1,6 @@
 <!------------------------------  Header section  ------------------------------>
 <?php 
+$dynamicTitle = "Newari shop";
 include("header.php"); 
 include("function/commonfunction.php");
 cart();

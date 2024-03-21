@@ -1,4 +1,9 @@
-<?php include("header.php"); ?>
+<?php 
+$dynamicTitle = "Policy and Term";
+include("header.php"); 
+include("function/commonfunction.php");
+
+?>
 
 <section class="privacy-page margin-top-header">
     <div class="container">
@@ -7,7 +12,7 @@
         </div>
         <div class="policy-text">
             <div class="content">
-                <p>This privacy policy discloses the privacy practices for <a href="index.php">www.my-personal-page.com</a>. This privacy policy applies solely to information collected by this web site. It will notify you of the following:</p>
+                <p>This privacy policy discloses the privacy practices for <a href="index.php">www.newarishop.com</a>. This privacy policy applies solely to information collected by this web site. It will notify you of the following:</p>
                 <ul class="policy-list">
                     <li>What personally identifiable information is collected from you through the web site, how it is used and with whom it may be shared.</li>
                     <li>Personal information you provide voluntarily, such as your name and email address when filling out a form.</li>
@@ -52,10 +57,8 @@
             <div class="content">
                 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                 <ul>
-                    <li>By visiting this page on our website: <a href="index.php">www.my-personal-page.com</a></li>
+                    <li>By visiting this page on our website: <a href="index.php">www.newarishop.com</a></li>
                 </ul>
-
-
             </div>
         </div>
     </div>

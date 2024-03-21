@@ -1,5 +1,5 @@
 <?php
-
+$dynamicTitle = "All product";
 include("header.php");
 include('function/commonfunction.php');
 
