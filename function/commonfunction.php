@@ -34,7 +34,7 @@ function displayProducts($limit){
                                     <h4 class='heading'>$product_name</h4>
                                     <div class='price-tag'>";
 
-                        echo "<ins><span class='price-symbol'>$</span><span>$product_price</span></ins>
+                        echo "<ins><span class='price-symbol'>Rs.</span><span>$product_price</span></ins>
                                 </div>
                                 </a>
                             </div>
@@ -105,7 +105,7 @@ function search_product() {
                                 <a href='shop-single.php?id=$product_id'>
                                     <h4 class='heading'>$product_name</h4>
                                     <div class='price-tag'>
-                                        <ins><span class='price-symbol'>$</span><span>$product_price</span></ins>
+                                        <ins><span class='price-symbol'>Rs.</span><span>$product_price</span></ins>
                                     </div>
                                 </a>
                             </div>
@@ -126,10 +126,10 @@ function allproduct(){
         $product_id = $row['id']; 
         $product_name = $row['product_name'];
         $product_price = $row['product_price'];
-        $product_rating = $row['product_rating'];
+        // $product_rating = $row['product_rating'];
         $product_image = $row['product_image_1'];
 
-        $filled_stars = floor($product_rating); 
+        // $filled_stars = floor($product_rating); 
 
         // Output HTML code to display product
         echo "<div class='col-lg-3 col-sm-6'>
@@ -145,21 +145,10 @@ function allproduct(){
                     </div>
                     <div class='content'>
                         <a href='shop-single.php?id=$product_id'>
-                            <div class='rateing'>";
-
-        for ($i = 0; $i < $filled_stars; $i++) {
-            echo "<i class='fa-solid fa-star'></i>";
-        }
-
-        $empty_stars = 5 - ceil($product_rating); 
-        for ($i = 0; $i < $empty_stars; $i++) {
-            echo "<i class='fa-regular fa-star'></i>";
-        }
-
-        echo "</div>
+                            <div class='rateing'></div>
                 <h4 class='heading'>$product_name</h4>
                 <div class='price-tag'>
-                    <ins><span class='price-symbol'>$</span><span>$product_price</span></ins>
+                    <ins><span class='price-symbol'>Rs.</span><span>$product_price</span></ins>
                 </div>
                 </a>
             </div>
@@ -258,7 +247,7 @@ function productdetail(){
                                         <h4 class='heading'>{$product_name}</h4>
                                     </div>
                                     <div class='price-tag'>
-                                        <ins><span class='price-symbol'>$</span><span>{$product_price}</span></ins>
+                                        <ins><span class='price-symbol'>Rs.</span><span>{$product_price}</span></ins>
                                     </div>
                                 </div>
                                 <div class='product-price-description product-box-list'>
@@ -454,7 +443,7 @@ function displayCart() {
                         </td>
                         <td data-label='Product Price' class='product-price'>
                             <span class='product-amount'>
-                                <span class='price-symbol'>$</span>
+                                <span class='price-symbol'>Rs.</span>
                                 $price
                             </span>
                         </td>
@@ -467,7 +456,7 @@ function displayCart() {
                         </td>
                         <td data-label='Product Subtotal' class='product-subtotal'>
                             <span class='product-amount'>
-                                <span class='price-symbol'>$</span>
+                                <span class='price-symbol'>Rs.</span>
                                 " . ($price * $quantity) . "
                             </span>
                         </td>
@@ -496,7 +485,7 @@ function displayCart() {
                                         <tr class='cart-subtotal'>
                                             <th>Subtotal</th>
                                             <td class='text-end' id='subtotal'>
-                                            <span class='price-symbol'>$</span>
+                                            <span class='price-symbol'>Rs.</span>
                                             $total
                                         </td>
                                         </tr>
@@ -504,7 +493,7 @@ function displayCart() {
                                             <th>Total</th>
                                             <td class='text-end' id='total'>
                                                 <strong>
-                                                    <span class='price-symbol'>$</span>
+                                                    <span class='price-symbol'>Rs.</span>
                                                     $total
                                                 </strong>
                                             </td>
@@ -564,11 +553,43 @@ function total_price_cart(){
 
 // get user order detail
 
+// function user_order(){
+//     global $conn;
+//     $username = $_SESSION["username"];
+//     $get_details = "SELECT * FROM `user_table` WHERE user_name = '$username'";
+//     $result_detail = mysqli_query($conn, $get_details);
+
+//     while($row_query = mysqli_fetch_array($result_detail)){
+//         $user_id = $row_query["user_id"];
+
+//         if(!isset($_GET['edit_account']) && !isset($_GET['my_order']) && !isset($_GET['delete_account'])){
+//             $get_order = "SELECT * FROM `user_order` WHERE user_id = $user_id AND order_status = 'pending'";
+//             $result_order_query = mysqli_query($conn, $get_order);
+//             $row_count = mysqli_num_rows($result_order_query);
+
+//             if ($row_count > 0){
+//                 echo "<div class='pending-order-fn'>
+//                     <h3 class='heading text-center '>You have <span>$row_count</span> pending orders</h3>
+//                 <p class='text-center'><a href='../user_area/profile.php?user_order'>Order Details</a></p>
+//                 </div>";
+//             }else{
+//                 echo "<div class='pending-order-fn'>
+//                     <h3 class='heading text-center '>You have <span>$row_count</span> pending orders</h3>
+//                 <p class='text-center'><a href='../index.php'>Explore products  </a></p>
+//                 </div>";
+//             }
+//         }
+//     }
+// }
+
 function user_order(){
     global $conn;
     $username = $_SESSION["username"];
     $get_details = "SELECT * FROM `user_table` WHERE user_name = '$username'";
     $result_detail = mysqli_query($conn, $get_details);
+
+    // Initialize a variable to keep track of whether the pending order message has been displayed
+    $pending_order_displayed = false;
 
     while($row_query = mysqli_fetch_array($result_detail)){
         $user_id = $row_query["user_id"];
@@ -578,16 +599,20 @@ function user_order(){
             $result_order_query = mysqli_query($conn, $get_order);
             $row_count = mysqli_num_rows($result_order_query);
 
-            if ($row_count > 0){
+            if ($row_count > 0 && !$pending_order_displayed){
                 echo "<div class='pending-order-fn'>
                     <h3 class='heading text-center '>You have <span>$row_count</span> pending orders</h3>
-                <p class='text-center'><a href='../user_area/profile.php?user_order'>Order Details</a></p>
+                    <p class='text-center'><a href='../user_area/profile.php?user_order'>Order Details</a></p>
                 </div>";
-            }else{
+                // Set the flag to true to indicate that the pending order message has been displayed
+                $pending_order_displayed = true;
+            } elseif (!$pending_order_displayed) {
                 echo "<div class='pending-order-fn'>
                     <h3 class='heading text-center '>You have <span>$row_count</span> pending orders</h3>
-                <p class='text-center'><a href='../index.php'>Explore products  </a></p>
+                    <p class='text-center'><a href='../index.php'>Explore products  </a></p>
                 </div>";
+                // Set the flag to true to indicate that the pending order message has been displayed
+                $pending_order_displayed = true;
             }
         }
     }

@@ -48,7 +48,7 @@
                     
                     echo "<tr>
                             <td>$number</td>
-                            <td><img src='../image/$image' height='80' width='80'/></td>
+                            <td><img src='../admin_area/product_images/$image' height='80' width='80'/></td>
                             <td>$amount_due</td>
                             <td>$total_product</td>
                             <td>$invoice_number</td>

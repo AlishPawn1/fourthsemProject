@@ -9,6 +9,7 @@ if(isset($_GET['edit_account'])) {
     $user_email = $row_query['user_email'];
     $user_address = $row_query['user_address'];
     $user_mobile = $row_query['user_mobile'];
+    $user_image = $row_query['user_image']; // Existing user image
 
     if(isset($_POST['user_update'])){
         $update_id = $user_id;
@@ -16,24 +17,29 @@ if(isset($_GET['edit_account'])) {
         $user_email = $_POST['user_email'];
         $user_address = $_POST['user_address'];
         $user_mobile = $_POST['user_mobile'];
-        $user_image = $_FILES['user_image']['name'];
+        $user_image = $_FILES['user_image']['name']; // New user image
         $user_image_temp = $_FILES['user_image']['tmp_name'];
 
+        // Check if a new image has been uploaded
+        if(!empty($user_image)) {
+            // Move the uploaded image to the appropriate directory
+            move_uploaded_file($user_image_temp, "./user_image/$user_image");
+        } else {
+            // If no new image is uploaded, retain the existing image
+            $user_image = $row_query['user_image'];
+        }
 
-        move_uploaded_file($user_image_temp, "./user_image/$user_image");
-
-        // update query
-
-        $update_data = "update `user_table` set user_name = '$username', user_email = '$user_email', user_address = '$user_address', user_mobile = $user_mobile where user_id = $user_id";
+        // Update query
+        $update_data = "UPDATE `user_table` SET user_name = '$username', user_email = '$user_email', user_address = '$user_address', user_mobile = $user_mobile, user_image = '$user_image' WHERE user_id = $user_id";
         $result_query = mysqli_query($conn, $update_data);
 
         if($result_query){
-            echo "<script>alert('Data update successfully')</script>";
+            echo "<script>alert('Data updated successfully')</script>";
         }
-
     }
 }
 ?>
+
 
 <section class="edit-account">
     <div class="edit_form">

@@ -1975,7 +1975,7 @@ strong .product-amount {
     transform: rotate(45deg);
 }
 
-.slide-box input {
+.slide-box input[type="password"], .slide-box input[type="text/email"] {
     /* width: 100%; */
     color: #000;
 }
@@ -2321,4 +2321,12 @@ strong .product-amount {
     bottom: -10px;
     right: 0;
     z-index: -1;
+}
+
+.user-image{
+    height: 200px;
+}
+.user-image img{
+    height: 100%;
+    width: 100%;
 }
