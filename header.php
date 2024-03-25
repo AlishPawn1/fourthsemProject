@@ -23,7 +23,7 @@ if(isset($_SESSION["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
     <?php
-        $dynamicTitle = '';
+        // $dynamicTitle = '';
 
         if(isset($dynamicTitle) && $dynamicTitle !== '') {
             echo $dynamicTitle;
