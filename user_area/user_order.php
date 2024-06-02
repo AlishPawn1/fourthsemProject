@@ -1,3 +1,24 @@
+<?php
+
+// Update product stock and insert pending orders
+$update_store_query = "SELECT * FROM user_order WHERE order_status = 'complete' ";
+$result_update = mysqli_query($conn, $update_store_query);
+
+if ($result_update) {
+    while ($row = mysqli_fetch_assoc($result_update)) {
+        $product_id = $row['product_id'];
+        $quantity = $row['total_products'];
+        $update_query = "UPDATE products SET product_in_store = product_in_store - $quantity WHERE id = $product_id";
+        if (!mysqli_query($conn, $update_query)) {
+            echo "<script>alert('Error updating product stock: " . mysqli_error($conn) . "');</script>";
+        }
+    }
+} else {
+    echo "<script>alert('Error fetching complete orders: " . mysqli_error($conn) . "');</script>";
+}
+
+?>
+
 <section class="order_user">
     <div class="container">
         <?php 
