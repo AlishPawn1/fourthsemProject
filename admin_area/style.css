@@ -1,0 +1,187 @@
+:root{
+    --primary-color: #303233;
+    --secondary-color: #F8F8F8;
+    --third-color: #fcca03;
+    --default-transition: all 0.3s linear;
+
+}
+.insert_product .form-group{
+    padding-bottom: 15px;
+}
+.section-gaps{
+    padding: 100px 0;
+}
+.product-image{
+    height: 100px;
+    width: 100px;
+}
+.form-group{
+    /* margin-bottom: 15px; */
+    position: relative;
+}
+.read-more, .white-btn {
+    background-color: var(--third-color);
+    color: #000;
+    padding: 14px 50px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
+    border: none;
+    transition: var(--default-transition);
+}
+.form-input:focus{
+    outline: none !important;
+    border-color: #eaeaea;
+    box-shadow: none;
+}
+.search-product input[type="email"]:focus, .contact-input:focus, .form-input:focus {
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
+    outline: 0;
+    padding-left: 5px;
+    border-left-color: transparent;
+    outline: none;
+    border: none;
+}
+.form-input, .form-textarea {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    padding: 4px 13px;
+    margin-bottom: 10px;
+    font-family: var(--third-fonts);
+}
+.required {
+    color: red;
+}
+.login-user .error {
+    color: red;
+    font-size: 10px;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    z-index: -1;
+}
+.form-group .showPassword {
+    position: absolute;
+    top: 62%;
+    transform: translateY(-50%);
+    right: 15px;
+}
+.admin_login .container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin_login .content{
+    width: 50%;
+}
+
+header nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: #fff;
+    border-right: 1px solid #e6e5e5;
+}
+.dashboard {
+    position: relative;
+    left: 250px;
+    background-color: #fff;
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+}
+.sub-menu{
+    display: none;
+    list-style: none;
+}
+.primary-menu{
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.primary-menu a, .logout-btn a{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    position: relative;
+    color: #707070;
+    transition: all 0.3s linear;
+}
+.primary-menu li a i, .logout-btn a i {
+    font-size: 18px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #707070;
+}
+.primary-menu .menu-dropdown .dropdown-btn{
+    float: right;
+    flex: 1;
+}
+.primary-menu .menu-dropdown .dropdown-btn i{
+    max-width: unset;
+    justify-content: end;
+}
+.logo-name{
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.menu-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 80px;
+    min-height: calc(100vh - 50px);
+}
+.dashboard{
+    margin-top: 90px;
+}
+.dashboard .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 275px;
+    right: 30px;
+    top: 0;
+    background-color: #fff;
+    z-index: 9;
+    padding: 20px 0;
+}
+.dashboard .top .title{
+    font-size: 32px;
+}
+.dashboard .top .admin-name{
+    text-transform: capitalize;
+}
+
+.dashboard-box{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard-box .title{
+    font-size: 18px;
+    line-height: 28px;
+}
+.dashboard-box .icon i{
+    font-size: 26px;
+}
+.dashboard-box .content{
+    text-align: end;
+}

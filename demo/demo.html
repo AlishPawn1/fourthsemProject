@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #price-display {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="filter-by-price">
+    <h4 class="heading underline">Filter by price</h4>
+    <form action="" id="price-filter-form">
+        <div id="price-range"></div>
+        <div id="price-display">
+            <span>Price: $<span id="range-min">9</span> - $<span id="range-max">956</span></span>
+        </div>
+    </form>
+</div>
+
+<script>
+$(document).ready(function () {
+    var minValue = 9;
+    var maxValue = 956;
+    var step = 10;
+
+    $("#price-range").slider({
+        range: true,
+        min: minValue,
+        max: maxValue,
+        values: [minValue, maxValue],
+        slide: function (event, ui) {
+            // Update the displayed values without changing the slider values
+            $("#range-min").text(minValue);
+            $("#range-max").text(ui.values[1]);
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>

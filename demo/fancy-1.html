@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Corrected paths for CSS and JS files -->
+    <link rel="stylesheet" href="/ecommerce/demo/path/to/your/custom.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+    
+    <!-- Include FontAwesome for the icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .image-change {
+            position: relative;
+        }
+
+        .image-change-full-width i {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 18px;
+            color: #000;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background-color: #000;
+            box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="zoom image image-change position-relative" id="zoom1" style="height: 300px; width: 300px;">
+    <img class="zoomable-image" style="min-width: 100%; width: 100%; height: auto;" src="/ecommerce/image/new-arrival-5.jpg" alt="">
+    <div class="image-change-full-width">
+        <i class="fas fa-magnifying-glass" onclick="openFancybox()"></i>
+    </div>
+</div>
+<div class="for-change-image">
+    <a href="/ecommerce/image/new-arrival-5.jpg" data-fancybox="images" data-caption="Image 1">
+        <img src="/ecommerce/image/new-arrival-5.jpg" alt="">
+    </a>
+    <a href="/ecommerce/image/new-arrival-1.jpg" data-fancybox="images" data-caption="Image 2">
+        <img src="/ecommerce/image/new-arrival-1.jpg" alt="">
+    </a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize jQuery Zoom
+        $('#zoom1').zoom({
+            magnify: "1.5",
+        });
+    });
+
+    function openFancybox() {
+        $.fancybox.open({
+          src: $('.zoomable-image').attr('src'),
+          type: 'image',
+          opts: {
+              buttons: [
+                  "zoom",
+                  "fullScreen",
+                  "close"
+              ],
+              fullScreen: {
+                  autoStart: false,
+              },
+              touch: {
+                  vertical: true,
+                  momentum: true
+              },
+              openEffect: 'none',
+              closeEffect: 'none',
+          }
+      });
+    }
+</script>
+
+</body>
+</html>
