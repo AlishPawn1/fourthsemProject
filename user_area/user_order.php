@@ -58,7 +58,7 @@
                     if($order_status == 'Complete') {
                         echo "<td>Paid</td>";
                     } else {
-                        echo "<td><a href='conform_payment.php?order_id=$order_id'>Confirm</a></td>";
+                        echo "<td><a href='confirm_payment.php?order_id=$order_id'>Confirm</a></td>";
                     }
 
                     echo "</tr>";

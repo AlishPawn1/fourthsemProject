@@ -53,12 +53,6 @@ while ($get_item_quantity = mysqli_fetch_assoc($run_cart)) {
     $quantity = $get_item_quantity['quantity'];
     $product_id = $get_item_quantity['product_id'];
 
-    // Update the product_in_store column in the database
-    $update_query = "UPDATE `products` SET product_in_store = product_in_store - $quantity WHERE id = $product_id";
-    if (!mysqli_query($conn, $update_query)) {
-        echo "<script>alert('Error updating product stock: " . mysqli_error($conn) . "');</script>";
-    }
-
     // Insert pending orders
     $insert_pending_orders = "INSERT INTO `order_pending` (`user_id`, `invoice_number`, `product_id`, `quantity`, `order_status`) VALUES ('$user_id', '$invoice_number', '$product_id', '$quantity', '$status')";
     if (!mysqli_query($conn, $insert_pending_orders)) {
