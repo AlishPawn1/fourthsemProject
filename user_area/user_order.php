@@ -1,22 +1,44 @@
 <?php
 
-// Update product stock and insert pending orders
-$update_store_query = "SELECT * FROM user_order WHERE order_status = 'complete' ";
-$result_update = mysqli_query($conn, $update_store_query);
+if (isset($_GET['order_id'])) {
+    $order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
+    $order_id = (int)$order_id;  // Ensure order_id is an integer
 
-if ($result_update) {
-    while ($row = mysqli_fetch_assoc($result_update)) {
-        $product_id = $row['product_id'];
-        $quantity = $row['total_products'];
-        $update_query = "UPDATE products SET product_in_store = product_in_store - $quantity WHERE id = $product_id";
-        if (!mysqli_query($conn, $update_query)) {
-            echo "<script>alert('Error updating product stock: " . mysqli_error($conn) . "');</script>";
+    // Fetch order details
+    $update_store_query = "SELECT * FROM user_order WHERE order_id = $order_id AND order_status = 'pending'";
+    $result_update = mysqli_query($conn, $update_store_query);
+
+    if ($result_update && mysqli_num_rows($result_update) > 0) {
+        while ($row = mysqli_fetch_assoc($result_update)) {
+            $product_id = (int)$row['product_id'];
+            $quantity = (int)$row['total_products'];
+
+            // Ensure both product_id and quantity are valid numbers
+            if ($product_id > 0 && $quantity > 0) {
+                $update_query = "UPDATE products SET product_in_store = product_in_store - $quantity WHERE id = $product_id";
+                if (mysqli_query($conn, $update_query)) {
+                    // Update order status to complete
+                    $complete_order_query = "UPDATE user_order SET order_status = 'complete' WHERE order_id = $order_id";
+                    if (mysqli_query($conn, $complete_order_query)) {
+                        echo "<script>alert('Payment confirmed and product stock updated successfully.');</script>";
+                        echo "<script>window.open('profile.php', '_self');</script>";
+                    } else {
+                        echo "<script>alert('Error updating order status: " . mysqli_error($conn) . "');</script>";
+                    }
+                } else {
+                    echo "<script>alert('Error updating product stock: " . mysqli_error($conn) . "');</script>";
+                }
+            } else {
+                echo "<script>alert('Invalid product ID or quantity.');</script>";
+            }
         }
+    } else {
+        echo "<script>alert('Error fetching pending orders or no matching order found: " . mysqli_error($conn) . "');</script>";
     }
-} else {
-    echo "<script>alert('Error fetching complete orders: " . mysqli_error($conn) . "');</script>";
 }
-
+//  else {
+//     echo "<script>alert('Invalid order ID.');</script>";
+// }
 ?>
 
 <section class="order_user">
@@ -90,3 +112,4 @@ if ($result_update) {
         </table>
     </div>
 </section>
+

@@ -37,7 +37,7 @@ $number = 1; // Initialize the number counter
                 $product_in_store = $row['product_in_store'];
 
                 // Query to get the count of pending orders for this product
-                $get_count = "SELECT COALESCE(SUM(quantity), 0) AS total_orders FROM `order_pending` WHERE product_id = $product_id"; // Using COALESCE to handle NULL values
+                $get_count = "SELECT COALESCE(SUM(total_products), 0) AS total_orders FROM `user_order` WHERE product_id = $product_id and order_status = 'complete'"; // Using COALESCE to handle NULL values
                 $result_count = mysqli_query($conn, $get_count);
                 if ($result_count) {
                     $row_count = mysqli_fetch_assoc($result_count); // Fetching the row as an associative array

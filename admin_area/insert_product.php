@@ -30,14 +30,16 @@ if(isset($_POST['insert_product'])) {
 ?>
 
 <div class="insert_product w-50 m-auto pt-5">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="product_name">Product name <span class="required">*</span></label>
             <input type="text" id="product_name" required name="product_name" class="form-control"/>
+            <small id="product_name_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="product_description">Product description <span class="required">*</span></label>
             <input type="text" id="product_description" required name="product_description" class="form-control"/>
+            <small id="product_description_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="tags">Tags</label>
@@ -51,6 +53,7 @@ if(isset($_POST['insert_product'])) {
                 }
                 ?>
             </select>
+            <small id="select_tags_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="categories">Categories</label>
@@ -64,24 +67,147 @@ if(isset($_POST['insert_product'])) {
                 }
                 ?>
             </select>
+            <small id="select_categories_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="product_price">Product price <span class="required">*</span></label>
             <input type="text" id="product_price" required name="product_price" class="form-control"/>
+            <small id="product_price_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="product_image_1">Product image 1 <span class="required">*</span></label>
-            <input type="file" name="product_image_1"  required class="form-control">
+            <input type="file" name="product_image_1" required class="form-control">
+            <small id="product_image_1_error" class="text-danger"></small>
         </div>
         <div class="form-group">
-            <label for="product_image_2">product image 2<span class="required">*</span></label>
+            <label for="product_image_2">Product image 2 <span class="required">*</span></label>
             <input type="file" name="product_image_2" required class="form-control">
+            <small id="product_image_2_error" class="text-danger"></small>
         </div>
         <div class="form-group">
             <label for="product_in_store">Product quantity in store <span class="required">*</span></label>
             <input type="number" id="product_in_store" required name="product_in_store" class="form-control"/>
+            <small id="product_in_store_error" class="text-danger"></small>
         </div>
 
-        <input type="submit" class="btn btn-primary" name="insert_product" value="insert product">
+        <input type="submit" class="btn btn-primary" name="insert_product" value="Insert Product">
     </form>
-</div>
+</div> 
+
+<script>
+function validateForm() {
+    var isValid = true;
+
+    var productName = document.getElementById('product_name').value;
+    var productDescription = document.getElementById('product_description').value;
+    var productPrice = document.getElementById('product_price').value;
+    var productInStore = document.getElementById('product_in_store').value;
+
+    var letters = /^[A-Za-z\s]+$/;
+    var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
+    var quantityPattern = /^[1-9]\d*$/;
+
+    // Product Name Validation
+    var productNameError = document.getElementById('product_name_error');
+    if (!productName.match(letters)) {
+        productNameError.textContent = "Product name can only contain letters and spaces";
+        isValid = false;
+    } else {
+        var wordCount = productName.trim().split(/\s+/).length;
+        if (wordCount < 3) {
+            productNameError.textContent = "Product name must be at least 3 words long";
+            isValid = false;
+        } else {
+            productNameError.textContent = "";
+        }
+    }
+
+    // Product Description Validation
+    var productDescriptionError = document.getElementById('product_description_error');
+    if (!productDescription.match(letters)) {
+        productDescriptionError.textContent = "Product description can only contain letters and spaces";
+        isValid = false;
+    } else if (productDescription.length < 10 || productDescription.length > 200) {
+        productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
+        isValid = false;
+    } else {
+        productDescriptionError.textContent = "";
+    }
+
+    // Product Price Validation
+    var productPriceError = document.getElementById('product_price_error');
+    if (!productPrice.match(pricePattern)) {
+        productPriceError.textContent = "Product price must be a positive number";
+        isValid = false;
+    } else {
+        productPriceError.textContent = "";
+    }
+
+    // Product Quantity Validation
+    var productInStoreError = document.getElementById('product_in_store_error');
+    if (!productInStore.match(quantityPattern)) {
+        productInStoreError.textContent = "Product quantity in store must be a positive integer";
+        isValid = false;
+    } else {
+        productInStoreError.textContent = "";
+    }
+
+    return isValid;
+}
+
+// Add event listeners for real-time validation
+document.getElementById('product_name').addEventListener('input', function() {
+    var productName = document.getElementById('product_name').value;
+    var productNameError = document.getElementById('product_name_error');
+    var letters = /^[A-Za-z\s]+$/;
+
+    if (!productName.match(letters)) {
+        productNameError.textContent = "Product name can only contain letters and spaces";
+    } else {
+        var wordCount = productName.trim().split(/\s+/).length;
+        if (wordCount < 3) {
+            productNameError.textContent = "Product name must be at least 3 words long";
+        } else {
+            productNameError.textContent = "";
+        }
+    }
+});
+
+document.getElementById('product_description').addEventListener('input', function() {
+    var productDescription = document.getElementById('product_description').value;
+    var productDescriptionError = document.getElementById('product_description_error');
+    var letters = /^[A-Za-z\s]+$/;
+
+    if (!productDescription.match(letters)) {
+        productDescriptionError.textContent = "Product description can only contain letters and spaces";
+    } else if (productDescription.length < 10 || productDescription.length > 200) {
+        productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
+    } else {
+        productDescriptionError.textContent = "";
+    }
+});
+
+document.getElementById('product_price').addEventListener('input', function() {
+    var productPrice = document.getElementById('product_price').value;
+    var productPriceError = document.getElementById('product_price_error');
+    var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    if (!productPrice.match(pricePattern)) {
+        productPriceError.textContent = "Product price must be a positive number";
+    } else {
+        productPriceError.textContent = "";
+    }
+});
+
+document.getElementById('product_in_store').addEventListener('input', function() {
+    var productInStore = document.getElementById('product_in_store').value;
+    var productInStoreError = document.getElementById('product_in_store_error');
+    var quantityPattern = /^[1-9]\d*$/;
+
+    if (!productInStore.match(quantityPattern)) {
+        productInStoreError.textContent = "Product quantity in store must be a positive integer";
+    } else {
+        productInStoreError.textContent = "";
+    }
+});
+</script>

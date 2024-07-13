@@ -34,11 +34,11 @@ if(isset($_POST["conform_payment"])) {
     
     // Check if the query was successful
     if($result) {
-        echo "<h1 class='heading'>Successfully completed the payment</h1>";
+        echo "<script>alert('Successfully completed the payment')</script>";
         echo "<script>window.open('profile.php?user_order', '_self')</script>";
     } else {
         // If the query fails, display an error message
-        echo "<h1 class='heading'>Error occurred while processing your payment</h1>";
+        echo "<h1 class='heading'>Error occurred while processing your payment</script>";
         echo "<p>Please try again later.</p>";
         echo "<p>Error message: " . mysqli_error($conn) . "</p>";
     }

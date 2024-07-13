@@ -71,12 +71,12 @@ if (isset($_POST['update_product'])) {
         </div>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="product_name">Product name <span class="required">*</span></label>
-                <input type="text" id="product_name" required name="product_name" class="form-control" value="<?php echo $product_name; ?>">
+                <label for="product_name">Product name</label>
+                <input type="text" id="product_name" name="product_name" class="form-control" value="<?php echo $product_name; ?>">
             </div>
             <div class="form-group">
-                <label for="product_description">Product description <span class="required">*</span></label>
-                <input type="text" id="product_description" required name="product_description" class="form-control" value="<?php echo $product_description; ?>">
+                <label for="product_description">Product description</label>
+                <input type="text" id="product_description" name="product_description" class="form-control" value="<?php echo $product_description; ?>">
             </div>
             <div class="form-group">
                 <label for="select_tags">Tags</label>
@@ -113,18 +113,18 @@ if (isset($_POST['update_product'])) {
                 </select>
             </div>
             <div class="form-group">
-                <label for="product_price">Product price <span class="required">*</span></label>
-                <input type="text" id="product_price" required name="product_price" class="form-control" value="<?php echo $product_price; ?>">
+                <label for="product_price">Product price</label>
+                <input type="text" id="product_price" name="product_price" class="form-control" value="<?php echo $product_price; ?>">
             </div>
             <div class="form-group">
-                <label for="product_image_1">Product image 1 <span class="required">*</span></label>
+                <label for="product_image_1">Product image 1</label>
                 <div class="d-flex">
                     <input type="file" name="product_image_1" id="product_image_1" class="form-control">
                     <img class="product-image" src="./product_images/<?php echo $product_image_1; ?>" alt="">
                 </div>
             </div>
             <div class="form-group">
-                <label for="product_image_2">Product image 2 <span class="required">*</span></label>
+                <label for="product_image_2">Product image 2</label>
                 <div class="d-flex">
                     <input type="file" name="product_image_2" id="product_image_2" class="form-control">
                     <img class="product-image" src="./product_images/<?php echo $product_image_2; ?>" alt="">
