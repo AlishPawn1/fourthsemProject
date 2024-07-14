@@ -1,12 +1,12 @@
 <section class="section-gaps list-order">
     <div class="container">
 
-        <?php 
+        <?php
         $get_order = "SELECT * FROM `user_order`"; // Corrected 'select' to 'SELECT'
         $result = mysqli_query($conn, $get_order);
-        $row  = mysqli_num_rows($result);
+        $row = mysqli_num_rows($result);
 
-        if($row == 0){
+        if ($row == 0) {
             echo "<h1 class='heading text-center'>No Order Found!</h1>";
         } else {
             echo "
@@ -27,7 +27,7 @@
                     <tbody>";
 
             $number = 0;
-            while($row = mysqli_fetch_assoc($result)){
+            while ($row = mysqli_fetch_assoc($result)) {
                 $order_id = $row['order_id'];
                 $user_id = $row['user_id'];
                 $amount_due = $row['amount_due'];
@@ -46,12 +46,12 @@
                     <td data-label='Order due'>$order_date</td>
                     <td data-label='Status'>$order_status</td>
                     <td data-label='Delete'>";
-                
+
                 // Only show delete button if status is not complete
-                if($order_status != "complete") {
+                if ($order_status != "complete") {
                     echo "<a href='index.php?order_id=$order_id' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this order?\")'>Delete</a>";
                 }
-                
+
                 echo "</td>
                 </tr>";
             }

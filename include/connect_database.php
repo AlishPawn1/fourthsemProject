@@ -3,12 +3,11 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "shop";
-$conn = mysqli_connect($servername,  $username, $password, $database);
+$conn = mysqli_connect($servername, $username, $password, $database);
 ;
-if (!$conn) { 
+if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
-}
-else{
+} else {
     // echo "<script>console.log('Connected Successfully')</script>";
 }
 ?>

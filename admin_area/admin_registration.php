@@ -1,9 +1,8 @@
-
 <?php
 session_start();
-include('header.php');  
-include("../include/connect_database.php");
-include('../function/commonfunction.php');
+include ('header.php');
+include ("../include/connect_database.php");
+include ('../function/commonfunction.php');
 // use PHPMailer\PHPMailer\PHPMailer;
 
 // // Include PHPMailer Autoload file
@@ -35,7 +34,8 @@ if (!$file_found) {
 use PHPMailer\PHPMailer\PHPMailer;
 
 // Function to generate a random verification code
-function generateVerificationCode() {
+function generateVerificationCode()
+{
     return rand(100000, 999999); // Generates a 6-digit code
 }
 
@@ -53,7 +53,7 @@ $mail->Port = 587;
 
 $errors = []; // Define an empty array to store errors
 
-if(isset($_POST['admin_register'])){
+if (isset($_POST['admin_register'])) {
     $admin_name = $_POST['admin_name'];
     $admin_email = $_POST['admin_email'];
     $admin_password = $_POST['admin_password'];
@@ -80,7 +80,7 @@ if(isset($_POST['admin_register'])){
             $mail->Subject = 'Verify your email address for registration';
             $mail->isHTML(true);
             $mail->Body = "Please click the following link to verify your email address: <a href='http://localhost/shop/admin_area/verify_email.php?code=$verification_code'>Verify Email</a>";
-    
+
             if (!$mail->send()) {
                 // Display error message if email sending fails
                 echo "<script>alert('Failed to send verification email.')</script>";
@@ -123,13 +123,15 @@ if(isset($_POST['admin_register'])){
                     </div>
                     <div class="form-group">
                         <label for="admin_conform_password">Confirm Password <span class="required">*</span></label>
-                        <input type="password" id="admin_conform_password" name="admin_conform_password" class="form-input password">
+                        <input type="password" id="admin_conform_password" name="admin_conform_password"
+                            class="form-input password">
                         <input type="checkbox" class="showPassword">
                         <span id="admin_confirmPasswordError" class="error"></span>
                     </div>
                     <div>
                         <input type="submit" value="Register" class="read-more btn" name="admin_register">
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="admin_login.php" class="text-danger">Login</a></p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="admin_login.php"
+                                class="text-danger">Login</a></p>
                     </div>
                 </div>
             </div>
@@ -141,75 +143,75 @@ if(isset($_POST['admin_register'])){
     // admin validation
     // Function to validate name
     function validateAdminUsername() {
-      const adminUsernameInput = document.getElementById("admin_name");
-      const adminUsernameError = document.getElementById("admin_nameError");
-      if (adminUsernameInput.value.trim().length < 3) {
-          adminUsernameError.textContent = "Username must be at least 3 characters long.";
-          return false;
-      } else {
-          adminUsernameError.textContent = "";
-          return true;
-      }
-  }
+        const adminUsernameInput = document.getElementById("admin_name");
+        const adminUsernameError = document.getElementById("admin_nameError");
+        if (adminUsernameInput.value.trim().length < 3) {
+            adminUsernameError.textContent = "Username must be at least 3 characters long.";
+            return false;
+        } else {
+            adminUsernameError.textContent = "";
+            return true;
+        }
+    }
 
-  // Function to validate email
-  function validateAdminEmail() {
-      const adminEmailInput = document.getElementById("admin_email");
-      const adminEmailError = document.getElementById("admin_emailError");
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminEmailInput.value.trim())) {
-          adminEmailError.textContent = "Enter a valid email address.";
-          return false;
-      } else {
-          adminEmailError.textContent = "";
-          return true;
-      }
-  }
+    // Function to validate email
+    function validateAdminEmail() {
+        const adminEmailInput = document.getElementById("admin_email");
+        const adminEmailError = document.getElementById("admin_emailError");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminEmailInput.value.trim())) {
+            adminEmailError.textContent = "Enter a valid email address.";
+            return false;
+        } else {
+            adminEmailError.textContent = "";
+            return true;
+        }
+    }
 
-  // Function to validate password
-  function validateAdminPassword() {
-      const adminPasswordInput = document.getElementById("admin_password");
-      const adminPasswordError = document.getElementById("admin_passwordError");
-      if (adminPasswordInput.value.trim().length < 6 || !/[A-Z]/.test(adminPasswordInput.value) || !/[a-z]/.test(adminPasswordInput.value) || !/\d/.test(adminPasswordInput.value)) {
-          adminPasswordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
-          return false;
-      } else {
-          adminPasswordError.textContent = "";
-          return true;
-      }
-  }
+    // Function to validate password
+    function validateAdminPassword() {
+        const adminPasswordInput = document.getElementById("admin_password");
+        const adminPasswordError = document.getElementById("admin_passwordError");
+        if (adminPasswordInput.value.trim().length < 6 || !/[A-Z]/.test(adminPasswordInput.value) || !/[a-z]/.test(adminPasswordInput.value) || !/\d/.test(adminPasswordInput.value)) {
+            adminPasswordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
+            return false;
+        } else {
+            adminPasswordError.textContent = "";
+            return true;
+        }
+    }
 
-  // Function to validate confirm password
-  function validateAdminConfirmPassword() {
-      const adminPasswordInput = document.getElementById("admin_password");
-      const adminConfirmPasswordInput = document.getElementById("admin_conform_password");
-      const adminConfirmPasswordError = document.getElementById("admin_confirmPasswordError");
-      if (adminPasswordInput.value.trim() !== adminConfirmPasswordInput.value.trim()) {
-          adminConfirmPasswordError.textContent = "Passwords do not match.";
-          return false;
-      } else {
-          adminConfirmPasswordError.textContent = "";
-          return true;
-      }
-  }
+    // Function to validate confirm password
+    function validateAdminConfirmPassword() {
+        const adminPasswordInput = document.getElementById("admin_password");
+        const adminConfirmPasswordInput = document.getElementById("admin_conform_password");
+        const adminConfirmPasswordError = document.getElementById("admin_confirmPasswordError");
+        if (adminPasswordInput.value.trim() !== adminConfirmPasswordInput.value.trim()) {
+            adminConfirmPasswordError.textContent = "Passwords do not match.";
+            return false;
+        } else {
+            adminConfirmPasswordError.textContent = "";
+            return true;
+        }
+    }
 
 
 
-  // Add event listeners for input events
-  document.getElementById("admin_name").addEventListener("input", validateAdminUsername);
-  document.getElementById("admin_email").addEventListener("input", validateAdminEmail);
-  document.getElementById("admin_password").addEventListener("input", validateAdminPassword);
-  document.getElementById("admin_conform_password").addEventListener("input", validateAdminConfirmPassword);
+    // Add event listeners for input events
+    document.getElementById("admin_name").addEventListener("input", validateAdminUsername);
+    document.getElementById("admin_email").addEventListener("input", validateAdminEmail);
+    document.getElementById("admin_password").addEventListener("input", validateAdminPassword);
+    document.getElementById("admin_conform_password").addEventListener("input", validateAdminConfirmPassword);
 
-  // Add event listener for form submission
-  document.getElementById("admin_registrationForm").addEventListener("submit", function(event) {
-      // Prevent form submission if any of the validations fail
-      if (!validateAdminUsername() || !validateAdminEmail() || !validateAdminPassword() || !validateAdminConfirmPassword()) {
-          event.preventDefault();
-      }
-  });
+    // Add event listener for form submission
+    document.getElementById("admin_registrationForm").addEventListener("submit", function (event) {
+        // Prevent form submission if any of the validations fail
+        if (!validateAdminUsername() || !validateAdminEmail() || !validateAdminPassword() || !validateAdminConfirmPassword()) {
+            event.preventDefault();
+        }
+    });
 </script>
-<?php 
+<?php
 
-include('footer.php'); 
+include ('footer.php');
 
 ?>

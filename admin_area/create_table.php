@@ -97,7 +97,7 @@ include '../include/connect_database.php';
 //      FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
 //      FOREIGN KEY (product_image_id) REFERENCES images(id) ON DELETE CASCADE
 //  )";
- 
+
 //  $tags = "CREATE TABLE tags(
 //      id INT AUTO_INCREMENT PRIMARY KEY,
 //      tag_name VARCHAR(100)
@@ -207,7 +207,7 @@ mysqli_query($conn, $product_images);
 mysqli_query($conn, $cart);
 
 // Check for errors
-if(mysqli_errno($conn)) {
+if (mysqli_errno($conn)) {
     echo "Error creating tables: " . mysqli_error($conn);
 } else {
     echo "Tables created successfully!";

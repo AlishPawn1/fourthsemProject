@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include('header.php'); 
+include ('header.php');
 
 ?>
 
@@ -24,7 +24,8 @@ include('header.php');
                             <input type="submit" class="btn white-btn checkout-btn" value="login" name="admin_login">
                         </div>
                         <div class="d-none">
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  <a href="admin_registration.php" class="text-danger">Register</a></p>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a
+                                    href="admin_registration.php" class="text-danger">Register</a></p>
                         </div>
                     </div>
                 </div>
@@ -33,8 +34,8 @@ include('header.php');
     </div>
 </section>
 
-<?php 
+<?php
 
-include('footer.php'); 
+include ('footer.php');
 
 ?>

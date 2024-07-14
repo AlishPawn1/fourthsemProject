@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
             </tr>";
 
     // Output data for each row
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row["id"] . "</td>
                 <td>" . $row["product_name"] . "</td>
@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
                 <td>" . $row["items_sold"] . "</td>
             </tr>";
     }
-    
+
     // End the HTML table
     echo "</table>";
 } else {

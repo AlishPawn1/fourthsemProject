@@ -1,12 +1,12 @@
 <section class="section-gaps list-order">
     <div class="container">
 
-        <?php 
+        <?php
         $get_payment = "SELECT * FROM `user_payments`"; // Corrected 'select' to 'SELECT'
         $result = mysqli_query($conn, $get_payment);
-        $row  = mysqli_num_rows($result);
+        $row = mysqli_num_rows($result);
 
-        if($row == 0){
+        if ($row == 0) {
             echo "<h1 class='heading text-center'>No Payment Found!</h1>";
         } else {
             echo "
@@ -25,7 +25,7 @@
                     <tbody>";
 
             $number = 0;
-            while($row = mysqli_fetch_assoc($result)){
+            while ($row = mysqli_fetch_assoc($result)) {
                 $order_id = $row['order_id'];
                 $payment_id = $row['payment_id'];
                 $amount = $row['amount'];

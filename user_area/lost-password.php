@@ -1,4 +1,4 @@
-<?php include("user_header.php"); ?>
+<?php include ("user_header.php"); ?>
 
 <section class="single-banner bg-light-white margin-top-header">
     <div class="container">
@@ -14,7 +14,8 @@
 </section>
 <section class="padding-top-section">
     <div class="container">
-        <p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
+        <p>Lost your password? Please enter your username or email address. You will receive a link to create a new
+            password via email.</p>
         <form action="">
             <div class="row pb-5">
                 <div class="col-sm-6">
@@ -29,4 +30,4 @@
     </div>
 </section>
 
-<?php include("user_footer.php"); ?>
+<?php include ("user_footer.php"); ?>

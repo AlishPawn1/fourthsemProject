@@ -1,8 +1,8 @@
 <?php
 
-if(isset($_GET['add_stock'])){
-    $select_query = "SELECT * FROM products"; 
-    $result = mysqli_query($conn, $select_query); 
+if (isset($_GET['add_stock'])) {
+    $select_query = "SELECT * FROM products";
+    $result = mysqli_query($conn, $select_query);
 }
 
 ?>
@@ -23,8 +23,8 @@ if(isset($_GET['add_stock'])){
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    while ($row = mysqli_fetch_array($result)) {  
+                    <?php
+                    while ($row = mysqli_fetch_array($result)) {
                         $product_name = $row['product_name'];
                         $product_image_1 = $row['product_image_1'];
                         $product_in_store = $row['product_in_store'];

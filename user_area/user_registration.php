@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('user_header.php');  
-include("../include/connect_database.php");
+include ('user_header.php');
+include ("../include/connect_database.php");
 // include('../function/commonfunction.php');
 
 // use PHPMailer\PHPMailer\PHPMailer;
@@ -17,7 +17,8 @@ use PHPMailer\PHPMailer\Exception;
 
 
 // Function to generate a random verification code
-function generateVerificationCode() {
+function generateVerificationCode()
+{
     return rand(100000, 999999); // Generates a 6-digit code
 }
 
@@ -35,7 +36,7 @@ $mail->Port = 587;
 
 $errors = []; // Define an empty array to store errors
 
-if(isset($_POST['user_register'])){
+if (isset($_POST['user_register'])) {
     $user_name = $_POST['user_name'];
     $user_lname = $_POST['user_lname'];
     $user_email = $_POST['user_email'];
@@ -43,7 +44,6 @@ if(isset($_POST['user_register'])){
     $conform_user_password = isset($_POST['conform_user_password']) ? $_POST['conform_user_password'] : '';
     $user_address = $_POST['user_address'];
     $user_phone = $_POST['user_contact'];
-    $user_ip = getIPAddress();
 
     $existing_email_query = "SELECT * FROM user_table WHERE user_email = '$user_email'";
     $existing_email_result = mysqli_query($conn, $existing_email_query);
@@ -58,7 +58,7 @@ if(isset($_POST['user_register'])){
         if (!empty($_FILES['user_image']['name'])) {
             $user_image = $_FILES['user_image']['name'];
             $user_image_temp = $_FILES['user_image']['tmp_name'];
-            
+
             // Move uploaded file to the appropriate directory
             $target_path = "./user_image/$user_image";
             move_uploaded_file($user_image_temp, $target_path);
@@ -67,24 +67,24 @@ if(isset($_POST['user_register'])){
         }
 
         // Construct and execute the SQL query
-        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name', '$user_lname','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_phone', '$verification_code')";
+        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name', '$user_lname','$user_email','$user_password','$user_image','$user_address','$user_phone', '$verification_code')";
         $result = mysqli_query($conn, $insert_query);
 
         if ($result) {
             // Send verification email
-            $mail->setFrom('alishpawn00@gmail.com', 'Your Name');
+            $mail->setFrom('alishpawn00@gmail.com', 'Newari shop');
             $mail->addAddress($user_email, $user_name);
             $mail->Subject = 'Verify your email address for registration';
             $mail->isHTML(true);
-            $mail->Body = "Please click the following link to verify your email address: <a href='http://localhost/fourthsemProject/user_area/verify_email.php?code=$verification_code'>Verify Email</a>";
-    
+            $mail->Body = "Please use the following verification code to verify your email address: <strong>$verification_code</strong><br>Enter the code on the following page: <a href='http://localhost/fourthsemProject/user_area/verify_email_click.php?code=$verification_code'>Verify Email</a>";
+
             if (!$mail->send()) {
                 // Display error message if email sending fails
                 echo "<script>alert('Failed to send verification email.')</script>";
             } else {
                 // Display success message if email sending succeeds
                 echo "<script>alert('Registration successful. Please check your email to verify your account.')</script>";
-                echo "<script>window.open('login-user.php', '_self')</script>";
+                echo "<script>window.open('verify_email.php', '_self')</script>";
             }
         } else {
             echo "<script>alert('Failed to insert user.')</script>";
@@ -140,7 +140,8 @@ if(isset($_POST['user_register'])){
                     </div>
                     <div class="form-group">
                         <label for="conform_user_password">Confirm Password <span class="required">*</span></label>
-                        <input type="password" id="conform_user_password" name="conform_user_password" class="form-input password">
+                        <input type="password" id="conform_user_password" name="conform_user_password"
+                            class="form-input password">
                         <input type="checkbox" class="showPassword">
                         <span id="confirmPasswordError" class="error"></span>
                     </div>
@@ -156,7 +157,8 @@ if(isset($_POST['user_register'])){
                     </div>
                     <div>
                         <input type="submit" value="Register" class="read-more btn" name="user_register">
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="login-user.php" class="text-danger">Login</a></p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="login-user.php"
+                                class="text-danger">Login</a></p>
                     </div>
                 </div>
             </div>
@@ -164,4 +166,4 @@ if(isset($_POST['user_register'])){
     </div>
 </section>
 
-<?php include('user_footer.php'); ?>
+<?php include ('user_footer.php'); ?>

@@ -1,9 +1,9 @@
-jQuery(function($){
-    $(document).ready(function() {
+jQuery(function ($) {
+    $(document).ready(function () {
         $(".primary-menu li.menu-dropdown > a").append('<span class="dropdown-btn"><i class="fa-solid fa-chevron-down"></i></span>');
-        
-    
-        $('.dropdown-btn').on('click', function(event) {
+
+
+        $('.dropdown-btn').on('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
             $(this).parent().parent().toggleClass('open').first().siblings().removeClass('open');
@@ -15,10 +15,10 @@ jQuery(function($){
     });
     $('.primary-menu li').has('ul').addClass('menu-dropdown');
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var currentPath = window.location.pathname.replace(/\/$/, '');
 
-        $('.primary-menu a').each(function() {
+        $('.primary-menu a').each(function () {
             var href = $(this).attr('href').replace(/\/$/, '');
             var lastPartHref = href.substring(href.lastIndexOf('/') + 1);
             if (currentPath.endsWith(lastPartHref)) {

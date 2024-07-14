@@ -2,7 +2,7 @@
 
 if (isset($_GET['order_id'])) {
     $order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
-    $order_id = (int)$order_id;  // Ensure order_id is an integer
+    $order_id = (int) $order_id;  // Ensure order_id is an integer
 
     // Fetch order details
     $update_store_query = "SELECT * FROM user_order WHERE order_id = $order_id AND order_status = 'pending'";
@@ -10,8 +10,8 @@ if (isset($_GET['order_id'])) {
 
     if ($result_update && mysqli_num_rows($result_update) > 0) {
         while ($row = mysqli_fetch_assoc($result_update)) {
-            $product_id = (int)$row['product_id'];
-            $quantity = (int)$row['total_products'];
+            $product_id = (int) $row['product_id'];
+            $quantity = (int) $row['total_products'];
 
             // Ensure both product_id and quantity are valid numbers
             if ($product_id > 0 && $quantity > 0) {
@@ -43,12 +43,12 @@ if (isset($_GET['order_id'])) {
 
 <section class="order_user">
     <div class="container">
-        <?php 
-            $user_name = $_SESSION['username'];
-            $get_user = "SELECT * FROM `user_table` WHERE user_name = '$user_name'";
-            $result_query = mysqli_query($conn, $get_user);
-            $row = mysqli_fetch_assoc($result_query);    
-            $user = $row['user_id'];
+        <?php
+        $user_name = $_SESSION['username'];
+        $get_user = "SELECT * FROM `user_table` WHERE user_name = '$user_name'";
+        $result_query = mysqli_query($conn, $get_user);
+        $row = mysqli_fetch_assoc($result_query);
+        $user = $row['user_id'];
         ?>
 
         <h1 class="heading">All Orders</h1>
@@ -66,14 +66,14 @@ if (isset($_GET['order_id'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php 
+                <?php
                 $number = 1;
                 $get_order_details = "SELECT uo.*, p.product_image_1 
                 FROM `user_order` uo 
                 JOIN `products` p ON uo.product_id = p.id
                 WHERE uo.user_id = '$user'";
                 $result_order = mysqli_query($conn, $get_order_details);
-                while($row_order = mysqli_fetch_assoc($result_order)){
+                while ($row_order = mysqli_fetch_assoc($result_order)) {
                     $order_id = $row_order['order_id']; // Retrieve order_id
                     $amount_due = $row_order['amount_due'];
                     $total_product = $row_order['total_products'];
@@ -81,14 +81,14 @@ if (isset($_GET['order_id'])) {
                     $order_status = $row_order['order_status'];
                     $image = $row_order['product_image_1'];
 
-                    if($order_status == 'pending'){
+                    if ($order_status == 'pending') {
                         $order_status = 'Incomplete';
-                    }else{
+                    } else {
                         $order_status = 'Complete';
                     }
 
                     $order_date = $row_order['order_date'];
-                    
+
                     echo "<tr>
                             <td>$number</td>
                             <td><img src='../admin_area/product_images/$image' height='80' width='80'/></td>
@@ -98,7 +98,7 @@ if (isset($_GET['order_id'])) {
                             <td>$order_date</td>
                             <td>$order_status</td>";
 
-                    if($order_status == 'Complete') {
+                    if ($order_status == 'Complete') {
                         echo "<td>Paid</td>";
                     } else {
                         echo "<td><a href='confirm_payment.php?order_id=$order_id'>Confirm</a></td>";
@@ -112,4 +112,3 @@ if (isset($_GET['order_id'])) {
         </table>
     </div>
 </section>
-

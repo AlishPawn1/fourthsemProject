@@ -1,7 +1,7 @@
 <?php
 $dynamicTitle = "All product";
-include("header.php");
-include('function/commonfunction.php');
+include ("header.php");
+include ('function/commonfunction.php');
 
 
 ?>
@@ -19,12 +19,12 @@ include('function/commonfunction.php');
     <div class="container">
         <h3 class="heading underline center text-center">Display all product</h3>
         <div class="row g-xl-5 g-4 ">
-       <?php
+            <?php
             allproduct();
-        ?>
+            ?>
         </div>
     </div>
 </section>
 
 
-<?php include("footer.php");?>
+<?php include ("footer.php"); ?>

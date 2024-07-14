@@ -1,7 +1,7 @@
-<?php 
+<?php
 $dynamicTitle = "Page Not Found";
-include("header.php"); 
-include("function/commonfunction.php");
+include ("header.php");
+include ("function/commonfunction.php");
 
 ?>
 
@@ -13,7 +13,8 @@ include("function/commonfunction.php");
                 <h1 class="heading">404</h1>
             </div>
             <h5 class="heading">Oops! Page Not Available.</h5>
-            <p>The page you are looking for does not exist. It may have been moved, or removed altogether. Perhaps you can return back to the site's homepage and see if you can find what you are looking for.</p>
+            <p>The page you are looking for does not exist. It may have been moved, or removed altogether. Perhaps you
+                can return back to the site's homepage and see if you can find what you are looking for.</p>
             <a href="index.php" class="white-btn btn">back to home</a>
         </div>
     </div>
@@ -22,4 +23,4 @@ include("function/commonfunction.php");
 
 
 
-<?php include("footer.php"); ?>
+<?php include ("footer.php"); ?>

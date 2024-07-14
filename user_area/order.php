@@ -1,15 +1,15 @@
-<?php 
-include('user_header.php'); 
-include("../include/connect_database.php");
+<?php
+include ('user_header.php');
+include ("../include/connect_database.php");
 // include("../function/commonfunction.php");
 
 // Check if user_id is set
-if(isset($_GET['user_id'])){
+if (isset($_GET['user_id'])) {
     $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
 }
 
 // Initialize variables
-$get_ip_address = getIPAddress();
+$get_ip_address = $_SESSION["userid"];
 $invoice_number = mt_rand();
 $status = 'pending';
 $total_price = 0;
@@ -21,7 +21,7 @@ $get_ip_address = mysqli_real_escape_string($conn, $get_ip_address);
 // Calculate total price and count product
 $cart_query_price = "SELECT cart_details.*, products.product_price FROM `cart_details` 
                     INNER JOIN products ON cart_details.product_id = products.id
-                    WHERE cart_details.ip_address = '$get_ip_address'";
+                    WHERE cart_details.userid = '$get_ip_address'";
 $result_price = mysqli_query($conn, $cart_query_price);
 
 if ($result_price) {

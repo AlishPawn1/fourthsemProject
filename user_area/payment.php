@@ -1,11 +1,11 @@
-<?php 
-include('user_header.php'); 
-include("../include/connect_database.php");
+<?php
+include ('user_header.php');
+include ("../include/connect_database.php");
 // include("../function/commonfunction.php");
 
 
-$user_ip = getIPAddress();
-$get_user = "select * from `user_table` where user_ip = '$user_ip'";
+$user_ip = $_SESSION["userid"];
+$get_user = "select * from `user_table` where user_id = '$user_ip'";
 $run_user = mysqli_query($conn, $get_user);
 $row_user = mysqli_fetch_array($run_user);
 $user_id = $row_user['user_id'];
@@ -28,7 +28,7 @@ $user_id = $row_user['user_id'];
         <h4 class="heading text-center text-info">Payment Method</h4>
         <div class="row justify-content-center pt-5 text-center">
             <div class="col-md-6">
-                <a href="order.php?user_id=<?php echo $user_id;?> " target="_blank">
+                <a href="order.php?user_id=<?php echo $user_id; ?> " target="_blank">
                     <h2 class="heading">Pay offline</h2>
                 </a>
             </div>
@@ -36,4 +36,4 @@ $user_id = $row_user['user_id'];
     </div>
 </section>
 
-<?php include("user_footer.php"); ?>
+<?php include ("user_footer.php"); ?>

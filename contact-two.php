@@ -2,23 +2,23 @@
 $dynamicTitle = "Contact";
 include ("header.php");
 include './include/connect_database.php';
-include("function/commonfunction.php");
+include ("function/commonfunction.php");
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
     $name = $_POST["name"];
-	$email = $_POST["email"];
-    $subject = $_POST["subject"];  
+    $email = $_POST["email"];
+    $subject = $_POST["subject"];
     $message = $_POST["message"];
 
 
     $insert_query = "INSERT INTO contact_message (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
-    $result = mysqli_query( $conn, $insert_query );
-    if($result) {
+    $result = mysqli_query($conn, $insert_query);
+    if ($result) {
         echo "<script>alert('Message sent successfully.')</script>";
     } else {
         echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
-    } 
+    }
 
 }
 ?>
@@ -40,7 +40,8 @@ if(isset($_POST['submit'])){
                                     <input class="contact-input" name="name" type="text" placeholder="name">
                                 </div>
                                 <div class="contact-inputs">
-                                    <input class="contact-input" name="email" type="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="email">
+                                    <input class="contact-input" name="email" type="email"
+                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="email">
                                 </div>
                                 <div class="contact-inputs">
                                     <input class="contact-input" name="subject" type="text" placeholder="subject">
@@ -90,4 +91,4 @@ if(isset($_POST['submit'])){
     </div>
 </section>
 
-<?php include("footer.php"); ?>
+<?php include ("footer.php"); ?>

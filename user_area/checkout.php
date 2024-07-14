@@ -1,6 +1,6 @@
-<?php 
+<?php
 // include("user_header.php");
-include("../include/connect_database.php");
+include ("../include/connect_database.php");
 @session_start();
 
 ?>
@@ -18,18 +18,13 @@ include("../include/connect_database.php");
     </div>
 </section> -->
 <section class="">
-    <?php 
-        if(!isset($_SESSION["username"])){
-            include ('login-user.php');
-        }
-        else{
-            include ('payment.php');
-        }
+    <?php
+    include ('payment.php');
     ?>
 </section>
 
 
-<?php 
+<?php
 
 // include("user_footer.php");
- ?>
+?>

@@ -1,65 +1,65 @@
 <?php
 
-    $sql_sales = "SELECT SUM(amount_due) AS total_sales FROM user_order WHERE order_status = 'complete'";
-    $result_sales = mysqli_query($conn, $sql_sales);
+$sql_sales = "SELECT SUM(amount_due) AS total_sales FROM user_order WHERE order_status = 'complete'";
+$result_sales = mysqli_query($conn, $sql_sales);
 
-    $totalSales = 0;
-    if ($result_sales) {
-        $row_sales = mysqli_fetch_assoc($result_sales);
-        if ($row_sales) {
-            $totalSales = $row_sales['total_sales'];
-        }
-    } else {
-        echo "Error: " . mysqli_error($conn);
+$totalSales = 0;
+if ($result_sales) {
+    $row_sales = mysqli_fetch_assoc($result_sales);
+    if ($row_sales) {
+        $totalSales = $row_sales['total_sales'];
     }
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
 
-    $sql_users = "SELECT COUNT(*) AS total_users FROM user_table";
-    $result_users = mysqli_query($conn, $sql_users);
+$sql_users = "SELECT COUNT(*) AS total_users FROM user_table";
+$result_users = mysqli_query($conn, $sql_users);
 
-    $totalUsers = 0;
-    if ($result_users) {
-        $row_users = mysqli_fetch_assoc($result_users);
-        if ($row_users) {
-            $totalUsers = $row_users['total_users'];
-        }
-    } else {
-        echo "Error: " . mysqli_error($conn);
+$totalUsers = 0;
+if ($result_users) {
+    $row_users = mysqli_fetch_assoc($result_users);
+    if ($row_users) {
+        $totalUsers = $row_users['total_users'];
     }
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
 
-    $sql_feedback = "SELECT COUNT(*) AS total_feedback FROM contact_message";
-    $result_feedback = mysqli_query($conn, $sql_feedback);
+$sql_feedback = "SELECT COUNT(*) AS total_feedback FROM contact_message";
+$result_feedback = mysqli_query($conn, $sql_feedback);
 
-    $totalFeedback = 0;
-    if ($result_feedback) {
-        $row_feedback = mysqli_fetch_assoc($result_feedback);
-        if ($row_feedback) {
-            $totalFeedback = $row_feedback['total_feedback'];
-        }
-    } else {
-        echo "Error: " . mysqli_error($conn);
+$totalFeedback = 0;
+if ($result_feedback) {
+    $row_feedback = mysqli_fetch_assoc($result_feedback);
+    if ($row_feedback) {
+        $totalFeedback = $row_feedback['total_feedback'];
     }
-    $sql_pending = "SELECT COUNT(*) AS total_pending FROM user_order WHERE order_status = 'pending'";
-    $result_pending = mysqli_query($conn, $sql_pending);
-    
-    $total_pending = 0;
-    if ($result_pending) {
-        $row_pending = mysqli_fetch_assoc($result_pending);
-        if ($row_pending) {
-            $total_pending = $row_pending['total_pending'];
-        }
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+$sql_pending = "SELECT COUNT(*) AS total_pending FROM user_order WHERE order_status = 'pending'";
+$result_pending = mysqli_query($conn, $sql_pending);
+
+$total_pending = 0;
+if ($result_pending) {
+    $row_pending = mysqli_fetch_assoc($result_pending);
+    if ($row_pending) {
+        $total_pending = $row_pending['total_pending'];
     }
-    
-    // Fetch total complete orders
-    $sql_complete = "SELECT COUNT(*) AS total_complete FROM user_order WHERE order_status = 'complete'";
-    $result_complete = mysqli_query($conn, $sql_complete);
-    
-    $total_complete = 0;
-    if ($result_complete) {
-        $row_complete = mysqli_fetch_assoc($result_complete);
-        if ($row_complete) {
-            $total_complete = $row_complete['total_complete'];
-        }
+}
+
+// Fetch total complete orders
+$sql_complete = "SELECT COUNT(*) AS total_complete FROM user_order WHERE order_status = 'complete'";
+$result_complete = mysqli_query($conn, $sql_complete);
+
+$total_complete = 0;
+if ($result_complete) {
+    $row_complete = mysqli_fetch_assoc($result_complete);
+    if ($row_complete) {
+        $total_complete = $row_complete['total_complete'];
     }
+}
 ?>
 
 <section class="dashboard-section">

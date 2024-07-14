@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2024 at 06:29 PM
+-- Generation Time: Jul 14, 2024 at 10:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -52,7 +52,7 @@ INSERT INTO `admin_table` (`admin_id`, `admin_name`, `admin_email`, `admin_passw
 CREATE TABLE `cart_details` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
+  `userid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -111,15 +111,6 @@ CREATE TABLE `order_pending` (
   `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_pending`
---
-
-INSERT INTO `order_pending` (`order_id`, `user_id`, `invoice_number`, `product_id`, `quantity`, `order_status`) VALUES
-(1, 1, 781999271, 1, 20, 'pending'),
-(2, 1, 1224879532, 5, 5, 'pending'),
-(3, 1, 1808376322, 6, 6, 'pending');
-
 -- --------------------------------------------------------
 
 --
@@ -147,10 +138,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_name`, `product_description`, `tag_id`, `category_id`, `product_image_1`, `product_image_2`, `product_price`, `product_in_store`, `date`, `status`, `stock_update_date`, `quantity_added`) VALUES
-(1, 'durwal suwal', 'it is a newari close for men', 1, 1, '6dc9db66995d4e760ef521ddd1de9ca6.jpg', '32.png', 500.00, 93, '2024-05-26 08:50:23', 'true', '2024-05-21 17:29:04', 123),
+(1, 'durwal suwal', 'it is a newari close for men', 1, 1, '6dc9db66995d4e760ef521ddd1de9ca6.jpg', '32.png', 500.00, 86, '2024-06-02 06:50:02', 'true', '2024-05-21 17:29:04', 123),
 (2, 'Newari kurtha surwal sari', 'Newari kurtha surwal set sari for women', 5, 2, '441030234_1032115705250319_7516981770332198964_n.jpg', '441289115_1032115751916981_1067377726052363153_n.jpg', 1000.00, 20, '2024-05-26 16:08:58', 'true', '2024-05-16 08:09:01', 0),
-(3, 'Newari hakupatasi', 'This is a newari dress.', 4, 2, 'newari-dress-set.jpeg', 'newar.png', 5000.00, 35, '2024-05-26 16:09:02', 'true', '2024-05-17 22:58:27', 0),
-(4, 'Bhadgaule Topi', 'Dhaka Topi (hat), symbol of Gorkhali pride, is famous from both fashionable as well as cultural looks. Dhaka topi is entirely popular as some Nepalese even consider it as symbol of Mount Everest, the highest peak of the world which is pride of Nepal.', 3, 1, '547dfd93e36ffb48e250b5504c86d689.jpg', '547dfd93e36ffb48e250b5504c86d689.jpg', 750.00, 10, '2024-05-26 16:09:08', 'true', '2024-05-26 15:11:10', 0);
+(3, 'Newari hakupatasi', 'This is a newari dress.', 4, 2, 'newari-dress-set.jpeg', 'newar.png', 5000.00, 38, '2024-06-02 06:50:02', 'true', '2024-05-17 22:58:27', 0),
+(4, 'Bhadgaule Topi', 'Dhaka Topi (hat), symbol of Gorkhali pride, is famous from both fashionable as well as cultural looks. Dhaka topi is entirely popular as some Nepalese even consider it as symbol of Mount Everest, the highest peak of the world which is pride of Nepal.', 3, 1, '547dfd93e36ffb48e250b5504c86d689.jpg', '547dfd93e36ffb48e250b5504c86d689.jpg', 750.00, 4, '2024-06-02 06:50:02', 'true', '2024-05-26 15:11:10', 0);
 
 -- --------------------------------------------------------
 
@@ -191,15 +182,6 @@ CREATE TABLE `user_order` (
   `order_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_order`
---
-
-INSERT INTO `user_order` (`order_id`, `user_id`, `product_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES
-(1, 1, 1, 10000, 781999271, 20, '2024-05-26 08:51:40', 'complete'),
-(2, 1, 5, 5000, 1224879532, 5, '2024-05-26 08:52:11', 'pending'),
-(3, 1, 6, 30000, 1808376322, 6, '2024-05-26 09:14:07', 'pending');
-
 -- --------------------------------------------------------
 
 --
@@ -215,13 +197,6 @@ CREATE TABLE `user_payments` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_payments`
---
-
-INSERT INTO `user_payments` (`payment_id`, `order_id`, `invoice_number`, `amount`, `payment_mode`, `date`) VALUES
-(1, 1, 781999271, 10000, 'Cash on delivery', '2024-05-26 08:51:40');
-
 -- --------------------------------------------------------
 
 --
@@ -235,20 +210,11 @@ CREATE TABLE `user_table` (
   `user_email` varchar(100) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_image` varchar(255) NOT NULL,
-  `user_ip` varchar(100) NOT NULL,
   `user_address` varchar(255) NOT NULL,
   `user_mobile` varchar(20) NOT NULL,
   `verification_code` int(11) NOT NULL,
   `email_verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_table`
---
-
-INSERT INTO `user_table` (`user_id`, `user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`, `verification_code`, `email_verified`) VALUES
-(1, 'alish', 'pawn', 'alishpau@gmail.com', '123', 'image (1).png', '::1', 'bhaktapur', '9768711111', 281934, 1),
-(12, 'alish', 'pawn', 'alishpawn00@gmail.com', 'Ronit1?', '', '::1', 'bhaktapur', '9841131909', 931750, 1);
 
 --
 -- Indexes for dumped tables
@@ -264,7 +230,8 @@ ALTER TABLE `admin_table`
 -- Indexes for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_details_ibfk_1` (`product_id`);
 
 --
 -- Indexes for table `categories`
@@ -282,15 +249,17 @@ ALTER TABLE `contact_message`
 -- Indexes for table `order_pending`
 --
 ALTER TABLE `order_pending`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `order_pending_ibfk_1` (`user_id`),
+  ADD KEY `order_pending_ibfk_2` (`product_id`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tag_id` (`tag_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `products_ibfk_1` (`tag_id`),
+  ADD KEY `products_ibfk_2` (`category_id`);
 
 --
 -- Indexes for table `tags`
@@ -302,13 +271,16 @@ ALTER TABLE `tags`
 -- Indexes for table `user_order`
 --
 ALTER TABLE `user_order`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_order_ibfk_1` (`user_id`),
+  ADD KEY `user_order_ibfk_2` (`product_id`);
 
 --
 -- Indexes for table `user_payments`
 --
 ALTER TABLE `user_payments`
-  ADD PRIMARY KEY (`payment_id`);
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `user_payments_ibfk_1` (`order_id`);
 
 --
 -- Indexes for table `user_table`
@@ -330,7 +302,7 @@ ALTER TABLE `admin_table`
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -348,13 +320,13 @@ ALTER TABLE `contact_message`
 -- AUTO_INCREMENT for table `order_pending`
 --
 ALTER TABLE `order_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tags`
@@ -366,23 +338,36 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `user_order`
 --
 ALTER TABLE `user_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_payments`
 --
 ALTER TABLE `user_payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart_details`
+--
+ALTER TABLE `cart_details`
+  ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_pending`
+--
+ALTER TABLE `order_pending`
+  ADD CONSTRAINT `order_pending_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_pending_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`
@@ -390,6 +375,19 @@ ALTER TABLE `user_table`
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_order`
+--
+ALTER TABLE `user_order`
+  ADD CONSTRAINT `user_order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_payments`
+--
+ALTER TABLE `user_payments`
+  ADD CONSTRAINT `user_payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `user_order` (`order_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

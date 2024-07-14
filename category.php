@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 $dynamicTitle = "category";
-include("header.php"); 
-include("function/commonfunction.php");
+include ("header.php");
+include ("function/commonfunction.php");
 
 ?>
 
@@ -26,17 +26,17 @@ include("function/commonfunction.php");
         </div>
         <div class="row">
             <?php
-            
+
             category_list()
-            
-            ?>
+
+                ?>
         </div>
     </div>
 </section>
 
 
-<?php 
+<?php
 
-include('footer.php');
+include ('footer.php');
 
 ?>

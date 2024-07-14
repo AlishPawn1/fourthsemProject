@@ -1,13 +1,13 @@
-<?php 
-include('user_header.php'); 
-include("../include/connect_database.php");
+<?php
+include ('user_header.php');
+include ("../include/connect_database.php");
 // include("../function/commonfunction.php");
 @session_start();
 
-if(isset($_GET['order_id'])){
+if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
     $select_data = "select * from `user_order` where order_id = $order_id";
-    $query_select = mysqli_query($conn,$select_data);
+    $query_select = mysqli_query($conn, $select_data);
     $row_fetch = mysqli_fetch_assoc($query_select);
     $invoice_number = $row_fetch['invoice_number'];
     $amount_due = $row_fetch['amount_due'];
@@ -21,7 +21,7 @@ if(isset($_GET['order_id'])){
     // }
 }
 
-if(isset($_POST["conform_payment"])) {
+if (isset($_POST["conform_payment"])) {
     $invoice_number = $_POST['invoice_number'];
     $amount = $_POST['amount'];
     $payment_mode = $_POST['payment_mode'];
@@ -31,9 +31,9 @@ if(isset($_POST["conform_payment"])) {
 
     // Execute the query
     $result = mysqli_query($conn, $insert_query);
-    
+
     // Check if the query was successful
-    if($result) {
+    if ($result) {
         echo "<script>alert('Successfully completed the payment')</script>";
         echo "<script>window.open('profile.php?user_order', '_self')</script>";
     } else {
@@ -44,7 +44,7 @@ if(isset($_POST["conform_payment"])) {
     }
 
     $update_order = "update `user_order` set order_status = 'complete' where order_id = $order_id ";
-    $result_order = mysqli_query( $conn , $update_order );
+    $result_order = mysqli_query($conn, $update_order);
 }
 
 
@@ -60,11 +60,13 @@ if(isset($_POST["conform_payment"])) {
         <h1 class="heading">Confirm payment</h1>
         <form action="" method="post">
             <div class="form-outline mt-4 w-50 m-auto">
-                <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $invoice_number?>" name="invoice_number">
+                <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $invoice_number ?>"
+                    name="invoice_number">
             </div>
             <div class="form-outline mt-4 w-50 m-auto">
                 <label for="amount">amount</label>
-                <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $amount_due?>" name="amount">
+                <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $amount_due ?>"
+                    name="amount">
             </div>
             <div class="form-outline mt-4 w-50 m-auto">
                 <select name="payment_mode" class="form-select w-50 m-auto" id="">
@@ -77,4 +79,4 @@ if(isset($_POST["conform_payment"])) {
     </div>
 </section>
 
-<?php include("user_footer.php"); ?>
+<?php include ("user_footer.php"); ?>

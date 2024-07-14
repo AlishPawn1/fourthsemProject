@@ -1,8 +1,8 @@
 <!------------------------------  Header section  ------------------------------>
-<?php 
+<?php
 $dynamicTitle = "Newari shop";
-include("header.php"); 
-include("function/commonfunction.php");
+include ("header.php");
+include ("function/commonfunction.php");
 cart();
 ?>
 <!------------------------------ End  header section  ------------------------------>
@@ -11,9 +11,11 @@ cart();
         <div class="splide__track">
             <ul class="splide__list">
                 <li class="splide__slide">
-                    <div class="banner" style="background-image: url('image/newari-dress-girl.png'); background-position: 120% 100px; background-size: contain;">
+                    <div class="banner"
+                        style="background-image: url('image/newari-dress-girl.png'); background-position: 120% 100px; background-size: contain;">
                         <div class="container">
-                            <div class="content d-flex align-items-center justify-content-start h-100 wow animate__delay-slow" >
+                            <div
+                                class="content d-flex align-items-center justify-content-start h-100 wow animate__delay-slow">
                                 <div class="col-xl-6">
                                     <h1 class="heading underline"><span>the best</span> products</h1>
                                     <p>Create a diverse and authentic collection of Newari clothes.</p>
@@ -24,9 +26,11 @@ cart();
                     </div>
                 </li>
                 <li class="splide__slide">
-                    <div class="banner" style="background-image: url('image/Vector.png'); background-position: left bottom; background-size: contain;">
+                    <div class="banner"
+                        style="background-image: url('image/Vector.png'); background-position: left bottom; background-size: contain;">
                         <div class="container">
-                            <div class="content d-flex align-items-center justify-content-end h-100 wow animate__delay-slow" >
+                            <div
+                                class="content d-flex align-items-center justify-content-end h-100 wow animate__delay-slow">
                                 <div class="col-xl-6">
                                     <h1 class="heading underline"><span>Follow</span>Us</h1>
                                     <p>Follow us for new product in local.</p>
@@ -88,16 +92,17 @@ cart();
 </section>
 <section class="shop-collection section-gap wow animate__animated animate__backInUp">
     <div class="container">
-       <div class="content text-center">
+        <div class="content text-center">
             <div class="title kaushan">
                 <h5 class="heading">Shop Collection</h5>
             </div>
             <h3 class="heading underline">New Arrivals</h3>
-            <p>Experience the fascinating world of Newari culture with Newari shop, where traditions and style combine.</p>
-       </div>
+            <p>Experience the fascinating world of Newari culture with Newari shop, where traditions and style combine.
+            </p>
+        </div>
 
-       <div class="row g-xl-5 g-4">
-            <?php displayProducts(8);?>
+        <div class="row g-xl-5 g-4">
+            <?php displayProducts(8); ?>
         </div>
     </div>
 </section>
@@ -122,13 +127,12 @@ cart();
             <h5 class="heading">Top Rated Products</h5>
         </div>
         <div class="row g-xl-5 g-4">
-            <?php displayProducts(4)?>
+            <?php displayProducts(4) ?>
         </div>
         <div id="cartBody"></div>
     </div>
 </section>
 
 <!------------------------------  Footer section  ------------------------------>
-<?php include("footer.php"); ?>
+<?php include ("footer.php"); ?>
 <!------------------------------ End  Footer section  ------------------------------>
-

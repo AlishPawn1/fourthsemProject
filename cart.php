@@ -1,7 +1,7 @@
-<?php 
+<?php
 $dynamicTitle = "Cart";
-include("header.php"); 
-include("function/commonfunction.php");
+include ("header.php");
+include ("function/commonfunction.php");
 
 ?>
 
@@ -17,8 +17,8 @@ include("function/commonfunction.php");
         </div>
     </div>
 </section>
-<?php 
+<?php
 displayCart();
 ?>
 
-<?php include("footer.php"); ?>
+<?php include ("footer.php"); ?>

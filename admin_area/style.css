@@ -1,25 +1,31 @@
-:root{
+:root {
     --primary-color: #303233;
     --secondary-color: #F8F8F8;
     --third-color: #fcca03;
     --default-transition: all 0.3s linear;
 
 }
-.insert_product .form-group{
+
+.insert_product .form-group {
     padding-bottom: 15px;
 }
-.section-gaps{
+
+.section-gaps {
     padding: 100px 0;
 }
-.product-image{
+
+.product-image {
     height: 100px;
     width: 100px;
 }
-.form-group{
+
+.form-group {
     /* margin-bottom: 15px; */
     position: relative;
 }
-.read-more, .white-btn {
+
+.read-more,
+.white-btn {
     background-color: var(--third-color);
     color: #000;
     padding: 14px 50px;
@@ -31,12 +37,16 @@
     border: none;
     transition: var(--default-transition);
 }
-.form-input:focus{
+
+.form-input:focus {
     outline: none !important;
     border-color: #eaeaea;
     box-shadow: none;
 }
-.search-product input[type="email"]:focus, .contact-input:focus, .form-input:focus {
+
+.search-product input[type="email"]:focus,
+.contact-input:focus,
+.form-input:focus {
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
     outline: 0;
     padding-left: 5px;
@@ -44,16 +54,20 @@
     outline: none;
     border: none;
 }
-.form-input, .form-textarea {
+
+.form-input,
+.form-textarea {
     width: 100%;
     border: 1px solid #eaeaea;
     padding: 4px 13px;
     margin-bottom: 10px;
     font-family: var(--third-fonts);
 }
+
 .required {
     color: red;
 }
+
 .login-user .error {
     color: red;
     font-size: 10px;
@@ -62,19 +76,22 @@
     right: 0;
     z-index: -1;
 }
+
 .form-group .showPassword {
     position: absolute;
     top: 62%;
     transform: translateY(-50%);
     right: 15px;
 }
-.admin_login .container{
+
+.admin_login .container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.admin_login .content{
+
+.admin_login .content {
     width: 50%;
 }
 
@@ -88,6 +105,7 @@ header nav {
     background-color: #fff;
     border-right: 1px solid #e6e5e5;
 }
+
 .dashboard {
     position: relative;
     left: 250px;
@@ -96,17 +114,20 @@ header nav {
     width: calc(100% - 250px);
     padding: 10px 14px;
 }
-.sub-menu{
+
+.sub-menu {
     display: none;
     list-style: none;
 }
-.primary-menu{
+
+.primary-menu {
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
 }
 
-.primary-menu a, .logout-btn a{
+.primary-menu a,
+.logout-btn a {
     display: flex;
     align-items: center;
     height: 50px;
@@ -115,7 +136,9 @@ header nav {
     color: #707070;
     transition: all 0.3s linear;
 }
-.primary-menu li a i, .logout-btn a i {
+
+.primary-menu li a i,
+.logout-btn a i {
     font-size: 18px;
     min-width: 45px;
     height: 100%;
@@ -124,31 +147,37 @@ header nav {
     justify-content: center;
     color: #707070;
 }
-.primary-menu .menu-dropdown .dropdown-btn{
+
+.primary-menu .menu-dropdown .dropdown-btn {
     float: right;
     flex: 1;
 }
-.primary-menu .menu-dropdown .dropdown-btn i{
+
+.primary-menu .menu-dropdown .dropdown-btn i {
     max-width: unset;
     justify-content: end;
 }
-.logo-name{
+
+.logo-name {
     font-size: 22px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 50px;
 }
-.menu-items{
+
+.menu-items {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 80px;
     min-height: calc(100vh - 50px);
 }
-.dashboard{
+
+.dashboard {
     margin-top: 90px;
 }
-.dashboard .top{
+
+.dashboard .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -160,14 +189,16 @@ header nav {
     z-index: 9;
     padding: 20px 0;
 }
-.dashboard .top .title{
+
+.dashboard .top .title {
     font-size: 32px;
 }
-.dashboard .top .admin-name{
+
+.dashboard .top .admin-name {
     text-transform: capitalize;
 }
 
-.dashboard-box{
+.dashboard-box {
     padding: 20px;
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -175,13 +206,16 @@ header nav {
     justify-content: space-between;
     align-items: center;
 }
-.dashboard-box .title{
+
+.dashboard-box .title {
     font-size: 18px;
     line-height: 28px;
 }
-.dashboard-box .icon i{
+
+.dashboard-box .icon i {
     font-size: 26px;
 }
-.dashboard-box .content{
+
+.dashboard-box .content {
     text-align: end;
 }

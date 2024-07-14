@@ -3,11 +3,10 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 
-$conn = mysqli_connect($servername,  $username, $password);
-if (!$conn) { 
+$conn = mysqli_connect($servername, $username, $password);
+if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
-}
-else{
+} else {
     echo "<script>console.log('Connected Successfully')</script>";
 }
 
@@ -16,8 +15,7 @@ $run = mysqli_query($conn, $server_query);
 
 if (!$run) {
     echo "Error  creating database: " . mysqli_error($conn);
-}
-else{
+} else {
     echo "Database created successfully.";
 }
 ?>

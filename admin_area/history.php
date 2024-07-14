@@ -1,7 +1,8 @@
 <?php
-include("../include/connect_database.php");
+include ("../include/connect_database.php");
 
-function getOrderHistory($conn, $days) {
+function getOrderHistory($conn, $days)
+{
     $date_filter = date('Y-m-d H:i:s', strtotime("-$days days"));
     // SQL query with JOINs to get product name and user name
     $sql = "SELECT 
@@ -22,7 +23,7 @@ function getOrderHistory($conn, $days) {
             WHERE 
                 uo.order_date >= '$date_filter'";
     $result = mysqli_query($conn, $sql);
-    
+
     return $result;
 }
 
@@ -34,7 +35,7 @@ if (isset($_POST['filter'])) {
 // Fetch order history for the selected date range
 $orders = getOrderHistory($conn, $selected_days);
 ?>
-    
+
 <section>
     <div class="container">
         <div class="main-title">
@@ -49,10 +50,14 @@ $orders = getOrderHistory($conn, $selected_days);
         <form method="post" action="" class="d-flex gap-2 align-items-center">
             <label for="days">Select Date Range:</label>
             <select name="days" id="days" class="form-control w-25">
-                <option value="7" <?php if($selected_days == 7) echo 'selected'; ?>>Last 7 Days</option>
-                <option value="30" <?php if($selected_days == 30) echo 'selected'; ?>>Last 1 Month</option>
-                <option value="90" <?php if($selected_days == 90) echo 'selected'; ?>>Last 3 Months</option>
-                <option value="365" <?php if($selected_days == 365) echo 'selected'; ?>>Last 1 Year</option>
+                <option value="7" <?php if ($selected_days == 7)
+                    echo 'selected'; ?>>Last 7 Days</option>
+                <option value="30" <?php if ($selected_days == 30)
+                    echo 'selected'; ?>>Last 1 Month</option>
+                <option value="90" <?php if ($selected_days == 90)
+                    echo 'selected'; ?>>Last 3 Months</option>
+                <option value="365" <?php if ($selected_days == 365)
+                    echo 'selected'; ?>>Last 1 Year</option>
             </select>
             <input type="submit" name="filter" class="btn btn-primary" value="Filter">
         </form>

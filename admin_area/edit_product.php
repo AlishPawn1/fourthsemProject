@@ -72,11 +72,13 @@ if (isset($_POST['update_product'])) {
         <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="product_name">Product name</label>
-                <input type="text" id="product_name" name="product_name" class="form-control" value="<?php echo $product_name; ?>">
+                <input type="text" id="product_name" name="product_name" class="form-control"
+                    value="<?php echo $product_name; ?>">
             </div>
             <div class="form-group">
                 <label for="product_description">Product description</label>
-                <input type="text" id="product_description" name="product_description" class="form-control" value="<?php echo $product_description; ?>">
+                <input type="text" id="product_description" name="product_description" class="form-control"
+                    value="<?php echo $product_description; ?>">
             </div>
             <div class="form-group">
                 <label for="select_tags">Tags</label>
@@ -114,7 +116,8 @@ if (isset($_POST['update_product'])) {
             </div>
             <div class="form-group">
                 <label for="product_price">Product price</label>
-                <input type="text" id="product_price" name="product_price" class="form-control" value="<?php echo $product_price; ?>">
+                <input type="text" id="product_price" name="product_price" class="form-control"
+                    value="<?php echo $product_price; ?>">
             </div>
             <div class="form-group">
                 <label for="product_image_1">Product image 1</label>

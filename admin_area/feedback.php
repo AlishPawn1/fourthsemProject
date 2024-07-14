@@ -1,8 +1,8 @@
 <?php
 
-if(isset($_GET['feedback'])){
-    $select_query = "SELECT * FROM contact_message"; 
-    $result = mysqli_query($conn, $select_query); 
+if (isset($_GET['feedback'])) {
+    $select_query = "SELECT * FROM contact_message";
+    $result = mysqli_query($conn, $select_query);
 }
 
 ?>
@@ -12,7 +12,7 @@ if(isset($_GET['feedback'])){
         <table class="table text-center table-bordered">
             <thead>
                 <tr>
-                    <th >S.no</th>
+                    <th>S.no</th>
                     <th>name</th>
                     <th>email</th>
                     <th>subject</th>
@@ -21,15 +21,15 @@ if(isset($_GET['feedback'])){
             </thead>
             <tbody>
                 <?php
-                if(isset($result) && mysqli_num_rows($result) > 0){
+                if (isset($result) && mysqli_num_rows($result) > 0) {
                     $i = 1;
-                    while($row = mysqli_fetch_assoc($result)){
+                    while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>{$i}</td>";
-                        echo "<td>".htmlspecialchars($row['name'])."</td>";
-                        echo "<td>".htmlspecialchars($row['email'])."</td>";
-                        echo "<td>".htmlspecialchars($row['subject'])."</td>";
-                        echo "<td>".htmlspecialchars($row['message'])."</td>";
+                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['subject']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['message']) . "</td>";
                         echo "</tr>";
                         $i++;
                     }

@@ -1,5 +1,4 @@
- 
-<?php include('user_header.php');  ?>
+<?php include ('user_header.php'); ?>
 <section class="single-banner bg-light-white margin-top-header">
     <div class="container">
         <div class="content">
@@ -32,7 +31,8 @@
                         <input type="submit" class="btn white-btn checkout-btn" value="login" name="user_login">
                     </div>
                     <div class="">
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  <a href="user_registration.php" class="text-danger">Register</a></p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="user_registration.php"
+                                class="text-danger">Register</a></p>
                     </div>
                 </div>
             </div>
@@ -40,4 +40,4 @@
     </div>
 </section>
 
-<?php include("user_footer.php"); ?>
+<?php include ("user_footer.php"); ?>

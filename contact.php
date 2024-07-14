@@ -1,6 +1,6 @@
 <?php
 $dynamicTitle = "Contact";
-include("header.php"); ?>
+include ("header.php"); ?>
 
 <?php
 
@@ -9,11 +9,11 @@ require 'C:/xampp/htdocs/shop/PHPMailer-master/src/PHPMailer.php';
 require 'C:/xampp/htdocs/shop/PHPMailer-master/src/SMTP.php'; // Include the SMTP class
 
 // Check if form is submitted and 'name', 'email', and 'message' fields are set
-if(isset($_POST['name'], $_POST['email'], $_POST['message'])) {
+if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {
     // Get form data
-    $name = $_POST['name']; 
-    $email = $_POST['email']; 
-    $message = $_POST['message']; 
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
 
     // Create a new instance of the PHPMailer class
     $mail = new PHPMailer\PHPMailer\PHPMailer();
@@ -34,7 +34,7 @@ if(isset($_POST['name'], $_POST['email'], $_POST['message'])) {
     $mail->Body = $message;
 
     // Send email
-    if(!$mail->send()) {
+    if (!$mail->send()) {
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
@@ -96,10 +96,12 @@ if(isset($_POST['name'], $_POST['email'], $_POST['message'])) {
                                 <input type="text" name="name" placeholder="Enter your Name" class="form-input">
                             </div>
                             <div class="col-12">
-                                <input type="email" name="email" placeholder="Enter your email address" class="form-input">
+                                <input type="email" name="email" placeholder="Enter your email address"
+                                    class="form-input">
                             </div>
                             <div class="col-12">
-                                <textarea name="message" placeholder="Enter your Message" cols="40" rows="5" class="form-textarea form-input"></textarea>
+                                <textarea name="message" placeholder="Enter your Message" cols="40" rows="5"
+                                    class="form-textarea form-input"></textarea>
                             </div>
                             <div class="col-12">
                                 <input type="submit" value="submit">
@@ -112,4 +114,4 @@ if(isset($_POST['name'], $_POST['email'], $_POST['message'])) {
     </div>
 </section>
 
-<?php include("footer.php"); ?>
+<?php include ("footer.php"); ?>

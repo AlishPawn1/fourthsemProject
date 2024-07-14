@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (isset($_GET['edit_account'])) {
     $username = $_SESSION["username"];
     $select_query = "SELECT * FROM `user_table` WHERE user_name = '$username'";
@@ -53,6 +53,7 @@ if (isset($_GET['edit_account'])) {
     .form-outline {
         position: relative;
     }
+
     .showPassword {
         position: absolute;
         top: 43%;
@@ -60,7 +61,8 @@ if (isset($_GET['edit_account'])) {
         right: 15px;
         cursor: pointer;
     }
-    .error-message{
+
+    .error-message {
         position: absolute;
         color: red;
         bottom: -6px;
@@ -77,11 +79,13 @@ if (isset($_GET['edit_account'])) {
                 <span id="usernameError" class="error-message"></span>
             </div>
             <div class="form-outline">
-                <input type="email" class="form-input" id="user_email" value="<?php echo $user_email; ?>" name="user_email">
+                <input type="email" class="form-input" id="user_email" value="<?php echo $user_email; ?>"
+                    name="user_email">
                 <span id="emailError" class="error-message"></span>
             </div>
             <div class="form-outline">
-                <input type="password" class="password form-input" id="user_password" value="<?php echo $user_password; ?>" name="user_password">
+                <input type="password" class="password form-input" id="user_password"
+                    value="<?php echo $user_password; ?>" name="user_password">
                 <span id="passwordError" class="error-message"></span>
                 <input type="checkbox" class="showPassword">
             </div>
@@ -90,11 +94,13 @@ if (isset($_GET['edit_account'])) {
                 <img src='./user_image/<?php echo $user_image; ?>' alt='<?php echo $username; ?>'>
             </div>
             <div class="form-outline">
-                <input type="text" class="form-input" id="user_address" value="<?php echo $user_address; ?>" name="user_address">
+                <input type="text" class="form-input" id="user_address" value="<?php echo $user_address; ?>"
+                    name="user_address">
                 <span id="addressError" class="error-message"></span>
             </div>
             <div class="form-outline">
-                <input type="text" class="form-input" id="user_mobile" value="<?php echo $user_mobile; ?>" name="user_mobile">
+                <input type="text" class="form-input" id="user_mobile" value="<?php echo $user_mobile; ?>"
+                    name="user_mobile">
                 <span id="contactError" class="error-message"></span>
             </div>
             <input type="submit" class="read-more btn" value="Update" name="user_update">
@@ -104,8 +110,8 @@ if (isset($_GET['edit_account'])) {
 
 <script>
     // Show/Hide Password
-    document.querySelectorAll('.showPassword').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
+    document.querySelectorAll('.showPassword').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
             const passwordField = checkbox.previousElementSibling;
             if (checkbox.checked) {
                 passwordField.type = 'text';
@@ -184,7 +190,7 @@ if (isset($_GET['edit_account'])) {
     document.getElementById("user_address").addEventListener("input", validateAddress);
     document.getElementById("user_mobile").addEventListener("input", validateContact);
 
-    document.getElementById("editAccountForm").addEventListener("submit", function(event) {
+    document.getElementById("editAccountForm").addEventListener("submit", function (event) {
         if (!validateUsername() || !validateEmail() || !validatePassword() || !validateAddress() || !validateContact()) {
             event.preventDefault();
         }

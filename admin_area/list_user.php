@@ -1,12 +1,12 @@
 <section class="section-gaps list-order">
     <div class="container">
 
-        <?php 
+        <?php
         $get_user = "SELECT * FROM `user_table`";
         $result = mysqli_query($conn, $get_user);
-        $row  = mysqli_num_rows($result);
+        $row = mysqli_num_rows($result);
 
-        if($row == 0){
+        if ($row == 0) {
             echo "<h1 class='heading text-center'>No User Found!</h1>";
         } else {
             echo "
@@ -27,7 +27,7 @@
                     <tbody>";
 
             $number = 0;
-            while($row = mysqli_fetch_assoc($result)){
+            while ($row = mysqli_fetch_assoc($result)) {
                 $user_id = $row['user_id'];
                 $user_name = $row['user_name'];
                 $user_email = $row['user_email'];
@@ -35,7 +35,7 @@
                 $user_address = $row['user_address'];
                 $user_mobile = $row['user_mobile'];
                 $number++;
-            
+
                 echo "
                 <tr class='text-center'>
                     <td data-label='S. No'>$number</td>
@@ -50,7 +50,7 @@
                 </tr>
                 ";
             }
-            
+
 
             echo "</tbody></table>";
         }
