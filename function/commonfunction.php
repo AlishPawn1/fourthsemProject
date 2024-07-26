@@ -506,7 +506,7 @@ function displayCart()
                             </tbody>
                         </table>
                         <div class='proceed-to-checkout'>
-                            <a href='./user_area/checkout.php' class='btn read-more checkout-btn'>Proceed to checkout</a>
+                            <a href='./user_area/order.php?user_id=$userid' class='btn read-more checkout-btn'>Proceed to checkout</a>
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,9 @@
 <?php
 include ('user_header.php');
 include ("../include/connect_database.php");
-// include("../function/commonfunction.php");
 
 // Check if user_id is set
-if (isset($_GET['user_id'])) {
-    $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
-}
+$user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 
 // Initialize variables
 $get_ip_address = $_SESSION["userid"];
@@ -15,11 +12,9 @@ $status = 'pending';
 $total_price = 0;
 $total_quantity = 0;
 
-// Sanitize input
-$get_ip_address = mysqli_real_escape_string($conn, $get_ip_address);
-
 // Calculate total price and count product
-$cart_query_price = "SELECT cart_details.*, products.product_price FROM `cart_details` 
+$cart_query_price = "SELECT cart_details.*, products.product_price 
+                    FROM `cart_details` 
                     INNER JOIN products ON cart_details.product_id = products.id
                     WHERE cart_details.userid = '$get_ip_address'";
 $result_price = mysqli_query($conn, $cart_query_price);
@@ -35,7 +30,8 @@ if ($result_price) {
 }
 
 // Insert order
-$insert_orders = "INSERT INTO `user_order` (user_id, product_id, amount_due, invoice_number, total_products, order_date, order_status) VALUES ('$user_id', '$product_id', '$total_price', '$invoice_number', '$total_quantity', NOW(), '$status')";
+$insert_orders = "INSERT INTO `user_order` (user_id, product_id, amount_due, invoice_number, total_products, order_date, order_status) 
+                  VALUES ('$user_id', '$product_id', '$total_price', '$invoice_number', '$total_quantity', NOW(), '$status')";
 $result_query = mysqli_query($conn, $insert_orders);
 
 if ($result_query) {
@@ -46,7 +42,7 @@ if ($result_query) {
 }
 
 // Insert pending orders and delete items from cart
-$get_cart = "SELECT * FROM `cart_details` WHERE ip_address = '$get_ip_address'";
+$get_cart = "SELECT * FROM `cart_details` WHERE userid = '$get_ip_address'";
 $run_cart = mysqli_query($conn, $get_cart);
 
 while ($get_item_quantity = mysqli_fetch_assoc($run_cart)) {
@@ -54,15 +50,21 @@ while ($get_item_quantity = mysqli_fetch_assoc($run_cart)) {
     $product_id = $get_item_quantity['product_id'];
 
     // Insert pending orders
-    $insert_pending_orders = "INSERT INTO `order_pending` (`user_id`, `invoice_number`, `product_id`, `quantity`, `order_status`) VALUES ('$user_id', '$invoice_number', '$product_id', '$quantity', '$status')";
+    $insert_pending_orders = "INSERT INTO `order_status` (user_id, invoice_number, product_id, quantity, order_status) 
+                              VALUES ('$user_id', '$invoice_number', '$product_id', '$quantity', '$status')";
     if (!mysqli_query($conn, $insert_pending_orders)) {
-        echo "<script>alert('Error inserting pending order: " . mysqli_error($conn) . "');</script>";
+        echo "Error inserting pending order: " . mysqli_error($conn);
     }
 }
 
 // Delete items from cart
-$empty_cart = "DELETE FROM `cart_details` WHERE ip_address = '$get_ip_address'";
+$empty_cart = "DELETE FROM `cart_details` WHERE userid = '$get_ip_address'";
 if (!mysqli_query($conn, $empty_cart)) {
-    echo "<script>alert('Error emptying cart: " . mysqli_error($conn) . "');</script>";
+    echo "Error emptying cart: " . mysqli_error($conn);
+} else {
+    echo "Cart emptied successfully";
 }
+
+// Close the database connection
+mysqli_close($conn);
 ?>

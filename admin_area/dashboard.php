@@ -50,7 +50,7 @@ if ($result_pending) {
 }
 
 // Fetch total complete orders
-$sql_complete = "SELECT COUNT(*) AS total_complete FROM user_order WHERE order_status = 'complete'";
+$sql_complete = "SELECT COUNT(*) AS total_complete FROM user_order WHERE admin_status = 'complete'";
 $result_complete = mysqli_query($conn, $sql_complete);
 
 $total_complete = 0;
@@ -68,7 +68,7 @@ if ($result_complete) {
             <div class='col-4'>
                 <div class='dashboard-box'>
                     <div class="icon">
-                        <i class="fa-solid fa-dollar-sign"></i>
+                        <i class="fa-solid fa-rupee-sign"></i>
                     </div>
                     <div class="content">
                         <h3 class='title'>Total Sales</h3>

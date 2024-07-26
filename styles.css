@@ -2303,6 +2303,7 @@ strong .product-amount {
     height: var(--size);
     width: var(--size);
     border-radius: 5px;
+    object-fit: contain;
 }
 
 .form-group {
@@ -2332,4 +2333,5 @@ strong .product-amount {
 .user-image img{
     height: 100%;
     width: 100%;
+    object-fit: contain;
 }

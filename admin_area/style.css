@@ -99,11 +99,12 @@ header nav {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
+    min-height: 100vh;
     width: 250px;
     padding: 10px 14px;
     background-color: #fff;
     border-right: 1px solid #e6e5e5;
+    overflow: auto;
 }
 
 .dashboard {
@@ -218,4 +219,26 @@ header nav {
 
 .dashboard-box .content {
     text-align: end;
+}
+
+/* scroll */
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #616161;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #474747;
 }

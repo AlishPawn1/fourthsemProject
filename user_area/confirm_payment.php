@@ -26,52 +26,51 @@ if (isset($_POST["conform_payment"])) {
     $amount = $_POST['amount'];
     $payment_mode = $_POST['payment_mode'];
 
-    // Construct the SQL query
-    $insert_query = "INSERT INTO `user_payments` (order_id, invoice_number, amount, payment_mode) VALUES ('$order_id', '$invoice_number', '$amount', '$payment_mode')";
+    if ($payment_mode == "Cash on delivery") {
+        // Construct the SQL query
+        $insert_query = "INSERT INTO `user_payments` (order_id, invoice_number, amount, payment_mode) VALUES ('$order_id', '$invoice_number', '$amount', '$payment_mode')";
 
-    // Execute the query
-    $result = mysqli_query($conn, $insert_query);
+        // Execute the query
+        $result = mysqli_query($conn, $insert_query);
 
-    // Check if the query was successful
-    if ($result) {
-        echo "<script>alert('Successfully completed the payment')</script>";
-        echo "<script>window.open('profile.php?user_order', '_self')</script>";
-    } else {
-        // If the query fails, display an error message
-        echo "<h1 class='heading'>Error occurred while processing your payment</script>";
-        echo "<p>Please try again later.</p>";
-        echo "<p>Error message: " . mysqli_error($conn) . "</p>";
+        // Check if the query was successful
+        if ($result) {
+            echo "<script>alert('Successfully completed the payment')</script>";
+            echo "<script>window.open('profile.php?user_order', '_self')</script>";
+        } else {
+            // If the query fails, display an error message
+            echo "<h1 class='heading'>Error occurred while processing your payment</script>";
+            echo "<p>Please try again later.</p>";
+            echo "<p>Error message: " . mysqli_error($conn) . "</p>";
+        }
+
+        $update_order = "update `user_order` set order_status = 'complete' where order_id = $order_id ";
+        $result_order = mysqli_query($conn, $update_order);
+    } else if ($payment_mode == "Khalti") {
+        // Redirect to Khalti payment page
+        echo "<script>window.location.href='khalti_payment.php?order_id=$order_id';</script>";
+        exit;
     }
-
-    $update_order = "update `user_order` set order_status = 'complete' where order_id = $order_id ";
-    $result_order = mysqli_query($conn, $update_order);
 }
-
-
-
-
-
-
 ?>
-
 
 <section class="py-5 margin-top-header text-center">
     <div class="container">
         <h1 class="heading">Confirm payment</h1>
-        <form action="" method="post">
+        <form id="paymentForm" action="" method="post">
             <div class="form-outline mt-4 w-50 m-auto">
                 <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $invoice_number ?>"
                     name="invoice_number">
             </div>
             <div class="form-outline mt-4 w-50 m-auto">
-                <label for="amount">amount</label>
+                <label for="amount">Amount</label>
                 <input readonly type="text" class="form-control w-50 m-auto" value="<?php echo $amount_due ?>"
                     name="amount">
             </div>
             <div class="form-outline mt-4 w-50 m-auto">
-                <select name="payment_mode" class="form-select w-50 m-auto" id="">
-                    <option>Cash on delivery</option>
-                    <option>Offline Payment</option>
+                <select name="payment_mode" class="form-select w-50 m-auto" id="paymentMode">
+                    <option value="Cash on delivery">Cash on delivery</option>
+                    <option value="Khalti">Khalti</option>
                 </select>
             </div>
             <input type="submit" class="btn read-more mt-4" value="confirm" name="conform_payment">
@@ -80,3 +79,13 @@ if (isset($_POST["conform_payment"])) {
 </section>
 
 <?php include ("user_footer.php"); ?>
+
+<script>
+document.getElementById('paymentForm').addEventListener('submit', function(event) {
+    var paymentMode = document.getElementById('paymentMode').value;
+    if (paymentMode === 'Khalti') {
+        event.preventDefault(); // Prevent the form from submitting normally
+        window.location.href = 'khalti_payment.php?order_id=<?php echo $order_id; ?>';
+    }
+});
+</script>

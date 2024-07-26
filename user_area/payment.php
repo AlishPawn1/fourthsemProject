@@ -28,7 +28,7 @@ $user_id = $row_user['user_id'];
         <h4 class="heading text-center text-info">Payment Method</h4>
         <div class="row justify-content-center pt-5 text-center">
             <div class="col-md-6">
-                <a href="order.php?user_id=<?php echo $user_id; ?> " target="_blank">
+                <a href="order.php?user_id=<?php echo $user_id; ?> " >
                     <h2 class="heading">Pay offline</h2>
                 </a>
             </div>

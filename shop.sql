@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2024 at 10:36 AM
+-- Generation Time: Jul 26, 2024 at 04:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -99,10 +99,10 @@ INSERT INTO `contact_message` (`id`, `name`, `email`, `subject`, `message`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_pending`
+-- Table structure for table `order_status`
 --
 
-CREATE TABLE `order_pending` (
+CREATE TABLE `order_status` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `invoice_number` int(255) NOT NULL,
@@ -179,7 +179,8 @@ CREATE TABLE `user_order` (
   `invoice_number` int(255) NOT NULL,
   `total_products` int(255) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `order_status` varchar(255) NOT NULL
+  `order_status` varchar(255) NOT NULL,
+  `admin_status` varchar(100) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -217,6 +218,13 @@ CREATE TABLE `user_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user_table`
+--
+
+INSERT INTO `user_table` (`user_id`, `user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_address`, `user_mobile`, `verification_code`, `email_verified`) VALUES
+(1, 'alish', 'pawn', 'alishpawn00@gmail.com', '123', 'office-grp.jpg', 'bhaktapur', '9874563210', 874663, 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -246,12 +254,12 @@ ALTER TABLE `contact_message`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_pending`
+-- Indexes for table `order_status`
 --
-ALTER TABLE `order_pending`
+ALTER TABLE `order_status`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `order_pending_ibfk_1` (`user_id`),
-  ADD KEY `order_pending_ibfk_2` (`product_id`);
+  ADD KEY `order_status_ibfk_1` (`user_id`),
+  ADD KEY `order_status_ibfk_2` (`product_id`);
 
 --
 -- Indexes for table `products`
@@ -317,9 +325,9 @@ ALTER TABLE `contact_message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `order_pending`
+-- AUTO_INCREMENT for table `order_status`
 --
-ALTER TABLE `order_pending`
+ALTER TABLE `order_status`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -350,7 +358,7 @@ ALTER TABLE `user_payments`
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -363,11 +371,11 @@ ALTER TABLE `cart_details`
   ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `order_pending`
+-- Constraints for table `order_status`
 --
-ALTER TABLE `order_pending`
-  ADD CONSTRAINT `order_pending_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `order_pending_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+ALTER TABLE `order_status`
+  ADD CONSTRAINT `order_status_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_status_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`

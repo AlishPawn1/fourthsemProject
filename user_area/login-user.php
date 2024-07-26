@@ -29,6 +29,7 @@
                     </div>
                     <div class="form-row d-flex gap-2 align-items-center">
                         <input type="submit" class="btn white-btn checkout-btn" value="login" name="user_login">
+                        <a href="verify_email.php" class="btn read-more">Verify Email</a>
                     </div>
                     <div class="">
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="user_registration.php"
