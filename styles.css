@@ -250,6 +250,42 @@ textarea {
     line-height: 24px;
 }
 
+/* pagination */
+
+.pagination{
+    display: flex;
+    list-style: none;
+    margin: 30px -3px 0;
+    padding: 0;
+}
+.pagination li{
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.pagination .page-numbers{
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #323232;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    background: 0 0;
+    border: 1px solid #ccc;
+    transition: var(--default-transition);
+}
+.pagination .page-numbers:hover, .pagination .page-numbers.current{
+    color: #fff;
+    background: #323232;
+    border-color: #323232;
+    text-decoration: none;
+}
+
+/* pagination */
+
 #to_top_button {
     position: fixed;
     z-index: 100;

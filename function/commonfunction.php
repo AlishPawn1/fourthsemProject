@@ -141,10 +141,10 @@ function search_product()
     }
 }
 
-function allproduct()
+function allproduct($start, $limit)
 {
     global $conn;
-    $sql_query = "SELECT * FROM `products`";
+    $sql_query = "SELECT * FROM `products` LIMIT $start, $limit";
     $result = mysqli_query($conn, $sql_query);
 
     while ($row = mysqli_fetch_assoc($result)) {
@@ -154,15 +154,12 @@ function allproduct()
         $product_image = $row['product_image_1'];
         $product_in_store = $row['product_in_store'];
 
-        // $filled_stars = floor($product_rating); 
-
-        // Output HTML code to display product
         echo "<div class='col-lg-3 col-sm-6'>
         <div class='new-arrival-box'>
             <a href='shop-single.php?id=$product_id'>
             <div class='image'>
                 <img src='./admin_area/product_images/$product_image' alt='$product_name'>";
-        if ($product_in_store <= 0 || $product_in_store == 1) {
+        if ($product_in_store <= 0) {
             echo "<div class='sale-btn'>
                         <span class='btn read-more'>out of stock</span>
                     </div>";
@@ -172,7 +169,6 @@ function allproduct()
             <div class='content'>
                     <h4 class='heading'>$product_name</h4>
                     <div class='price-tag'>";
-
         echo "<ins><span class='price-symbol'>Rs.</span><span>$product_price</span></ins>
                         </div>
                     </div>
@@ -181,6 +177,7 @@ function allproduct()
             </div>";
     }
 }
+
 
 function productdetail()
 {
@@ -345,7 +342,7 @@ function cart()
     global $conn;
 
     if (isset($_POST['add_to_cart'])) {
-        $userid = getuserid();
+        $userid = $_SESSION["userid"];
         $product_id = $_POST['add_to_cart'];
 
         // Check if the item is already in the cart
@@ -540,7 +537,7 @@ function total_price_cart()
 {
     global $conn;
     $total = 0;
-    $userid = getuserid();
+    $userid = $_SESSION["userid"];
     $cart_query = "SELECT * FROM `cart_details` WHERE userid='$userid'";
     $run_cart = mysqli_query($conn, $cart_query);
 
