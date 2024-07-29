@@ -1,8 +1,15 @@
 <?php
 include ("../include/connect_database.php");
+// test_secret_key_e78b6608052b4d388f6455ae0df8d9b7
+// test_public_key_3349c4f953df407591d450fb1a890d90
+// https://admin.khalti.com/
+// qweasdany@gmai.com
+// Alish123@
+
 
 $error_message = "";
 $khalti_public_key = "test_public_key_3349c4f953df407591d450fb1a890d90";
+
 
 // Check if the order_id is set in the GET request
 if (isset($_GET['order_id'])) {
