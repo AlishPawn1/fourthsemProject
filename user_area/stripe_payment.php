@@ -1,4 +1,12 @@
 <?php
+
+// Visa: 4242 4242 4242 4242
+// MasterCard: 5555 5555 5555 4444
+// American Express: 3782 822463 10005
+// Discover: 6011 1111 1111 1117
+// Diners Club: 3056 9309 0259 04
+// JCB: 3530 1113 3330 0000
+
 require '../vendor/autoload.php';
 \Stripe\Stripe::setApiKey('sk_test_51PhZNfRqbIai3bkj3wSIoLzsLBorzOA2ICDy6hckrO936PKz26Lsu4hEqudTwlFwU6c0Tz1do7ZN7kd5jEg8pi4M00Y0Lap67P'); // Replace with your actual secret key
 

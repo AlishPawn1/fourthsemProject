@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="pb-4">
                             <h5 class="heading">Support</h5>
-                            <a href="mailto:ronitchauguthi321@gmail.com" type="">ronitchauguthi321@gmail.com</a>
+                            <a href="mailto:ronitchauguthi321@gmail.com" type="">newarishop@gmail.com</a>
                         </div>
                         <div class="">
                             <h5 class="heading">Call us</h5>
@@ -72,15 +72,15 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="contact-link ">
-                        <a href="#" class="">
+                        <a href="#" class="" title="instragram">
                             <div class="icon d-none"></div>
                             <div class="text">Instagram</div>
                         </a>
-                        <a href="https://www.facebook.com/newarishop/" class="">
+                        <a href="https://www.facebook.com/newarishop/" title="facebook" class="">
                             <div class="icon d-none"></div>
                             <div class="text">Facebook</div>
                         </a>
-                        <a href="#" class="">
+                        <a href="#" class="" title="linkedin">
                             <div class="icon d-none"></div>
                             <div class="text">Linkedin</div>
                         </a>

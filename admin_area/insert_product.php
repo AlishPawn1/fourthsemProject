@@ -96,118 +96,124 @@ if (isset($_POST['insert_product'])) {
 
 <script>
     function validateForm() {
-        var isValid = true;
+    var isValid = true;
 
-        var productName = document.getElementById('product_name').value;
-        var productDescription = document.getElementById('product_description').value;
-        var productPrice = document.getElementById('product_price').value;
-        var productInStore = document.getElementById('product_in_store').value;
+    var productName = document.getElementById('product_name').value;
+    var productDescription = document.getElementById('product_description').value;
+    var productPrice = document.getElementById('product_price').value;
+    var productInStore = document.getElementById('product_in_store').value;
 
-        var letters = /^[A-Za-z\s]+$/;
-        var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
-        var quantityPattern = /^[1-9]\d*$/;
+    var specialChars = /^[A-Za-z\s!@#$%^&*()_+=\[\]{};:'",.<>?]+$/;
+    var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
+    var quantityPattern = /^[1-9]\d*$/;
 
-        // Product Name Validation
-        var productNameError = document.getElementById('product_name_error');
-        if (!productName.match(letters)) {
-            productNameError.textContent = "Product name can only contain letters and spaces";
+    // Product Name Validation
+    var productNameError = document.getElementById('product_name_error');
+    if (productName.trim() === '' || !productName.match(specialChars) || /\d/.test(productName)) {
+        productNameError.textContent = "Product name can only contain letters, special characters, and spaces but must not be numeric-only";
+        isValid = false;
+    } else {
+        var wordCount = productName.trim().split(/\s+/).length;
+        if (wordCount < 3) {
+            productNameError.textContent = "Product name must be at least 3 words long";
             isValid = false;
         } else {
-            var wordCount = productName.trim().split(/\s+/).length;
-            if (wordCount < 3) {
-                productNameError.textContent = "Product name must be at least 3 words long";
-                isValid = false;
-            } else {
-                productNameError.textContent = "";
-            }
+            productNameError.textContent = "";
         }
-
-        // Product Description Validation
-        var productDescriptionError = document.getElementById('product_description_error');
-        if (!productDescription.match(letters)) {
-            productDescriptionError.textContent = "Product description can only contain letters and spaces";
-            isValid = false;
-        } else if (productDescription.length < 10 || productDescription.length > 200) {
-            productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
-            isValid = false;
-        } else {
-            productDescriptionError.textContent = "";
-        }
-
-        // Product Price Validation
-        var productPriceError = document.getElementById('product_price_error');
-        if (!productPrice.match(pricePattern)) {
-            productPriceError.textContent = "Product price must be a positive number";
-            isValid = false;
-        } else {
-            productPriceError.textContent = "";
-        }
-
-        // Product Quantity Validation
-        var productInStoreError = document.getElementById('product_in_store_error');
-        if (!productInStore.match(quantityPattern)) {
-            productInStoreError.textContent = "Product quantity in store must be a positive integer";
-            isValid = false;
-        } else {
-            productInStoreError.textContent = "";
-        }
-
-        return isValid;
     }
 
-    // Add event listeners for real-time validation
-    document.getElementById('product_name').addEventListener('input', function () {
-        var productName = document.getElementById('product_name').value;
-        var productNameError = document.getElementById('product_name_error');
-        var letters = /^[A-Za-z\s]+$/;
+    // Product Description Validation
+    var productDescriptionError = document.getElementById('product_description_error');
+    if (productDescription.trim() === '' || !productDescription.match(specialChars) || /\d/.test(productDescription)) {
+        productDescriptionError.textContent = "Product description can only contain letters, special characters, and spaces but must not be numeric-only";
+        isValid = false;
+    } else if (productDescription.length < 10 || productDescription.length > 200) {
+        productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
+        isValid = false;
+    } else {
+        productDescriptionError.textContent = "";
+    }
 
-        if (!productName.match(letters)) {
-            productNameError.textContent = "Product name can only contain letters and spaces";
+    // Product Price Validation
+    var productPriceError = document.getElementById('product_price_error');
+    if (!productPrice.match(pricePattern)) {
+        productPriceError.textContent = "Product price must be a positive number";
+        isValid = false;
+    } else {
+        productPriceError.textContent = "";
+    }
+
+    // Product Quantity Validation
+    var productInStoreError = document.getElementById('product_in_store_error');
+    if (!productInStore.match(quantityPattern)) {
+        productInStoreError.textContent = "Product quantity in store must be a positive integer";
+        isValid = false;
+    } else {
+        productInStoreError.textContent = "";
+    }
+
+    return isValid;
+}
+
+// Add event listeners for real-time validation
+document.getElementById('product_name').addEventListener('input', function () {
+    var productName = document.getElementById('product_name').value;
+    var productNameError = document.getElementById('product_name_error');
+    var specialChars = /^[A-Za-z0-9\s!@#$%^&*()_+=\[\]{};:'",.<>?]+$/;
+
+    // Check for invalid characters
+    if (productName.trim() === '' || !productName.match(specialChars)) {
+        productNameError.textContent = "Product name can only contain letters, numbers, special characters, and spaces";
+    } else {
+        // Ensure the product name is not numeric-only and has at least 3 letters
+        var letterCount = (productName.match(/[A-Za-z]/g) || []).length;
+        if (/^\d+$/.test(productName)) {
+            productNameError.textContent = "Product name cannot be numeric-only";
+        } else if (letterCount < 3) {
+            productNameError.textContent = "Product name must contain at least 3 letters";
         } else {
-            var wordCount = productName.trim().split(/\s+/).length;
-            if (wordCount < 3) {
-                productNameError.textContent = "Product name must be at least 3 words long";
-            } else {
-                productNameError.textContent = "";
-            }
+            productNameError.textContent = "";
         }
-    });
+    }
+});
 
-    document.getElementById('product_description').addEventListener('input', function () {
-        var productDescription = document.getElementById('product_description').value;
-        var productDescriptionError = document.getElementById('product_description_error');
-        var letters = /^[A-Za-z\s]+$/;
 
-        if (!productDescription.match(letters)) {
-            productDescriptionError.textContent = "Product description can only contain letters and spaces";
-        } else if (productDescription.length < 10 || productDescription.length > 200) {
-            productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
-        } else {
-            productDescriptionError.textContent = "";
-        }
-    });
+document.getElementById('product_description').addEventListener('input', function () {
+    var productDescription = document.getElementById('product_description').value;
+    var productDescriptionError = document.getElementById('product_description_error');
+    var specialChars = /^[A-Za-z\s!@#$%^&*()_+=\[\]{};:'",.<>?]+$/;
 
-    document.getElementById('product_price').addEventListener('input', function () {
-        var productPrice = document.getElementById('product_price').value;
-        var productPriceError = document.getElementById('product_price_error');
-        var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
+    if (productDescription.trim() === '' || !productDescription.match(specialChars) || /\d/.test(productDescription)) {
+        productDescriptionError.textContent = "Product description can only contain letters, special characters, and spaces but must not be numeric-only";
+    } else if (productDescription.length < 10 || productDescription.length > 200) {
+        productDescriptionError.textContent = "Product description must be between 10 and 200 characters long";
+    } else {
+        productDescriptionError.textContent = "";
+    }
+});
 
-        if (!productPrice.match(pricePattern)) {
-            productPriceError.textContent = "Product price must be a positive number";
-        } else {
-            productPriceError.textContent = "";
-        }
-    });
+document.getElementById('product_price').addEventListener('input', function () {
+    var productPrice = document.getElementById('product_price').value;
+    var productPriceError = document.getElementById('product_price_error');
+    var pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/;
 
-    document.getElementById('product_in_store').addEventListener('input', function () {
-        var productInStore = document.getElementById('product_in_store').value;
-        var productInStoreError = document.getElementById('product_in_store_error');
-        var quantityPattern = /^[1-9]\d*$/;
+    if (!productPrice.match(pricePattern)) {
+        productPriceError.textContent = "Product price must be a positive number";
+    } else {
+        productPriceError.textContent = "";
+    }
+});
 
-        if (!productInStore.match(quantityPattern)) {
-            productInStoreError.textContent = "Product quantity in store must be a positive integer";
-        } else {
-            productInStoreError.textContent = "";
-        }
-    });
+document.getElementById('product_in_store').addEventListener('input', function () {
+    var productInStore = document.getElementById('product_in_store').value;
+    var productInStoreError = document.getElementById('product_in_store_error');
+    var quantityPattern = /^[1-9]\d*$/;
+
+    if (!productInStore.match(quantityPattern)) {
+        productInStoreError.textContent = "Product quantity in store must be a positive integer";
+    } else {
+        productInStoreError.textContent = "";
+    }
+});
+
 </script>

@@ -55,11 +55,60 @@ if (isset($_SESSION["username"])) {
                             <a href="http://localhost/fourthsemProject/">home</a>
                         </li>
                         <li>
-                            <a href="http://localhost/fourthsemProject/contact-two.php">contact</a>
-                        </li>
-                        <li>
                             <a href="http://localhost/fourthsemProject/display_all.php">shop</a>
                         </li>
+                        <li>
+                            <a href="#">Tag</a>
+                            <?php 
+                                $select_tag = "SELECT * FROM tags";
+                                $result_tag = mysqli_query($conn, $select_tag);
+
+                                // Check if there are any tags
+                                if (mysqli_num_rows($result_tag) > 0) {
+                                    echo '<ul class="sub-menu">';
+                                    
+                                    while ($row_tag = mysqli_fetch_assoc($result_tag)) {
+                                        $tag_name = $row_tag['tag_name'];
+                                        $tag_id = $row_tag['id']; 
+                                        ?>
+                                        <li>
+                                            <a href="tag.php?tag_id=<?php echo $tag_id; ?>"><span><?php echo $tag_name; ?></span></a>
+                                        </li>
+                                        <?php
+                                    }
+
+                                    echo '</ul>';
+                                }
+                            ?>
+                        </li>
+                        <li>
+                            <a href="#">categories</a>
+                            <?php 
+                                $select_categories = "SELECT * FROM categories";
+                                $result_categories = mysqli_query($conn, $select_categories);
+
+                                // Check if there are any tags
+                                if (mysqli_num_rows($result_categories) > 0) {
+                                    echo '<ul class="sub-menu">';
+                                    
+                                    while ($row_category = mysqli_fetch_assoc($result_categories)) {
+                                        $category_name = $row_category['category_name'];
+                                        $category_id = $row_category['id']; 
+                                        ?>
+                                        <li>
+                                            <a href="category.php?cat_id=<?php echo $category_id; ?>"><span><?php echo $category_name; ?></span></a>
+                                        </li>
+                                        <?php
+                                    }
+
+                                    echo '</ul>';
+                                }
+                            ?>
+                        </li>
+                        <li>
+                            <a href="http://localhost/fourthsemProject/contact-two.php">contact</a>
+                        </li>
+
                         <?php if (!isset($_SESSION["username"])): ?>
                             <li class="right">
                                 <a href="#">Login</a>
@@ -87,6 +136,6 @@ if (isset($_SESSION["username"])) {
                     </div>
                 </nav>
             </div>
-            <!-- <div class="overlay"></div> -->
+            <div class="overlay"></div>
         </div>
     </header>

@@ -2,7 +2,8 @@
 
 // include("function/commonfunction.php");
 
-
+$isLoggedIn = isset($_SESSION["username"]);
+$cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_area/login-user.php';
 ?>
 <footer>
     <section class="fixed-icon">
@@ -38,7 +39,7 @@
                 </button>
             </div>
             <div class="cart-btn position-relative">
-                <a href="cart.php">
+                <a href="<?php echo $cartUrl; ?>">
                     <button class="cart">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-cart" aria-hidden="true"
                             focusable="false" role="presentation" width="28" height="24" viewBox="0 0 28 24"
@@ -61,10 +62,13 @@
                         <div class="icon"><i class="fa-solid fa-xmark"></i></div>
                     </div>
                     <div class="body-section">
-                        <form action="search.php" method="get">
+                        <form id="searchForm" action="search.php" method="get">
                             <div class="position-relative">
-                                <input class="form_input" name="search_keyword" type="search">
-                                <label class="form_label" for="search">Search</label>
+                                <input class="form_input" name="search_keyword" id="searchInput" type="search"
+                                    placeholder="Search...">
+                                <label class="form_label" for="searchInput">Search</label>
+                                <div id="suggestionsList" class="suggestions-list"></div>
+                                <!-- Container for suggestions -->
                             </div>
                             <input type="submit" name="search_product" class="read-more btn mt-3 primary-btn"
                                 value="Search">
@@ -129,24 +133,7 @@
                         </ul>
                     </div>
                 <?php endif; ?>
-
             </div>
-            <!-- <div class="cart-box slide-box">
-                <div class="card">
-                    <div class="top-section">
-                        <h4 class="heading">Search</h4>
-                        <div class="icon"><i class="fa-solid fa-xmark"></i></div>
-                    </div>
-                    <div class="body-section">
-                        <form action="">
-                            <div class="position-relative">
-                                <label for="search">Search</label>
-                                <input type="search">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
     <section class="primary-bg section-gap footer">
@@ -158,62 +145,31 @@
                         <p>Experience the fascinating world of Newari culture with Newari shop, where traditions and
                             style combine. Enjoy exquisite collection of Newari clothing, jewellery and cultural
                             artifacts that represents the ageless beauty and artistry of Nepal's Kathmandu Valley. </p>
-                        <div class="social-icon pt-lg-2">
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="icon">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <p><span>Bhaktapur, Nepal</span></p>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="icon">
-                                    <i class="fa-solid fa-phone"></i>
-                                </div>
-                                <p><a href="tel:+977 9880945250">+977 9880945250</a> or <a
-                                        href="tel:+977 9876543210">+977 9876543210</a></p>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="icon">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                                <p><a href="mailto:ronitchauguthi321@gmail.com">ronitchauguthi321@gmail.com</a></p>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 offset-3">
-                    <div class="footer-box footer-gallery">
-                        <h4 class="heading underline">Our Gallery</h4>
-                        <?php
-                        // Directory containing the images
-                        $image_dir = "admin_area/product_images/";
-
-                        $image_files = [];
-
-                        if ($handle = opendir($image_dir)) {
-                            while (false !== ($file = readdir($handle))) {
-                                if ($file != "." && $file != ".." && is_file($image_dir . $file)) {
-                                    $image_files[] = $file;
-                                }
-                            }
-                            closedir($handle);
-                        }
-                        // shuffle($image_files);
-                        ?>
-                        <div class="row g-2">
-                            <?php
-                            $num_images = 8;
-
-                            for ($i = 0; $i < min($num_images, count($image_files)); $i++) {
-                                ?>
-                                <div class="col-3">
-                                    <div class="image">
-                                        <img src="<?php echo $image_dir . $image_files[$i]; ?>" alt="">
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                            ?>
+                <div class="col-8">
+                    <div class="row justify-content-end">
+                        <div class="col-4">
+                            <div class="footer-box">
+                                <h3 class="heading underline">Menu</h3>
+                                <ul class="list-none">
+                                    <li><a href="index.php" title>Home</a></li>
+                                    <li><a href="display_all.php" title>shop</a></li>
+                                    <li><a href="tag.php" title>tag</a></li>
+                                    <li><a href="category.php" title>category</a></li>
+                                    <li><a href="contact-two.php" title>contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="footer-box">
+                                <h3 class="heading underline">Contact Us</h3>
+                                <ul class="list-none">
+                                    <li><span>Bhaktapur, Nepal</span></li>
+                                    <li><a href="tel:+977 9880945250">+977 9880945250</a></li>
+                                    <li><a href="mailto: newaritraditionalshop@gmail.com" title>newaritraditionalshop@gmail.com</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,7 +179,11 @@
     <section class="footer-bottom">
         <div class="container">
             <div class="text-center">
-                <span>©2024. All rights reserved. <a href="policy.php">Policy and term</a></span>
+                <span>
+                    <?php
+                    echo "© " . date("Y") . " All rights reserved. <a href='policy.php'>Policy and term</a>";
+                    ?>
+                </span>
             </div>
         </div>
         <!-- <button id="to_top_button"><i class="fa-solid fa-chevron-up"></i></button> -->
@@ -235,6 +195,7 @@
 
 
 <script src="js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <script src="js/wow.min.js"></script>
 <script src="js/bootstrap.js"></script>

@@ -137,6 +137,9 @@ header nav {
     color: #707070;
     transition: all 0.3s linear;
 }
+.primary-menu a.active, .primary-menu a:hover{
+    color: #000;
+}
 
 .primary-menu li a i,
 .logout-btn a i {

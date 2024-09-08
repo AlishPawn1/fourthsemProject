@@ -55,9 +55,10 @@ if (isset($_POST["conform_payment"])) {
             </div>
             <div class="form-outline mt-4 w-50 m-auto">
                 <select name="payment_mode" class="form-select w-50 m-auto" id="paymentMode">
+                    <option value="select a option">select a option</option>
                     <option value="Cash on delivery">Cash on delivery</option>
                     <option value="Khalti">Khalti</option>
-                    <option value="Stripe">Stripe</option>
+                    <option value="Stripe">Card</option>
                 </select>
             </div>
             <input type="submit" class="btn read-more mt-4" value="confirm" name="conform_payment">

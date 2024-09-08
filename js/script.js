@@ -1,71 +1,66 @@
 jQuery(function ($) {
-    var lastScrollTop = 0;
+    // Handle sticky header and scroll behavior
+    let lastScrollTop = 0;
 
     $(window).scroll(function () {
-        var currentScrollTop = $(this).scrollTop();
+        let currentScrollTop = $(this).scrollTop();
+        const header = $('.header');
 
-        if (currentScrollTop > lastScrollTop) {
-            // Scrolling down
-            $('.header').removeClass("sticky");
-        } else {
-            // Scrolling up
-            if (currentScrollTop > 100) {
-                $('.header').addClass("sticky");
-            } else {
-                $('.header').removeClass("sticky");
-            }
-        }
-
+        // Toggle sticky class based on scroll direction and position
+        header.toggleClass("sticky", currentScrollTop < lastScrollTop && currentScrollTop > 100);
         lastScrollTop = currentScrollTop;
 
-        // Additional scroll handling
-        if (currentScrollTop > 300) {
-            $('.header').addClass("transform-sticky");
-        } else {
-            $('.header').removeClass("transform-sticky");
-        }
+        // Toggle transform-sticky class based on scroll position
+        header.toggleClass("transform-sticky", currentScrollTop > 300);
     });
 
-    // Header class based on pathname
-    var pathname = window.location.pathname;
+    // Add class to header based on pathname
+    const pathname = window.location.pathname;
     if (pathname.endsWith("/index.php") || pathname === "/shop/") {
         $("header").addClass("index-page");
     }
 
-    // Dropdown Button
-    $(".primary-menu li.menu-dropdown > a").append('<span class="dropdown-btn"><i class="fa-solid fa-chevron-right"></i></span>');
+    // Handle dropdown menu
+    const menuDropdownSelector = '.primary-menu li.menu-dropdown > a';
+    $(menuDropdownSelector).append('<span class="dropdown-btn"><i class="fas fa-chevron-down"></i></span>');
 
-    $('.dropdown-btn').on('click', function (event) {
+    $('.dropdown-btn').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
-        $(this).parent().parent().toggleClass('open').first().siblings().removeClass('open');
-        $(this).parent().parent().find("ul").parent().find("ul.sub-menu").first().slideToggle();
-        $(this).parent().parent().siblings().find("ul.sub-menu").slideUp().parent().removeClass('open');
-        $(this).toggleClass('transform-90');
-        $(this).parent().parent().siblings().find('.dropdown-btn').removeClass('transform-90');
+        const $parentLi = $(this).closest('li');
+        $parentLi.toggleClass('open').siblings().removeClass('open');
+        $parentLi.find("ul.sub-menu").first().slideToggle();
+        $parentLi.siblings().find("ul.sub-menu").slideUp().parent().removeClass('open');
     });
 
+    $(document).click(function (event) {
+        if (!$(event.target).closest('.menu-dropdown').length) {
+            $('.menu-dropdown').removeClass('open');
+            $('.sub-menu').slideUp();
+        }
+    });
+
+    // Add dropdown class to items with submenus
     $('.primary-menu li').has('ul').addClass('menu-dropdown');
 
-    // Hamburger menu
+    // Handle hamburger menu toggle
     $('.hamburger').click(function () {
         $(this).toggleClass('active');
-        $('.overlay').toggleClass('active');
-        $('.primary-menu').toggleClass('active');
+        $('.overlay, .primary-menu').toggleClass('active');
     });
 
-    // Image change on click
-    $('.for_change-image a').on('click', function (event) {
+    // Change image on click
+    $('.for_change-image a').click(function (event) {
         event.preventDefault();
-        var imageUrl = $(this).attr('href');
+        const imageUrl = $(this).attr('href');
         $('#zoom1 img').attr('src', imageUrl);
     });
 
     // Fancybox for zoomable images
-    if (document.querySelector('.zoomable-image')) {
+    if ($('.zoomable-image').length) {
         window.openFancybox = function (element) {
-            var $image = $(element).closest('.image').find('.zoomable-image');
-            var imageSrc = $image.attr('src');
+            const $image = $(element).closest('.image').find('.zoomable-image');
+            const imageSrc = $image.attr('src');
 
             if (imageSrc) {
                 $.fancybox.open({
@@ -87,323 +82,176 @@ jQuery(function ($) {
 
     // Image zoom on hover
     const zoom = $('#zoom1');
-    const s = 2;
+    const scale = 2;
 
-    zoom.on('mousemove', function (e) {
+    zoom.mousemove(function (e) {
         const x = e.pageX - $(this).offset().left - zoom.width() / 2;
         const y = e.pageY - $(this).offset().top - zoom.height() / 2;
-        var xc = -x / s;
-        var yc = -y / s;
-        $('.zoomable-image').css('transform', 'translate(' + xc + 'px, ' + yc + 'px) scale(1.5)');
-    });
-
-    zoom.on('mouseleave', function () {
+        const xc = -x / scale;
+        const yc = -y / scale;
+        $('.zoomable-image').css('transform', `translate(${xc}px, ${yc}px) scale(1.5)`);
+    }).mouseleave(function () {
         $('.zoomable-image').css('transform', 'translate(0, 0) scale(1)');
     });
 
-    // Search, cart, and user interactions
+    // Handle search, cart, and user interactions
     $('.search-cart-user .side-btn button').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
-        $('.slide-box').removeClass('active');
+        const index = $(this).closest('.side-btn').index();
+        $('.slide-box').removeClass('active').eq(index).addClass('active');
+        $('.overlay').toggleClass('active');
         $('.search-box input').focus();
-        var index = $(this).closest('.side-btn').index();
-        $('.slide-box').eq(index).addClass('active');
-        $('.overlay-bg').toggleClass('active');
     });
 
-    $('.overlay-bg').click(function (event) {
+    $('.overlay, .search-cart-user-box .icon').click(function (event) {
         event.preventDefault();
-        event.stopPropagation();
-        $('.slide-box').removeClass('active');
-        $('.overlay-bg').removeClass('active');
+        $('.slide-box, .overlay').removeClass('active');
     });
 
-    $('.search-cart-user-box .icon').click(function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        $('.slide-box').removeClass('active');
-        $('.overlay-bg').removeClass('active');
-    });
-
+    // Toggle wishlist/cart active state
     $('.cart_wishlist').click(function () {
         $(this).toggleClass('active');
     });
 
-    // WOW.js and Splide.js initializations
-    new WOW().init();
+    // Initialize WOW.js for animations
 
-    if (document.querySelector('.banner-slide')) {
-        var splide = new Splide('.banner-slide', {
-            type: 'fade',
-            rewind: true,
-            perPage: 1,
-            pagination: false,
-            interval: 3000,
-            breakpoints: {
-                1024: {
-                    interval: 2000,
-                    arrows: false,
-                    pagination: true,
-                },
-            },
+    // Show/Hide password toggle
+    $('.showPassword').change(function () {
+        const passwordField = $(this).parent().find('.password');
+        passwordField.attr('type', this.checked ? 'text' : 'password');
+    });
+
+    // Initialize Isotope for filtering items
+    if ($('#isotope-container').length) {
+        const $grid = $('#isotope-container').isotope({
+            itemSelector: '.isotope-item',
+            layoutMode: 'fitRows'
         });
 
-        splide.on("active", function (slide) {
-            if (typeof $ !== 'undefined') {
-                $(".banner-slide .wow").removeClass("animate__animated");
-                $(".banner-slide .splide__slide.is-active .wow").addClass("animate__animated").css("animation-name", "fadeIn");
-            }
+        $('#isotope-filters').on('click', 'button', function () {
+            const filterValue = $(this).attr('data-filter');
+            $grid.isotope({ filter: filterValue });
         });
-
-        splide.on("moved", function () {
-            if (typeof $ !== 'undefined') {
-                $(".banner-slide .wow").removeClass("animate__animated");
-
-                var activeSlideWowElements = $(".banner-slide .splide__slide.is-active .wow");
-                activeSlideWowElements.addClass("animate__animated").css("animation-name", "fadeIn");
-
-                activeSlideWowElements.one("animationend", function () {
-                    $(".banner-slide .splide__slide:not(.is-active) .wow").css("animation-name", "none");
-                });
-
-                setTimeout(function () {
-                    $(".banner-slide .splide__slide:not(.is-active) .wow").css("animation-name", "none");
-                }, 1000);
-            }
-        });
-
-        splide.mount();
     }
 
-    if (document.querySelector('.footer-slide')) {
-        var footer = new Splide('.footer-slide', {
-            perPage: 1,
-        });
-        footer.mount();
+    var currentPath = window.location.pathname.replace(/\/$/, '');
+        // console.log("Current Path:", currentPath);
+
+    $('.primary-menu a').each(function() {
+        var href = $(this).attr('href').replace(/\/$/, '');
+        // console.log(href);
+        var lastPartHref = href.substring(href.lastIndexOf('/') + 1);
+        // console.log(lastPartHref);
+        if (currentPath.endsWith(lastPartHref)) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    });
+
+    // Form validation functions
+    function validateUsername() {
+        const usernameInput = $("#user_name");
+        const usernameError = $("#usernameError");
+        const isValid = usernameInput.val().trim().length >= 3;
+        usernameError.text(isValid ? "" : "Username must be at least 3 characters long.");
+        return isValid;
     }
 
-    // Show/Hide password
-    const showPasswordCheckboxes = document.querySelectorAll('.showPassword');
+    function validateEmail() {
+        const emailInput = $("#user_email");
+        const emailError = $("#emailError");
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.val().trim());
+        emailError.text(isValid ? "" : "Enter a valid email address.");
+        return isValid;
+    }
 
-    showPasswordCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            const passwordField = checkbox.parentElement.querySelector('.password');
-            if (checkbox.checked) {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
-            }
-        });
+    function validatePassword() {
+        const passwordInput = $("#user_password");
+        const passwordError = $("#passwordError");
+        const isValid = passwordInput.val().trim().length >= 6 &&
+                        /[A-Z]/.test(passwordInput.val()) &&
+                        /[a-z]/.test(passwordInput.val()) &&
+                        /\d/.test(passwordInput.val());
+        passwordError.text(isValid ? "" : "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.");
+        return isValid;
+    }
+
+    function validateConfirmPassword() {
+        const passwordInput = $("#user_password");
+        const confirmPasswordInput = $("#conform_user_password");
+        const confirmPasswordError = $("#confirmPasswordError");
+        const isValid = passwordInput.val().trim() === confirmPasswordInput.val().trim();
+        confirmPasswordError.text(isValid ? "" : "Passwords do not match.");
+        return isValid;
+    }
+
+    // Validate form on submit
+    $("#registerForm").submit(function (event) {
+        if (!validateUsername() || !validateEmail() || !validatePassword() || !validateConfirmPassword()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    // AJAX search with suggestions
+    $('#searchInput').on('keyup', function () {
+        const searchQuery = $(this).val();
+
+        if (searchQuery.length > 0) {
+            $.ajax({
+                url: 'search_suggestions.php',
+                method: 'GET',
+                data: { search_keyword: searchQuery },
+                success: function (response) {
+                    $('#suggestionsList').html(response).show();
+                }
+            });
+        } else {
+            $('#suggestionsList').hide();
+        }
+    });
+
+    // Hide suggestions when clicking outside
+    $(document).click(function (e) {
+        if (!$(e.target).closest('#searchForm').length) {
+            $('#suggestionsList').hide();
+        }
+    });
+
+    // Populate search input with the clicked suggestion
+    $(document).on('click', '.suggestion-item', function () {
+        $('#searchInput').val($(this).text());
+        $('#suggestionsList').hide();
+    });
+
+    $('#isotope-filters button').click(function () {
+        // Remove 'active' class from all buttons
+        $('#isotope-filters button').removeClass('active');
+        
+        // Add 'active' class to the clicked button
+        $(this).addClass('active');
     });
 
 });
 
-    // User validation
-    // function validateUsername() {
-    //     const usernameInput = document.getElementById("user_name");
-    //     const usernameError = document.getElementById("usernameError");
-    //     if (usernameInput.value.trim().length < 3) {
-    //         usernameError.textContent = "Username must be at least 3 characters long.";
-    //         return false;
-    //     } else {
-    //         usernameError.textContent = "";
-    //         return true;
-    //     }
-    // }
+new WOW().init();
 
-    // function validateEmail() {
-    //     const emailInput = document.getElementById("user_email");
-    //     const emailError = document.getElementById("emailError");
-    //     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
-    //         emailError.textContent = "Enter a valid email address.";
-    //         return false;
-    //     } else {
-    //         emailError.textContent = "";
-    //         return true;
-    //     }
-    // }
-
-    // function validatePassword() {
-    //     const passwordInput = document.getElementById("user_password");
-    //     const passwordError = document.getElementById("passwordError");
-    //     if (passwordInput.value.trim().length < 6 || !/[A-Z]/.test(passwordInput.value) || !/[a-z]/.test(passwordInput.value) || !/\d/.test(passwordInput.value)) {
-    //         passwordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
-    //         return false;
-    //     } else {
-    //         passwordError.textContent = "";
-    //         return true;
-    //     }
-    // }
-
-    // function validateConfirmPassword() {
-    //     const passwordInput = document.getElementById("user_password");
-    //     const confirmPasswordInput = document.getElementById("conform_user_password");
-    //     const confirmPasswordError = document.getElementById("confirmPasswordError");
-    //     if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
-    //         confirmPasswordError.textContent = "Passwords do not match.";
-    //         return false;
-    //     } else {
-    //         confirmPasswordError.textContent = "";
-    //         return true;
-    //     }
-    // }
-
-    // function validateAddress() {
-    //     const addressInput = document.getElementById("user_address");
-    //     const addressError = document.getElementById("addressError");
-    //     if (addressInput.value.trim().length < 5) {
-    //         addressError.textContent = "Address must be at least 5 characters long.";
-    //         return false;
-    //     } else {
-    //         addressError.textContent = "";
-    //         return true;
-    //     }
-    // }
-
-    // function validateContact() {
-    //     const contactInput = document.getElementById("user_contact");
-    //     const contactError = document.getElementById("contactError");
-    //     const contactValue = contactInput.value.trim();
-
-    //     if (contactValue.length !== 10 || isNaN(contactValue) || contactValue.charAt(0) !== '9' || !['8', '6', '7'].includes(contactValue.charAt(1))) {
-    //         contactError.textContent = "Contact must be a 10-digit number starting with 9 and the second digit must be 8, 6, or 7.";
-    //         return false;
-    //     } else {
-    //         contactError.textContent = "";
-    //         return true;
-    //     }
-    // }
-
-    // // Add event listeners for input events
-    // document.getElementById("user_name").addEventListener("input", validateUsername);
-    // document.getElementById("user_email").addEventListener("input", validateEmail);
-    // document.getElementById("user_password").addEventListener("input", validatePassword);
-    // document.getElementById("conform_user_password").addEventListener("input", validateConfirmPassword);
-    // document.getElementById("user_address").addEventListener("input", validateAddress);
-    // document.getElementById("user_contact").addEventListener("input", validateContact);
-
-    // // Add event listener for form submission
-    // document.getElementById("registrationForm").addEventListener("submit", function (event) {
-    //     // Prevent form submission if any of the validations fail
-    //     if (!validateUsername() || !validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateAddress() || !validateContact()) {
-    //         event.preventDefault();
-    //     }
-    // });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // User validation functions
-        function validateUsername() {
-            const usernameInput = document.getElementById("user_name");
-            const usernameError = document.getElementById("usernameError");
-            if (usernameInput.value.trim().length < 3) {
-                usernameError.textContent = "Username must be at least 3 characters long.";
-                return false;
-            } else {
-                usernameError.textContent = "";
-                return true;
-            }
-        }
-    
-        function validateEmail() {
-            const emailInput = document.getElementById("user_email");
-            const emailError = document.getElementById("emailError");
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
-                emailError.textContent = "Enter a valid email address.";
-                return false;
-            } else {
-                emailError.textContent = "";
-                return true;
-            }
-        }
-    
-        function validatePassword() {
-            const passwordInput = document.getElementById("user_password");
-            const passwordError = document.getElementById("passwordError");
-            if (passwordInput.value.trim().length < 6 || !/[A-Z]/.test(passwordInput.value) || !/[a-z]/.test(passwordInput.value) || !/\d/.test(passwordInput.value)) {
-                passwordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
-                return false;
-            } else {
-                passwordError.textContent = "";
-                return true;
-            }
-        }
-    
-        function validateConfirmPassword() {
-            const passwordInput = document.getElementById("user_password");
-            const confirmPasswordInput = document.getElementById("conform_user_password");
-            const confirmPasswordError = document.getElementById("confirmPasswordError");
-            if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
-                confirmPasswordError.textContent = "Passwords do not match.";
-                return false;
-            } else {
-                confirmPasswordError.textContent = "";
-                return true;
-            }
-        }
-    
-        function validateAddress() {
-            const addressInput = document.getElementById("user_address");
-            const addressError = document.getElementById("addressError");
-            if (addressInput.value.trim().length < 5) {
-                addressError.textContent = "Address must be at least 5 characters long.";
-                return false;
-            } else {
-                addressError.textContent = "";
-                return true;
-            }
-        }
-    
-        function validateContact() {
-            const contactInput = document.getElementById("user_contact");
-            const contactError = document.getElementById("contactError");
-            const contactValue = contactInput.value.trim();
-    
-            if (contactValue.length !== 10 || isNaN(contactValue) || contactValue.charAt(0) !== '9' || !['8', '6', '7'].includes(contactValue.charAt(1))) {
-                contactError.textContent = "Contact must be a 10-digit number starting with 9 and the second digit must be 8, 6, or 7.";
-                return false;
-            } else {
-                contactError.textContent = "";
-                return true;
-            }
-        }
-    
-        // Add event listeners for input events
-        const usernameInput = document.getElementById("user_name");
-        const emailInput = document.getElementById("user_email");
-        const passwordInput = document.getElementById("user_password");
-        const confirmPasswordInput = document.getElementById("conform_user_password");
-        const addressInput = document.getElementById("user_address");
-        const contactInput = document.getElementById("user_contact");
-        const registrationForm = document.getElementById("registrationForm");
-    
-        if (usernameInput) {
-            usernameInput.addEventListener("input", validateUsername);
-        }
-        if (emailInput) {
-            emailInput.addEventListener("input", validateEmail);
-        }
-        if (passwordInput) {
-            passwordInput.addEventListener("input", validatePassword);
-        }
-        if (confirmPasswordInput) {
-            confirmPasswordInput.addEventListener("input", validateConfirmPassword);
-        }
-        if (addressInput) {
-            addressInput.addEventListener("input", validateAddress);
-        }
-        if (contactInput) {
-            contactInput.addEventListener("input", validateContact);
-        }
-    
-        // Add event listener for form submission
-        if (registrationForm) {
-            registrationForm.addEventListener("submit", function(event) {
-                // Prevent form submission if any of the validations fail
-                if (!validateUsername() || !validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateAddress() || !validateContact()) {
-                    event.preventDefault();
-                }
-            });
+function initializeSplide(selector, options, extensions) {
+    document.querySelectorAll(selector).forEach(element => {
+        if (element.querySelector('.splide__track') && element.querySelector('.splide__list')) {
+            new Splide(element, options).mount(extensions);
+        } else {
+            console.error(`Splide initialization failed: Missing required elements in ${selector}`);
         }
     });
-    
+}
+if (document.querySelector('.banner-slide')) {
+    initializeSplide('.banner-slide', {
+        type: 'fade',
+        rewind: true,
+        perPage: 1,
+        pagination: true,
+        arrows: false,
+    });
+}

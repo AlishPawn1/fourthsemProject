@@ -684,4 +684,67 @@ function tag_list()
     }
 }
 
+function isotop_category() {
+    global $conn;
+    
+    // Retrieve all categories
+    $sql_query = "SELECT * FROM `categories`";
+    $result = mysqli_query($conn, $sql_query);
+    
+    echo "<div id='isotope-filters' class='isotope-filters'>";
+    echo "<button class='active' data-filter='*'>All</button>";
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        $cat_id = $row['id'];
+        $cat_name = $row['category_name'];
+        
+        // Output category filter button
+        echo "<button data-filter='.cat-$cat_id'>$cat_name</button>";
+    }
+    
+    echo "</div>"; // End of isotope filters
+    
+    // Retrieve and display products based on category
+    $sql_query = "SELECT * FROM `products`";
+    $result = mysqli_query($conn, $sql_query);
+    
+    echo "<div id='isotope-container' class='row'>";
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        $product_id = $row['id'];
+        $product_name = $row['product_name'];
+        $product_price = $row['product_price'];
+        $product_image = $row['product_image_1'];
+        $product_in_store = $row['product_in_store'];
+        $cat_id = $row['category_id'];
+        
+        // Output product HTML
+        echo "<div class='col-lg-3 col-sm-6 isotope-item cat-$cat_id'>
+                <div class='new-arrival-box'>
+                    <a href='shop-single.php?id=$product_id'>
+                        <div class='image'>
+                            <img src='./admin_area/product_images/$product_image' alt='$product_name'>";
+        
+        if ($product_in_store <= 0 || $product_in_store == 1) {
+            echo "<div class='sale-btn'>
+                      <span class='btn read-more'>Out of Stock</span>
+                  </div>";
+        }
+        
+        echo        "</div>
+                    <div class='content'>
+                        <h4 class='heading'>$product_name</h4>
+                        <div class='price-tag'>
+                            <ins><span class='price-symbol'>Rs.</span><span>$product_price</span></ins>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>";
+    }
+    
+    echo "</div>"; // End of isotope container
+}
+
+
 ?>
