@@ -2,7 +2,7 @@
 $dynamicTitle = "Contact";
 include ("header.php");
 include './include/connect_database.php';
-include ("function/commonfunction.php");
+// include ("function/commonfunction.php");
 
 if (isset($_POST['submit'])) {
 

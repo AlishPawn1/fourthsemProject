@@ -194,36 +194,45 @@ jQuery(function ($) {
         }
     });
 
-    // AJAX search with suggestions
-    $('#searchInput').on('keyup', function () {
-        const searchQuery = $(this).val();
-
+    // Handle keyup event on search inputs
+    $(document).on('keyup', '.searchInput', function () {
+        const searchInput = $(this);
+        const searchQuery = searchInput.val();
+        const suggestionsList = searchInput.siblings('.suggestions-list');
+    
         if (searchQuery.length > 0) {
             $.ajax({
                 url: 'search_suggestions.php',
                 method: 'GET',
                 data: { search_keyword: searchQuery },
                 success: function (response) {
-                    $('#suggestionsList').html(response).show();
+                    suggestionsList.html(response).show();
                 }
             });
         } else {
-            $('#suggestionsList').hide();
+            suggestionsList.hide();
         }
+    
+        // Hide suggestions for other search inputs
+        $('.suggestions-list').not(suggestionsList).hide();
     });
-
+    
     // Hide suggestions when clicking outside
     $(document).click(function (e) {
-        if (!$(e.target).closest('#searchForm').length) {
-            $('#suggestionsList').hide();
+        if (!$(e.target).closest('.searchForm').length) {
+            $('.suggestions-list').hide();
         }
     });
-
+    
     // Populate search input with the clicked suggestion
     $(document).on('click', '.suggestion-item', function () {
-        $('#searchInput').val($(this).text());
-        $('#suggestionsList').hide();
+        const suggestionItem = $(this);
+        const searchInput = suggestionItem.closest('.searchForm').find('.searchInput');
+        searchInput.val(suggestionItem.text());
+        suggestionItem.closest('.suggestions-list').hide();
     });
+    
+    
 
     $('#isotope-filters button').click(function () {
         // Remove 'active' class from all buttons

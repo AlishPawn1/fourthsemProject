@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('user_header.php');
+include ('../header.php');
 include ("../include/connect_database.php");
 // include('../function/commonfunction.php');
 
@@ -166,4 +166,4 @@ if (isset($_POST['user_register'])) {
     </div>
 </section>
 
-<?php include ('user_footer.php'); ?>
+<?php include ('../Footer.php'); ?>

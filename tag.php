@@ -2,7 +2,7 @@
 
 $dynamicTitle = "tag";
 include("header.php");
-include("function/commonfunction.php");
+// include("function/commonfunction.php");
 include('include/connect_database.php');
 
 if (isset($_GET['tag_id'])) {

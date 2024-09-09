@@ -1,7 +1,7 @@
 <?php
 $dynamicTitle = "Search";
 include ("header.php");
-include ('function/commonfunction.php');
+// include ('function/commonfunction.php');
 
 // Check if the search keyword is set
 $user_search_data_value = "";

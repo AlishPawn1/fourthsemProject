@@ -1,5 +1,5 @@
 <?php
-include ('user_header.php');
+include ('../header.php');
 include ("../include/connect_database.php");
 @session_start();
 
@@ -66,7 +66,7 @@ if (isset($_POST["conform_payment"])) {
     </div>
 </section>
 
-<?php include ("user_footer.php"); ?>
+<?php include ("../Footer.php"); ?>
 
 <script>
 document.getElementById('paymentForm').addEventListener('submit', function(event) {

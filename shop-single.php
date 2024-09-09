@@ -6,7 +6,7 @@ $row = mysqli_fetch_assoc($result_query);
 $product_name = $row["product_name"];
 $dynamicTitle = "$product_name";
 include ("header.php");
-include ('function/commonfunction.php');
+// include ('function/commonfunction.php');
 
 ?>
 <?php

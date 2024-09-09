@@ -1,5 +1,5 @@
 <?php
-include ('user_header.php');
+include ('../header.php');
 include ("../include/connect_database.php");
 // include("../function/commonfunction.php");
 
@@ -36,4 +36,4 @@ $user_id = $row_user['user_id'];
     </div>
 </section>
 
-<?php include ("user_footer.php"); ?>
+<?php include ("../Footer.php"); ?>

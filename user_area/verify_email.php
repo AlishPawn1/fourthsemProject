@@ -1,6 +1,6 @@
 <?php
 include ("../include/connect_database.php");
-include ('user_header.php');
+include ('../header.php');
 
 
 if (isset($_POST['verify'])) {
@@ -96,4 +96,4 @@ if (isset($_POST['verify'])) {
 
 
 
-    <?php include ("user_footer.php"); ?>
+    <?php include ("../Footer.php"); ?>

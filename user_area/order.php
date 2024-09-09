@@ -1,5 +1,5 @@
 <?php
-include ('user_header.php');
+include ('../header.php');
 include ("../include/connect_database.php");
 
 // Check if user_id is set
@@ -67,4 +67,5 @@ if (!mysqli_query($conn, $empty_cart)) {
 
 // Close the database connection
 mysqli_close($conn);
+include('../Footer.php');
 ?>

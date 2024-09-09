@@ -3,7 +3,7 @@
 // include("function/commonfunction.php");
 
 $isLoggedIn = isset($_SESSION["username"]);
-$cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_area/login-user.php';
+$cartUrl = $isLoggedIn ? 'http://localhost/fourthsemProject/cart.php' : 'http://localhost/fourthsemProject/user_area/login-user.php';
 ?>
 <footer>
     <section class="fixed-icon">
@@ -62,16 +62,13 @@ $cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_ar
                         <div class="icon"><i class="fa-solid fa-xmark"></i></div>
                     </div>
                     <div class="body-section">
-                        <form id="searchForm" action="search.php" method="get">
+                        <form class="searchForm" action="http://localhost/fourthsemProject/search.php" method="get">
                             <div class="position-relative">
-                                <input class="form_input" name="search_keyword" id="searchInput" type="search"
-                                    placeholder="Search...">
+                                <input class="form_input searchInput" name="search_keyword" type="search" placeholder="Search...">
                                 <label class="form_label" for="searchInput">Search</label>
-                                <div id="suggestionsList" class="suggestions-list"></div>
-                                <!-- Container for suggestions -->
+                                <div id="suggestionsList" class="suggestions-list"></div> <!-- Container for suggestions -->
                             </div>
-                            <input type="submit" name="search_product" class="read-more btn mt-3 primary-btn"
-                                value="Search">
+                            <input type="submit" name="search_product" class="read-more btn mt-3 primary-btn" value="Search">
                         </form>
                     </div>
                 </div>
@@ -89,7 +86,7 @@ $cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_ar
                             <p>If you are already registered, please log in.</p>
                         </div>
                         <div class="body-section">
-                            <form action="user_area/login.php" method="post">
+                            <form action="http://localhost/fourthsemProject/user_area/login.php" method="post">
                                 <div class="position-relative form-group">
                                     <label for="username">Username or email <span class="required">*</span></label>
                                     <input type="text/email" name="user_name" class="form-input" required>
@@ -113,7 +110,7 @@ $cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_ar
                             <div class="create-ac">
                                 <p>Don't have an account? Create and enjoy a new shopping experience.</p>
                                 <div class="item-btn">
-                                    <a href="user_area/user_registration.php" class="speical-btn">
+                                    <a href="http://localhost/fourthsemProject/user_area/user_registration.php" class="speical-btn">
                                         <span class="text">create a new account</span>
                                     </a>
                                 </div>
@@ -127,9 +124,9 @@ $cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_ar
                         </a>
                         <ul class="">
                             <li><a
-                                    href="user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
+                                    href="http://localhost/fourthsemProject/user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
                             </li>
-                            <li><a href="user_area/logout.php"><span>Log Out</span></a></li>
+                            <li><a href="http://localhost/fourthsemProject/user_area/logout.php"><span>Log Out</span></a></li>
                         </ul>
                     </div>
                 <?php endif; ?>
@@ -194,14 +191,14 @@ $cartUrl = $isLoggedIn ? 'cart.php' : 'http://localhost/fourthsemProject/user_ar
 
 
 
-<script src="js/jquery.min.js"></script>
+<script src="http://localhost/fourthsemProject/js/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
-<script src="js/wow.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/splide.min.js"></script>
-<script src="js/jquery.fancybox.js"></script>
-<script src="js/script.js"></script>
+<script src="http://localhost/fourthsemProject/js/wow.min.js"></script>
+<script src="http://localhost/fourthsemProject/js/bootstrap.js"></script>
+<script src="http://localhost/fourthsemProject/js/splide.min.js"></script>
+<script src="http://localhost/fourthsemProject/js/jquery.fancybox.js"></script>
+<script src="http://localhost/fourthsemProject/js/script.js"></script>
 
 </body>
 

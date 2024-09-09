@@ -1,5 +1,5 @@
 <?php
-include ('user_header.php');
+include ('../header.php');
 include ("../include/connect_database.php");
 @session_start();
 
@@ -29,4 +29,4 @@ if (isset($_GET['order_id'])) {
     </div>
 </section>
 
-<?php include ("user_footer.php"); ?>
+<?php include ("../footer.php"); ?>

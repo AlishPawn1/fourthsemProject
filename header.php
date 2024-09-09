@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ('include/connect_database.php');
+include("function/commonfunction.php");
 
 $user_search_data_value = "";
 if (isset($_GET['search_keyword'])) {
@@ -32,14 +33,14 @@ if (isset($_SESSION["username"])) {
         }
         ?>
     </title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
-    <link rel="stylesheet" type="text/css" href="css/all.css">
-    <link rel="stylesheet" href="css/splide.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="icon" href="image/newari_favicon.jpg" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/css/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/css/all.css">
+    <link rel="stylesheet" href="http://localhost/fourthsemProject/css/splide.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/styles.css">
+    <link rel="icon" href="http://localhost/fourthsemProject/image/newari_favicon.jpg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="http://localhost/fourthsemProject/css/responsive.css">
 </head>
 
 <body>
@@ -47,7 +48,7 @@ if (isset($_SESSION["username"])) {
         <div class="container">
             <div class="d-flex justify-content-between align-items-center nav-bar position-relative">
                 <div class="main-logo">
-                    <a href="index.php"><img src="image/logo.png" alt=""></a>
+                    <a href="http://localhost/fourthsemProject/index.php"><img src="http://localhost/fourthsemProject/image/logo.png" alt=""></a>
                 </div>
                 <nav>
                     <ul class="primary-menu">
@@ -72,7 +73,7 @@ if (isset($_SESSION["username"])) {
                                         $tag_id = $row_tag['id']; 
                                         ?>
                                         <li>
-                                            <a href="tag.php?tag_id=<?php echo $tag_id; ?>"><span><?php echo $tag_name; ?></span></a>
+                                            <a href="http://localhost/fourthsemProject/tag.php?tag_id=<?php echo $tag_id; ?>"><span><?php echo $tag_name; ?></span></a>
                                         </li>
                                         <?php
                                     }
@@ -96,7 +97,7 @@ if (isset($_SESSION["username"])) {
                                         $category_id = $row_category['id']; 
                                         ?>
                                         <li>
-                                            <a href="category.php?cat_id=<?php echo $category_id; ?>"><span><?php echo $category_name; ?></span></a>
+                                            <a href="http://localhost/fourthsemProject/category.php?cat_id=<?php echo $category_id; ?>"><span><?php echo $category_name; ?></span></a>
                                         </li>
                                         <?php
                                     }
@@ -113,8 +114,8 @@ if (isset($_SESSION["username"])) {
                             <li class="right">
                                 <a href="#">Login</a>
                                 <ul class="sub-menu">
-                                    <li><a href="./user_area/login-user.php"><span>Login</span></a></li>
-                                    <li><a href="user_area/user_registration.php"><span>Register</span></a></li>
+                                    <li><a href="http://localhost/fourthsemProject/user_area/login-user.php"><span>Login</span></a></li>
+                                    <li><a href="http://localhost/fourthsemProject/user_area/user_registration.php"><span>Register</span></a></li>
                                 </ul>
                             </li>
                         <?php else: ?>
@@ -122,9 +123,9 @@ if (isset($_SESSION["username"])) {
                                 <a href="#">Welcome, <?php echo $_SESSION["username"]; ?></a>
                                 <ul class="sub-menu">
                                     <li><a
-                                            href="user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
+                                            href="http://localhost/fourthsemProject/user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
                                     </li>
-                                    <li><a href="user_area/logout.php"><span>Log Out</span></a></li>
+                                    <li><a href="http://localhost/fourthsemProject/user_area/logout.php"><span>Log Out</span></a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>

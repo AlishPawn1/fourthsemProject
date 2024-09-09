@@ -1,4 +1,4 @@
-<?php include ('user_header.php'); ?>
+<?php include ('../header.php'); ?>
 <section class="single-banner bg-light-white margin-top-header">
     <div class="container">
         <div class="content">
@@ -41,4 +41,4 @@
     </div>
 </section>
 
-<?php include ("user_footer.php"); ?>
+<?php include ("../Footer.php"); ?>

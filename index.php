@@ -2,7 +2,7 @@
 <?php
 $dynamicTitle = "Newari Traditional Dress & Ornaments";
 include("header.php");
-include("function/commonfunction.php");
+// include("function/commonfunction.php");
 cart();
 ?>
 <!------------------------------ End  header section  ------------------------------>

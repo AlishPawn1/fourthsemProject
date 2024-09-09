@@ -1,7 +1,7 @@
 <?php
 $dynamicTitle = "All product";
 include ("header.php");
-include ('function/commonfunction.php');
+// include ('function/commonfunction.php');
 
 $limit = 2; // Number of products per page
 
