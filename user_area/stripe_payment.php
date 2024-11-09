@@ -8,24 +8,38 @@
 // JCB: 3530 1113 3330 0000
 
 require '../vendor/autoload.php';
-\Stripe\Stripe::setApiKey('sk_test_51PhZNfRqbIai3bkj3wSIoLzsLBorzOA2ICDy6hckrO936PKz26Lsu4hEqudTwlFwU6c0Tz1do7ZN7kd5jEg8pi4M00Y0Lap67P'); // Replace with your actual secret key
 
+// Set your Stripe secret key
+\Stripe\Stripe::setApiKey('sk_test_51PhZNfRqbIai3bkj3wSIoLzsLBorzOA2ICDy6hckrO936PKz26Lsu4hEqudTwlFwU6c0Tz1do7ZN7kd5jEg8pi4M00Y0Lap67P');
+
+// Retrieve the order ID from the GET request
 $order_id = $_GET['order_id'];
 
-// Fetch order details from the database
+// Connect to the database and fetch order details
 include ("../include/connect_database.php");
+
 $select_data = "SELECT * FROM `user_order` WHERE order_id = $order_id";
 $query_select = mysqli_query($conn, $select_data);
 $row_fetch = mysqli_fetch_assoc($query_select);
-$amount_due = $row_fetch['amount_due'];
-$currency = 'usd'; // Set your currency
 
-// Create a PaymentIntent
-$intent = \Stripe\PaymentIntent::create([
-    'amount' => $amount_due * 100, // Convert amount to cents
-    'currency' => $currency,
-    'metadata' => ['order_id' => $order_id]
-]);
+$invoice_number = $row_fetch['invoice_number'];
+$amount_due = $row_fetch['amount_due'];
+$currency = 'usd'; // Specify your currency
+
+// Create a new PaymentIntent
+try {
+    $intent = \Stripe\PaymentIntent::create([
+        'amount' => $amount_due * 100, // Convert amount to cents
+        'currency' => $currency,
+        'metadata' => ['order_id' => $order_id]
+    ]);
+
+    $client_secret = $intent->client_secret;
+} catch (\Stripe\Exception\ApiErrorException $e) {
+    echo "Error creating PaymentIntent: " . $e->getMessage();
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -72,16 +86,17 @@ $intent = \Stripe\PaymentIntent::create([
                     <!-- Elements will create input elements here -->
                 </div>
             </div>
-
             <div id="error-message" class="error-message" role="alert"></div>
             <button id="submit" class="btn btn-primary btn-block">Pay</button>
         </form>
     </div>
 
     <script>
-        var stripe = Stripe('pk_test_51PhZNfRqbIai3bkjE0q5aoFLz1EqrFtsea3VmYFT4DUnvEcxGOd6u2MiGzxxxLRXbNDVj27u3E0nPxT8nFj1LhCj00SDjGNrdO'); // Replace with your publishable key
+        // Initialize Stripe
+        var stripe = Stripe('pk_test_51PhZNfRqbIai3bkjE0q5aoFLz1EqrFtsea3VmYFT4DUnvEcxGOd6u2MiGzxxxLRXbNDVj27u3E0nPxT8nFj1LhCj00SDjGNrdO');
         var elements = stripe.elements();
 
+        // Style for card input field
         var style = {
             base: {
                 color: '#32325d',
@@ -98,25 +113,31 @@ $intent = \Stripe\PaymentIntent::create([
             }
         };
 
+        // Create the card input element
         var cardElement = elements.create('card', { style: style });
         cardElement.mount('#card-element');
 
+        // Handle the form submission
         var form = document.getElementById('payment-form');
         var errorMessage = document.getElementById('error-message');
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            stripe.confirmCardPayment('<?php echo $intent->client_secret; ?>', {
+            // Confirm the payment using the PaymentIntent client secret
+            stripe.confirmCardPayment('<?php echo $client_secret; ?>', {
                 payment_method: {
                     card: cardElement
                 }
             }).then(function(result) {
                 if (result.error) {
+                    // Display error message
                     errorMessage.textContent = result.error.message;
                 } else {
+                    // Payment succeeded
                     if (result.paymentIntent.status === 'succeeded') {
-                        window.location.href = 'success.php?order_id=<?php echo $order_id; ?>';
+                        // Insert payment data into the database
+                        window.location.href = 'insert_payment.php?order_id=<?php echo $order_id; ?>&invoice_number=<?php echo $invoice_number; ?>&amount=<?php echo $amount_due; ?>&payment_mode=Stripe';
                     }
                 }
             });
