@@ -414,16 +414,27 @@ function displayCart()
 
     if (isset($_POST['update_cart'])) {
         $quantities = $_POST['qty'];
+        $update_success = false;
+    
         foreach ($quantities as $product_id => $quantity) {
             $update_cart_query = "UPDATE cart_details SET quantity = $quantity WHERE product_id = $product_id AND userid = '$userid'";
             $update_result = mysqli_query($conn, $update_cart_query);
-            if (!$update_result) {
-                echo "<script>alert('Failed to update quantity.')</script>";
+    
+            if ($update_result) {
+                $update_success = true;
+            } else {
+                echo "<script>alert('Failed to update quantity for product ID $product_id.');</script>";
             }
         }
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit();
+    
+        if ($update_success) {
+            echo "<script>
+                    alert('Cart updated successfully!');
+                    window.location.href = window.location.href; // Refresh the page
+                  </script>";
+        }
     }
+    
 
     if (mysqli_num_rows($run_cart) > 0) {
         echo "<section class='cart-section padding-top-section'>

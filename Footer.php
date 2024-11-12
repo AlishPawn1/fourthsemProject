@@ -151,10 +151,10 @@ $cartUrl = $isLoggedIn ? 'http://localhost/fourthsemProject/cart.php' : 'http://
                                 <h3 class="heading underline">Menu</h3>
                                 <ul class="list-none">
                                     <li><a href="index.php" title>Home</a></li>
-                                    <li><a href="display_all.php" title>shop</a></li>
-                                    <li><a href="tag.php" title>tag</a></li>
-                                    <li><a href="category.php" title>category</a></li>
-                                    <li><a href="contact-two.php" title>contact</a></li>
+                                    <li><a href="display_all.php" title>Shop</a></li>
+                                    <li><a href="tag.php" title>Tag</a></li>
+                                    <li><a href="category.php" title>Category</a></li>
+                                    <li><a href="contact-two.php" title>Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ $cartUrl = $isLoggedIn ? 'http://localhost/fourthsemProject/cart.php' : 'http://
                                 <h3 class="heading underline">Contact Us</h3>
                                 <ul class="list-none">
                                     <li><span>Bhaktapur, Nepal</span></li>
-                                    <li><a href="tel:+977 9880945250">+977 9880945250</a></li>
+                                    <li><a href="tel:+977 9876543210">+977 9876543210</a></li>
                                     <li><a href="mailto: newaritraditionalshop@gmail.com" title>newaritraditionalshop@gmail.com</a></li>
                                 </ul>
                             </div>
