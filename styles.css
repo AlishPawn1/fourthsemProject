@@ -393,7 +393,14 @@ textarea {
     margin-left: 20px;
     padding-left: 30px;
 }
-
+.primary-menu .menu-dropdown > a{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.primary-menu .menu-dropdown > a .dropdown-btn i{
+    font-size: 14px;
+}
 .header.sticky .primary-menu a {
     padding: 23px 0px;
     padding-left: 30px;
@@ -410,11 +417,6 @@ textarea {
 .primary-menu .menu-dropdown {
     position: relative;
 }
-
-.right.menu-dropdown * {
-    color: var(--primary-color);
-}
-
 .leftmenu-dropdown .sub-menu {
     left: 0;
 }
@@ -530,6 +532,7 @@ textarea {
     opacity: 0;
     background-color: #000;
     transition: var(--default-transition);
+    z-index: 9;
 }
 .overlay.active {
     visibility: visible;

@@ -137,6 +137,6 @@ if (isset($_SESSION["username"])) {
                     </div>
                 </nav>
             </div>
-            <div class="overlay"></div>
         </div>
     </header>
+    <div class="overlay"></div>

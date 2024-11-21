@@ -183,7 +183,7 @@ $cartUrl = $isLoggedIn ? 'http://localhost/fourthsemProject/cart.php' : 'http://
                 </span>
             </div>
         </div>
-        <!-- <button id="to_top_button"><i class="fa-solid fa-chevron-up"></i></button> -->
+        <button id="to_top_button"><i class="fa-solid fa-chevron-up"></i></button>
     </section>
 </footer>
 
