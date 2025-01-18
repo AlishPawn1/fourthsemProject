@@ -404,7 +404,8 @@ function displayCart()
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 echo "<script>alert('Product with ID $product_id_to_remove removed successfully')</script>";
-                header("Location: {$_SERVER['PHP_SELF']}");
+                // header("Location: {$_SERVER['PHP_SELF']}");
+                echo "<script>window.open('cart.php','_self');</script>";
                 exit();
             } else {
                 echo "<script>alert('Failed to delete product.')</script>";

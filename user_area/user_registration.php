@@ -1,7 +1,7 @@
 <?php
 @session_start();
-include ('../header.php');
-include ("../include/connect_database.php");
+include('../header.php');
+include("../include/connect_database.php");
 // include('../function/commonfunction.php');
 
 // use PHPMailer\PHPMailer\PHPMailer;
@@ -30,7 +30,7 @@ $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = 'alishpawn00@gmail.com';
-$mail->Password = 'lupfmoliqmhqwumu';
+$mail->Password = 'ktrphxkgbwgescmg';
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
 
@@ -166,4 +166,116 @@ if (isset($_POST['user_register'])) {
     </div>
 </section>
 
-<?php include ('../Footer.php'); ?>
+<script>
+    function validateUsername() {
+        const usernameInput = document.getElementById("user_name");
+        const usernameError = document.getElementById("usernameError");
+        const username = usernameInput.value.trim();
+
+        if (username.length < 3) {
+            usernameError.textContent = "Username must be at least 3 characters long.";
+            return false;
+        } else if (/\d/.test(username)) {
+            usernameError.textContent = "Username must not contain numbers.";
+            return false;
+        } else {
+            usernameError.textContent = "";
+            return true;
+        }
+    }
+
+    // Function to validate email
+    function validateEmail() {
+        const emailInput = document.getElementById("user_email");
+        const emailError = document.getElementById("emailError");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+            emailError.textContent = "Enter a valid email address.";
+            return false;
+        } else {
+            emailError.textContent = "";
+            return true;
+        }
+    }
+
+    // Function to validate password
+    function validatePassword() {
+        const passwordInput = document.getElementById("user_password");
+        const passwordError = document.getElementById("passwordError");
+        if (passwordInput.value.trim().length < 6 || !/[A-Z]/.test(passwordInput.value) || !/[a-z]/.test(passwordInput.value) || !/\d/.test(passwordInput.value)) {
+            passwordError.textContent = "Password must contain at least 1 lowercase, 1 uppercase, and 1 number, and be 6 characters long.";
+            return false;
+        } else {
+            passwordError.textContent = "";
+            return true;
+        }
+    }
+
+
+    // Function to validate confirm password
+    function validateConfirmPassword() {
+        const passwordInput = document.getElementById("user_password");
+        const confirmPasswordInput = document.getElementById("conform_user_password");
+        const confirmPasswordError = document.getElementById("confirmPasswordError");
+        if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            return false;
+        } else {
+            confirmPasswordError.textContent = "";
+            return true;
+        }
+    }
+    
+    function validateAddress() {
+        const addressInput = document.getElementById("user_address");
+        const addressError = document.getElementById("addressError");
+        const addressValue = addressInput.value.trim();
+
+        // Split the address by spaces
+        const addressParts = addressValue.split(/\s+/); // Split by one or more spaces
+
+        // Check if there are at least two words
+        if (addressParts.length < 2) {
+            addressError.textContent = "Address must consist of at least two words.";
+            return false;
+        } else {
+            addressError.textContent = "";
+            return true;
+        }
+    }
+
+    function validateContact() {
+        const contactInput = document.getElementById("user_contact");
+        const contactError = document.getElementById("contactError");
+        const contactValue = contactInput.value.trim();
+
+        // Regular expression to match the desired pattern
+        const contactPattern = /^9[678]\d{8}$/; // Starts with 9, second digit is 6, 7, or 8, followed by 8 digits
+
+        if (!contactPattern.test(contactValue)) {
+            contactError.textContent = "Enter a valid contact number starting with 9 and second digit as 6, 7, or 8.";
+            return false;
+        } else {
+            contactError.textContent = "";
+            return true;
+        }
+    }
+
+    // Add event listeners for input events
+    document.getElementById("user_name").addEventListener("input", validateUsername);
+    document.getElementById("user_email").addEventListener("input", validateEmail);
+    document.getElementById("user_password").addEventListener("input", validatePassword);
+    document.getElementById("conform_user_password").addEventListener("input", validateConfirmPassword);
+    document.getElementById("user_address").addEventListener("input", validateAddress);
+    document.getElementById("user_contact").addEventListener("input", validateContact);
+
+    // Add event listener for form submission
+    document.getElementById("registrationForm").addEventListener("submit", function (event) {
+        // Prevent form submission if any of the validations fail
+        if (!validateUsername() || !validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateAddress() || !validateContact()) {
+            event.preventDefault();
+        }
+    });
+
+</script>
+
+<?php include('../Footer.php'); ?>
