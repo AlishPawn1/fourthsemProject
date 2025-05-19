@@ -4,7 +4,7 @@ include ("../include/connect_database.php");
 // test_public_key_3349c4f953df407591d450fb1a890d90
 // https://admin.khalti.com/
 // qweasdany@gmai.com
-// Alish123@
+// 123alish456@
 
 
 $error_message = "";

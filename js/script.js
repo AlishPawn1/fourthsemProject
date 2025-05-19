@@ -194,6 +194,7 @@ $(document).click(function (event) {
             perPage: 1,
             pagination: true,
             arrows: false,
+            updateOnMove: true,
         });
     }
 });

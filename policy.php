@@ -1,7 +1,6 @@
 <?php
 $dynamicTitle = "Policy and Term";
 include ("header.php");
-include ("function/commonfunction.php");
 
 ?>
 

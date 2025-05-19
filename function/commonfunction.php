@@ -217,7 +217,7 @@ function productdetail()
                 $result_query = mysqli_query($conn, $insert_query);
 
                 if ($result_query) {
-                    echo "<script>alert('Item added to cart successfully');</script>";
+                    echo "<script>alert('Item ad  ded to cart successfully');</script>";
                 } else {
                     echo "<script>alert('Error adding item to cart');</script>";
                 }
